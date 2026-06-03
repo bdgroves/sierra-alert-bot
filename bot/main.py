@@ -32,6 +32,22 @@ LOOKBACK_MINUTES = int(os.environ.get("LOOKBACK_MINUTES", "120"))
 CACHE_FILE       = os.environ.get("CACHE_FILE", "posted_ids.json")
 DRY_RUN          = os.environ.get("DRY_RUN", "").lower() in ("1", "true", "yes")
 
+
+# Minimum fire size to report (acres)
+FIRE_MIN_ACRES     = 10.0
+
+# Growth threshold to re-tweet an existing fire (fraction — 0.5 = 50% bigger)
+FIRE_GROWTH_FACTOR = 0.5
+
+# NIFC WFIGS live fire perimeters — Sierra bbox filtered
+NIFC_FIRE_URL = (
+    "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/"
+    "WFIGS_Interagency_Perimeters_Current/FeatureServer/0/query"
+)
+
+# Sierra bbox as separate coords for ESRI API
+SIERRA_BBOX = (-121.0, 35.5, -117.5, 41.5)
+
 # ── Sierra Nevada NWS forecast zones ─────────────────────────────────────────
 # Covers the full Sierra Nevada mountain range and surrounding foothills
 # Source: api.weather.gov/zones
@@ -70,9 +86,7 @@ SIERRA_NWS_ZONES = [
     "CAC113",  # Yolo County
 ]
 
-# Bounding box for USGS earthquake queries [min_lon, min_lat, max_lon, max_lat]
-# Covers the Sierra Nevada range generously
-SIERRA_BBOX = "-120.5,35.5,-117.5,41.0"
+
 
 # Minimum earthquake magnitude to post
 EQ_MIN_MAGNITUDE = 2.5
@@ -235,10 +249,10 @@ def fetch_earthquakes(lookback_minutes: int) -> list[dict]:
         "format":       "geojson",
         "starttime":    cutoff.strftime("%Y-%m-%dT%H:%M:%S"),
         "minmagnitude": EQ_MIN_MAGNITUDE,
-        "minlatitude":  "35.5",
-        "maxlatitude":  "41.5",
-        "minlongitude": "-121.0",
-        "maxlongitude": "-117.5",
+        "minlatitude":  str(SIERRA_BBOX[1]),
+        "maxlatitude":  str(SIERRA_BBOX[3]),
+        "minlongitude": str(SIERRA_BBOX[0]),
+        "maxlongitude": str(SIERRA_BBOX[2]),
         "orderby":      "time",
     }
     try:
@@ -339,6 +353,111 @@ def format_eq_tweet(props: dict, geometry: dict) -> str:
     return body[:MAX_TWEET_LEN]
 
 
+
+# ── NIFC wildfire fetch ────────────────────────────────────────────────────────
+def fetch_fires() -> list[dict]:
+    """Fetch active fire perimeters intersecting the Sierra Nevada bbox."""
+    params = {
+        "where":         "attr_IncidentTypeCategory = 'WF'",
+        "geometry":      f"{SIERRA_BBOX[0]},{SIERRA_BBOX[1]},{SIERRA_BBOX[2]},{SIERRA_BBOX[3]}",
+        "geometryType":  "esriGeometryEnvelope",
+        "spatialRel":    "esriSpatialRelIntersects",
+        "outFields":     "poly_IncidentName,poly_GISAcres,poly_DateCurrent,"
+                         "attr_PercentContained,attr_POOCounty,attr_POOState,"
+                         "attr_FireDiscoveryDateTime,attr_UniqueFireIdentifier,"
+                         "attr_InitialLatitude,attr_InitialLongitude",
+        "f":             "json",
+    }
+    headers = {
+        "User-Agent": "SierraNevadaWX/1.0 (github.com/bdgroves/sierra-alert-bot)",
+    }
+    try:
+        resp = requests.get(NIFC_FIRE_URL, params=params, headers=headers, timeout=30)
+        resp.raise_for_status()
+        features = resp.json().get("features", [])
+        # Filter to minimum size
+        filtered = [f for f in features
+                    if (f.get("attributes", {}).get("poly_GISAcres") or 0) >= FIRE_MIN_ACRES]
+        log.info(f"Fetched {len(filtered)} Sierra fires ≥{FIRE_MIN_ACRES} acres from NIFC.")
+        return filtered
+    except requests.RequestException as e:
+        log.error(f"NIFC fire fetch error: {e}")
+        return []
+
+
+def fire_uid(attrs: dict) -> str:
+    """Stable ID for a fire — use unique fire identifier."""
+    fid = attrs.get("attr_UniqueFireIdentifier") or attrs.get("poly_IncidentName", "unknown")
+    return "fire-" + hashlib.md5(fid.encode()).hexdigest()
+
+
+def fire_growth_uid(attrs: dict) -> str:
+    """UID that changes when fire grows significantly — triggers re-tweet."""
+    fid  = attrs.get("attr_UniqueFireIdentifier") or attrs.get("poly_IncidentName", "unknown")
+    acres = attrs.get("poly_GISAcres") or 0
+    # Bucket acres into growth milestones: 10, 15, 22, 33, 50, 75, 112...
+    # Each 50% growth creates a new bucket → new UID → new tweet
+    import math
+    if acres > 0:
+        bucket = int(math.log(acres / FIRE_MIN_ACRES, 1 + FIRE_GROWTH_FACTOR))
+    else:
+        bucket = 0
+    return "fire-" + hashlib.md5(f"{fid}-growth{bucket}".encode()).hexdigest()
+
+
+def format_fire_tweet(attrs: dict) -> str:
+    name      = (attrs.get("poly_IncidentName") or "Unknown Fire").title()
+    acres     = attrs.get("poly_GISAcres") or 0
+    contained = attrs.get("attr_PercentContained")
+    county    = attrs.get("attr_POOCounty") or ""
+    state     = (attrs.get("attr_POOState") or "").replace("US-", "")
+    lat       = attrs.get("attr_InitialLatitude")
+    lon       = attrs.get("attr_InitialLongitude")
+    fid       = attrs.get("attr_UniqueFireIdentifier") or ""
+
+    # Containment string
+    if contained is not None:
+        contained_str = f"{int(contained)}% contained"
+    else:
+        contained_str = "containment unknown"
+
+    # Location
+    location = f"{county}, {state}" if county else state
+
+    # Size label
+    if acres >= 1000:
+        size_str = f"{acres:,.0f} acres"
+    else:
+        size_str = f"{acres:.0f} acres"
+
+    # InciWeb link if we have the fire ID
+    url = ""
+    if fid:
+        suffix = fid.split("-")[-1]
+        url = "\nhttps://inciweb.wildfire.gov/incident-information/" + suffix
+
+    # Emoji based on size
+    if acres >= 10000:
+        emoji = "🔥🔥"
+    elif acres >= 1000:
+        emoji = "🔥"
+    else:
+        emoji = "🌿🔥"
+
+    body = (
+        f"{emoji} Wildfire — {name}\n"
+        f"{size_str} · {contained_str}\n"
+        f"{location}"
+    )
+    if lat and lon:
+        body += f" ({lat:.3f}N, {abs(lon):.3f}W)"
+    if url:
+        body += url
+    body += "\n#SierraNevada #wildfire #CAwx #NVwx"
+
+    return body[:MAX_TWEET_LEN]
+
+
 # ── Post tweet ────────────────────────────────────────────────────────────────
 def post_tweet(client, text: str, uid: str, posted: set,
                new_count: list, error_count: list) -> None:
@@ -388,6 +507,23 @@ def run() -> None:
         text  = format_nws_tweet(props)
         post_tweet(client, text, uid, posted, new_count, error_count)
 
+    # ── NIFC wildfire monitoring ──────────────────────────────────────────────
+    fires = fetch_fires()
+    for feature in fires:
+        attrs = feature.get("attributes", {})
+        # Tweet on new fires (first-seen UID)
+        new_uid    = fire_uid(attrs)
+        # Tweet again on significant growth (growth-bucketed UID)
+        growth_uid = fire_growth_uid(attrs)
+
+        text = format_fire_tweet(attrs)
+        # Post new fire discovery
+        post_tweet(client, text, new_uid, posted, new_count, error_count)
+        # Post growth update (only if fire already known but grew)
+        if new_uid in posted and growth_uid not in posted:
+            growth_text = "📈 " + text[2:] if text.startswith("🔥") else "📈 " + text
+            post_tweet(client, growth_text, growth_uid, posted, new_count, error_count)
+
     # ── USGS earthquakes ──────────────────────────────────────────────────────
     earthquakes = fetch_earthquakes(LOOKBACK_MINUTES)
     for feature in earthquakes:
@@ -399,7 +535,7 @@ def run() -> None:
 
     save_cache(posted)
     log.info(
-        f"Done. NWS: {len(nws_alerts)} alerts | "
+        f"Done. NWS: {len(nws_alerts)} alerts | Fires: {len(fires)} | "
         f"EQ: {len(earthquakes)} quakes | "
         f"Posted: {new_count[0]} | Errors: {error_count[0]} | "
         f"Cache: {len(posted)}"
