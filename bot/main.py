@@ -626,11 +626,10 @@ def fetch_airnow() -> list[dict]:
         return []
 
     params = {
-        "format":       "application/json",
-        "BBOX":         f"{SIERRA_BBOX[0]},{SIERRA_BBOX[1]},{SIERRA_BBOX[2]},{SIERRA_BBOX[3]}",
-        "dataType":     "A",   # AQI values
-        "ParameterName": "PM2.5,PM10,OZONE",
-        "API_KEY":      api_key,
+        "format":   "application/json",
+        "BBOX":     f"{SIERRA_BBOX[0]},{SIERRA_BBOX[1]},{SIERRA_BBOX[2]},{SIERRA_BBOX[3]}",
+        "dataType": "AQI",
+        "API_KEY":  api_key,
     }
     try:
         resp = requests.get(AIRNOW_URL, params=params, timeout=30)
