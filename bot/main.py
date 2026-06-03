@@ -123,29 +123,21 @@ def aqi_label(aqi: int) -> str:
 
 # USGS Stream Gauges — Sierra Nevada key rivers
 # Format: (site_id, name, river, minor_flood_ft, moderate_flood_ft)
-# Thresholds from NWS/CNRFC — only tweet at MINOR FLOOD STAGE or above
-# Minor = property damage begins; Moderate = structures inundated/evacuations
+# NWS/CNRFC verified thresholds — tweet only at MINOR FLOOD STAGE or above
+# Kept to highest-impact gauges for reliability
 SIERRA_GAUGES = [
-    # Tuolumne River — NWS verified
-    ("11276500", "Hetch Hetchy",          "Tuolumne River",    9.0,  11.0),
-    ("11289650", "Don Pedro",             "Tuolumne River",   20.0,  25.0),
+    # Tuolumne River ❤️
     ("11290000", "Modesto",               "Tuolumne River",   55.0,  62.0),
-    # Merced River — NWS verified
+    ("11276500", "Hetch Hetchy",          "Tuolumne River",    9.0,  11.0),
+    # Merced River
     ("11270900", "Happy Isles/Yosemite",  "Merced River",      7.5,   9.0),
     ("11274000", "Merced",                "Merced River",     71.0,  74.0),
-    # American River — NWS verified
+    # American River
     ("11446500", "Fair Oaks",             "American River",   25.0,  33.0),
-    # Kings River — NWS verified
-    ("11251000", "Pine Flat",             "Kings River",      18.0,  22.0),
-    # Truckee River — NWS verified
-    ("10338000", "Tahoe City",            "Truckee River",     6.3,   6.8),
+    # Truckee River
     ("10346000", "Reno",                  "Truckee River",    11.0,  13.5),
-    # San Joaquin River
-    ("11303500", "Vernalis",              "San Joaquin River", 28.0,  36.0),
-    # Kern River — NWS verified
-    ("11186000", "Kernville",             "Kern River",        8.5,  11.0),
-    # Walker River
-    ("10301000", "Coleville",             "Walker River",      6.5,   8.0),
+    # Kings River
+    ("11251000", "Pine Flat",             "Kings River",      18.0,  22.0),
 ]
 
 USGS_IV_URL = "https://waterservices.usgs.gov/nwis/iv/"
@@ -851,32 +843,26 @@ def format_calfire_tweet(props: dict) -> str:
 # ── USGS Stream Gauge fetch ───────────────────────────────────────────────────
 def fetch_gauges() -> list[dict]:
     """Fetch current stage readings for Sierra Nevada stream gauges."""
-    # Fetch in two batches to avoid timeout on large requests
     headers = {
         "User-Agent": "SierraNevadaWX/1.0 (github.com/bdgroves/sierra-alert-bot)",
         "Accept":     "application/json",
     }
-    all_gauges = SIERRA_GAUGES
-    mid = len(all_gauges) // 2
-    batches = [all_gauges[:mid], all_gauges[mid:]]
+    site_ids = ",".join(g[0] for g in SIERRA_GAUGES)
+    params = {
+        "sites":       site_ids,
+        "parameterCd": "00065",
+        "format":      "json",
+        "siteStatus":  "active",
+    }
     time_series = []
-
-    for batch in batches:
-        site_ids = ",".join(g[0] for g in batch)
-        params = {
-            "sites":       site_ids,
-            "parameterCd": "00065",
-            "format":      "json",
-            "siteStatus":  "active",
-        }
-        try:
-            resp = requests.get(USGS_IV_URL, params=params,
-                                headers=headers, timeout=20)
-            resp.raise_for_status()
-            time_series += resp.json().get("value", {}).get("timeSeries", [])
-        except requests.RequestException as e:
-            log.warning(f"USGS batch fetch error (non-fatal): {e}")
-            continue
+    try:
+        resp = requests.get(USGS_IV_URL, params=params,
+                            headers=headers, timeout=15)
+        resp.raise_for_status()
+        time_series = resp.json().get("value", {}).get("timeSeries", [])
+    except requests.RequestException as e:
+        log.warning(f"USGS fetch timed out — skipping gauges this run: {e}")
+        return []
 
     try:
         # Build lookup: site_id -> latest stage
