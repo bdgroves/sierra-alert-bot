@@ -236,8 +236,8 @@ def fetch_earthquakes(lookback_minutes: int) -> list[dict]:
         "starttime":    cutoff.strftime("%Y-%m-%dT%H:%M:%S"),
         "minmagnitude": EQ_MIN_MAGNITUDE,
         "minlatitude":  "35.5",
-        "maxlatitude":  "41.0",
-        "minlongitude": "-120.5",
+        "maxlatitude":  "41.5",
+        "minlongitude": "-121.0",
         "maxlongitude": "-117.5",
         "orderby":      "time",
     }
