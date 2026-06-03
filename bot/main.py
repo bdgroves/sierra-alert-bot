@@ -48,6 +48,44 @@ NIFC_FIRE_URL = (
 # Sierra bbox as separate coords for ESRI API
 SIERRA_BBOX = (-121.0, 35.5, -117.5, 41.5)
 
+
+# IEM Local Storm Reports API
+IEM_LSR_URL = "https://mesonet.agron.iastate.edu/geojson/lsr.php"
+
+# LSR type → (emoji, label, season)
+# season: 'summer', 'winter', 'any'
+LSR_TYPES = {
+    # Summer / convective
+    "H":  ("🧊", "Hail",              "summer"),
+    "G":  ("💨", "Wind Gust",         "summer"),
+    "D":  ("💨", "Wind Damage",       "summer"),
+    "T":  ("🌪️", "Tornado",           "summer"),
+    "F":  ("🌪️", "Funnel Cloud",      "summer"),
+    "W":  ("🌊", "Water Spout",       "summer"),
+    "x":  ("⛈️", "Heavy Rain",        "summer"),
+    "E":  ("🌊", "Flash Flood",       "summer"),
+    "f":  ("🌊", "Flood",             "summer"),
+    "M":  ("🌊", "Marine Hail",       "summer"),
+    "L":  ("⚡", "Lightning",         "summer"),
+    "A":  ("🌊", "Avalanche",         "any"),
+    "U":  ("⚠️", "High Surf",         "summer"),
+    # Winter
+    "S":  ("❄️", "Heavy Snow",        "winter"),
+    "s":  ("🌨️", "Snow Squall",       "winter"),
+    "Z":  ("🧊", "Freezing Rain",     "winter"),
+    "I":  ("🧊", "Ice Storm",         "winter"),
+    "i":  ("🧊", "Black Ice",         "winter"),
+    "B":  ("🌨️", "Blowing Snow",      "winter"),
+    "R":  ("🥶", "Sleet",             "winter"),
+    # Any season
+    "q":  ("💨", "High Wind",         "any"),
+    "N":  ("🌫️", "Dense Fog",         "any"),
+    "P":  ("🌡️", "Extreme Heat",      "any"),
+    "C":  ("🥶", "Extreme Cold",      "any"),
+    "2":  ("🌫️", "Dense Smoke",       "any"),
+    "O":  ("⚠️", "Other",             "any"),
+}
+
 # ── Sierra Nevada NWS forecast zones ─────────────────────────────────────────
 # Covers the full Sierra Nevada mountain range and surrounding foothills
 # Source: api.weather.gov/zones
@@ -467,6 +505,99 @@ def format_fire_tweet(attrs: dict) -> str:
     return body[:MAX_TWEET_LEN]
 
 
+
+# ── IEM Local Storm Reports fetch ─────────────────────────────────────────────
+def fetch_lsr(lookback_minutes: int) -> list[dict]:
+    """Fetch Local Storm Reports from IEM for the Sierra Nevada bbox."""
+    now     = datetime.now(timezone.utc)
+    start   = now - timedelta(minutes=lookback_minutes)
+
+    params = {
+        "sts":  start.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "ets":  now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "wfo":  "ALL",
+    }
+    headers = {
+        "User-Agent": "SierraNevadaWX/1.0 (github.com/bdgroves/sierra-alert-bot)",
+    }
+    try:
+        resp = requests.get(IEM_LSR_URL, params=params, headers=headers, timeout=30)
+        resp.raise_for_status()
+        features = resp.json().get("features", [])
+
+        # Filter to Sierra bbox
+        sierra = []
+        for f in features:
+            coords = f.get("geometry", {}).get("coordinates", [None, None])
+            lon, lat = coords[0], coords[1]
+            if (lon is not None and lat is not None and
+                    SIERRA_BBOX[0] <= lon <= SIERRA_BBOX[2] and
+                    SIERRA_BBOX[1] <= lat <= SIERRA_BBOX[3]):
+                sierra.append(f)
+
+        log.info(f"Fetched {len(sierra)} LSRs in Sierra bbox.")
+        return sierra
+    except requests.RequestException as e:
+        log.error(f"IEM LSR fetch error: {e}")
+        return []
+
+
+def lsr_uid(props: dict) -> str:
+    raw = f"{props.get('wfo','')}-{props.get('valid','')}-{props.get('typetext','')}-{props.get('city','')}"
+    return "lsr-" + hashlib.md5(raw.encode()).hexdigest()
+
+
+def format_lsr_tweet(props: dict, coords: list) -> str:
+    lsr_type  = props.get("type", "O")
+    info      = LSR_TYPES.get(lsr_type, ("⚠️", "Storm Report", "any"))
+    emoji, label, season = info
+
+    # Winter vs summer label prefix
+    if season == "winter":
+        prefix = "❄️ Winter Report"
+    elif season == "summer":
+        prefix = "⛈️ Storm Report"
+    else:
+        prefix = "⚠️ Report"
+
+    city      = props.get("city", "")
+    county    = props.get("county", "")
+    state     = props.get("st", "")
+    magnitude = props.get("magnitude", "")
+    mag_unit  = props.get("magunit", "")
+    remark    = (props.get("remark") or "")[:120]
+    valid_str = props.get("valid", "")
+    source    = props.get("source", "")
+    wfo       = props.get("wfo", "")
+
+    # Time in Pacific
+    time_str = ""
+    if valid_str:
+        try:
+            dt = datetime.fromisoformat(valid_str.replace("Z", "+00:00"))
+            time_str = fmt_pacific(dt)
+        except ValueError:
+            pass
+
+    # Location
+    location = city
+    if county:
+        location += f" [{county} Co, {state}]"
+
+    # Magnitude string
+    mag_str = ""
+    if magnitude and str(magnitude) not in ("0", "0.0", "None"):
+        mag_str = f" - {magnitude} {mag_unit}".strip()
+
+    body = f"{emoji} {label}{mag_str}\n{location}"
+    if time_str:
+        body += f" - {time_str}"
+    if remark:
+        body += f"\n{remark}"
+    body += "\n#" + state.lower() + "wx #SierraNevada"
+
+    return body[:MAX_TWEET_LEN]
+
 # ── Post tweet ────────────────────────────────────────────────────────────────
 def post_tweet(client, text: str, uid: str, posted: set,
                new_count: list, error_count: list) -> None:
@@ -534,6 +665,15 @@ def run() -> None:
             growth_text = "📈 " + text[2:] if text.startswith("🔥") else "📈 " + text
             post_tweet(client, growth_text, growth_uid, posted, new_count, error_count)
 
+    # ── IEM Local Storm Reports ───────────────────────────────────────────────
+    lsrs = fetch_lsr(LOOKBACK_MINUTES)
+    for feature in lsrs:
+        props  = feature.get("properties", {})
+        coords = feature.get("geometry", {}).get("coordinates", [None, None])
+        uid    = lsr_uid(props)
+        text   = format_lsr_tweet(props, coords)
+        post_tweet(client, text, uid, posted, new_count, error_count)
+
     # ── USGS earthquakes ──────────────────────────────────────────────────────
     earthquakes = fetch_earthquakes(LOOKBACK_MINUTES)
     for feature in earthquakes:
@@ -545,7 +685,7 @@ def run() -> None:
 
     save_cache(posted)
     log.info(
-        f"Done. NWS: {len(nws_alerts)} alerts | Fires: {len(fires)} | "
+        f"Done. NWS: {len(nws_alerts)} alerts | Fires: {len(fires)} | LSR: {len(lsrs)} | "
         f"EQ: {len(earthquakes)} quakes | "
         f"Posted: {new_count[0]} | Errors: {error_count[0]} | "
         f"Cache: {len(posted)}"
