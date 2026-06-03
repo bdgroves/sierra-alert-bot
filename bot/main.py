@@ -88,8 +88,21 @@ LSR_TYPES = {
 
 
 # AirNow API — air quality monitoring
-AIRNOW_URL     = "https://www.airnowapi.org/aq/observation/bbox/current/"
+# Use latLong endpoint with multiple Sierra monitoring points instead of bbox
+# (bbox endpoint is unreliable; latLong with distance is more robust)
 AIRNOW_MIN_AQI = 101  # Unhealthy for Sensitive Groups threshold
+
+# Key Sierra Nevada monitoring locations [lat, lon, name]
+SIERRA_MONITOR_POINTS = [
+    (38.9577, -119.9229, "South Lake Tahoe"),
+    (37.6487, -118.9720, "Mammoth Lakes"),
+    (37.9780, -119.8825, "Yosemite Valley"),
+    (36.5785, -118.2923, "Sequoia NP"),
+    (39.7596, -121.8374, "Chico/Foothills"),
+    (38.5816, -121.4944, "Sacramento"),
+    (39.1638, -120.1422, "Truckee"),
+    (36.7783, -119.4179, "Fresno"),
+]
 
 # AQI category → emoji
 def aqi_emoji(aqi: int) -> str:
@@ -619,32 +632,42 @@ def format_lsr_tweet(props: dict, coords: list) -> str:
 
 # ── AirNow air quality fetch ──────────────────────────────────────────────────
 def fetch_airnow() -> list[dict]:
-    """Fetch current AQI observations in Sierra bbox from AirNow API."""
+    """Fetch current AQI from AirNow latLong endpoint for Sierra monitoring points."""
     api_key = os.environ.get("AIRNOW_API_KEY", "")
     if not api_key:
         log.warning("AIRNOW_API_KEY not set — skipping AQ check.")
         return []
 
-    params = {
-        "format":   "application/json",
-        "BBOX":     f"{SIERRA_BBOX[0]},{SIERRA_BBOX[1]},{SIERRA_BBOX[2]},{SIERRA_BBOX[3]}",
-        "dataType": "AQI",
-        "API_KEY":  api_key,
-    }
-    try:
-        resp = requests.get(AIRNOW_URL, params=params, timeout=30)
-        log.info(f"AirNow status: {resp.status_code}, content[:200]: {resp.text[:200]}")
-        resp.raise_for_status()
-        observations = resp.json()
-        # Filter to AQI >= threshold
-        bad_air = [o for o in observations
-                   if isinstance(o, dict) and
-                   (o.get("AQI") or 0) >= AIRNOW_MIN_AQI]
-        log.info(f"Fetched {len(observations)} AirNow obs, {len(bad_air)} above AQI {AIRNOW_MIN_AQI}.")
-        return bad_air
-    except requests.RequestException as e:
-        log.error(f"AirNow fetch error: {e}")
-        return []
+    url = "https://www.airnowapi.org/aq/observation/latLong/current/"
+    bad_air = []
+    seen = set()  # deduplicate by reporting area + parameter
+
+    for lat, lon, name in SIERRA_MONITOR_POINTS:
+        params = {
+            "format":   "application/json",
+            "latitude":  lat,
+            "longitude": lon,
+            "distance":  50,   # km radius
+            "API_KEY":   api_key,
+        }
+        try:
+            resp = requests.get(url, params=params, timeout=15)
+            if resp.status_code != 200 or not resp.text.strip().startswith("["):
+                continue
+            observations = resp.json()
+            for obs in observations:
+                if not isinstance(obs, dict):
+                    continue
+                aqi = obs.get("AQI") or 0
+                key = f"{obs.get('ReportingArea','')}-{obs.get('ParameterName','')}"
+                if aqi >= AIRNOW_MIN_AQI and key not in seen:
+                    seen.add(key)
+                    bad_air.append(obs)
+        except Exception:
+            continue
+
+    log.info(f"Fetched {len(bad_air)} AirNow observations above AQI {AIRNOW_MIN_AQI} in Sierra.")
+    return bad_air
 
 
 def airnow_uid(obs: dict) -> str:
