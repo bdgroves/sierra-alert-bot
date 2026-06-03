@@ -120,6 +120,34 @@ def aqi_label(aqi: int) -> str:
     if aqi >= 151: return "Unhealthy"
     return "Unhealthy for Sensitive Groups"
 
+
+# USGS Stream Gauges — Sierra Nevada key rivers
+# Format: (site_id, name, river, flood_stage_ft, action_stage_ft)
+SIERRA_GAUGES = [
+    # Tuolumne River
+    ("11276500", "Hetch Hetchy",          "Tuolumne River",   13.0,  10.0),
+    ("11289650", "Don Pedro",             "Tuolumne River",   12.0,   9.0),
+    ("11290000", "Modesto",               "Tuolumne River",   27.0,  20.0),
+    # Merced River
+    ("11270900", "Yosemite Valley",       "Merced River",     10.0,   7.0),
+    ("11274000", "Merced",                "Merced River",     25.0,  18.0),
+    # American River
+    ("11446500", "Fair Oaks",             "American River",   28.0,  20.0),
+    # Kings River
+    ("11251000", "Pine Flat Dam",         "Kings River",      20.0,  15.0),
+    # Truckee River
+    ("10338000", "Tahoe City",            "Truckee River",     6.3,   5.5),
+    ("10346000", "Reno",                  "Truckee River",    12.0,   8.0),
+    # San Joaquin River
+    ("11303500", "Vernalis",              "San Joaquin River", 28.0,  20.0),
+    # Kern River
+    ("11186000", "Kernville",             "Kern River",       10.0,   7.0),
+    # Walker River
+    ("10301000", "Coleville",             "Walker River",      8.0,   6.0),
+]
+
+USGS_IV_URL = "https://waterservices.usgs.gov/nwis/iv/"
+
 # ── Sierra Nevada NWS forecast zones ─────────────────────────────────────────
 # Covers the full Sierra Nevada mountain range and surrounding foothills
 # Source: api.weather.gov/zones
@@ -817,6 +845,115 @@ def format_calfire_tweet(props: dict) -> str:
 
     return body[:MAX_TWEET_LEN]
 
+
+# ── USGS Stream Gauge fetch ───────────────────────────────────────────────────
+def fetch_gauges() -> list[dict]:
+    """Fetch current stage readings for Sierra Nevada stream gauges."""
+    site_ids = ",".join(g[0] for g in SIERRA_GAUGES)
+    params = {
+        "sites":       site_ids,
+        "parameterCd": "00065",  # Gage height in feet
+        "format":      "json",
+        "siteStatus":  "active",
+    }
+    headers = {
+        "User-Agent": "SierraNevadaWX/1.0 (github.com/bdgroves/sierra-alert-bot)",
+        "Accept":     "application/json",
+    }
+    try:
+        resp = requests.get(USGS_IV_URL, params=params, headers=headers, timeout=30)
+        resp.raise_for_status()
+        time_series = resp.json().get("value", {}).get("timeSeries", [])
+
+        # Build lookup: site_id -> latest stage
+        readings = {}
+        for ts in time_series:
+            site_id = ts["sourceInfo"]["siteCode"][0]["value"]
+            vals    = ts["values"][0]["value"]
+            if vals:
+                latest = vals[-1]
+                readings[site_id] = {
+                    "stage":    float(latest["value"]),
+                    "datetime": latest["dateTime"],
+                    "name":     ts["sourceInfo"]["siteName"],
+                }
+
+        # Check which gauges are above action or flood stage
+        alerts = []
+        for site_id, label, river, flood_ft, action_ft in SIERRA_GAUGES:
+            if site_id not in readings:
+                continue
+            r     = readings[site_id]
+            stage = r["stage"]
+            if stage >= action_ft:
+                alerts.append({
+                    "site_id":    site_id,
+                    "label":      label,
+                    "river":      river,
+                    "stage":      stage,
+                    "flood_ft":   flood_ft,
+                    "action_ft":  action_ft,
+                    "datetime":   r["datetime"],
+                    "at_flood":   stage >= flood_ft,
+                })
+
+        log.info(f"Checked {len(readings)} Sierra gauges, {len(alerts)} above action stage.")
+        return alerts
+    except requests.RequestException as e:
+        log.error(f"USGS gauge fetch error: {e}")
+        return []
+
+
+def gauge_uid(alert: dict) -> str:
+    """UID that changes when gauge crosses flood stage threshold."""
+    level = "flood" if alert["at_flood"] else "action"
+    # Also bucket by foot increments above flood stage for re-alerts on rising water
+    if alert["at_flood"]:
+        feet_above = int(alert["stage"] - alert["flood_ft"])
+        level = f"flood+{feet_above}ft"
+    return "gauge-" + hashlib.md5(
+        f"{alert['site_id']}-{level}".encode()
+    ).hexdigest()
+
+
+def format_gauge_tweet(alert: dict) -> str:
+    river    = alert["river"]
+    label    = alert["label"]
+    stage    = alert["stage"]
+    flood_ft = alert["flood_ft"]
+    at_flood = alert["at_flood"]
+
+    if at_flood:
+        emoji  = "🌊🌊" if stage >= flood_ft + 3 else "🌊"
+        status = "FLOOD STAGE"
+        above  = stage - flood_ft
+        detail = f"{stage:.1f} ft — {above:.1f} ft above flood stage ({flood_ft} ft)"
+    else:
+        emoji  = "💧"
+        status = "Action Stage"
+        detail = f"{stage:.1f} ft — approaching flood stage ({flood_ft} ft)"
+
+    # Time in Pacific
+    time_str = ""
+    try:
+        dt = datetime.fromisoformat(alert["datetime"].replace("Z", "+00:00"))
+        time_str = fmt_pacific(dt)
+    except Exception:
+        pass
+
+    url = f"https://waterdata.usgs.gov/monitoring-location/{alert['site_id']}/"
+
+    body = (
+        f"{emoji} {status} - {river} at {label}\n"
+        f"{detail}\n"
+    )
+    if time_str:
+        body += "As of " + time_str + "\n"
+    body += url + "\n"
+    body += "#SierraNevada #flooding #CAwx #NVwx"
+
+    return body[:MAX_TWEET_LEN]
+
 # ── Post tweet ────────────────────────────────────────────────────────────────
 def post_tweet(client, text: str, uid: str, posted: set,
                new_count: list, error_count: list) -> None:
@@ -913,6 +1050,13 @@ def run() -> None:
         text = format_airnow_tweet(obs)
         post_tweet(client, text, uid, posted, new_count, error_count)
 
+    # ── USGS Stream Gauges ────────────────────────────────────────────────────
+    gauge_alerts = fetch_gauges()
+    for alert in gauge_alerts:
+        uid  = gauge_uid(alert)
+        text = format_gauge_tweet(alert)
+        post_tweet(client, text, uid, posted, new_count, error_count)
+
     # ── USGS earthquakes ──────────────────────────────────────────────────────
     earthquakes = fetch_earthquakes(LOOKBACK_MINUTES)
     for feature in earthquakes:
@@ -924,7 +1068,7 @@ def run() -> None:
 
     save_cache(posted)
     log.info(
-        f"Done. NWS: {len(nws_alerts)} alerts | NIFC: {len(fires)} | CAL FIRE: {len(calfire_incidents)} | LSR: {len(lsrs)} | AQ: {len(aq_obs)} | "
+        f"Done. NWS: {len(nws_alerts)} | NIFC: {len(fires)} | CAL FIRE: {len(calfire_incidents)} | LSR: {len(lsrs)} | AQ: {len(aq_obs)} | Gauges: {len(gauge_alerts)} | "
         f"EQ: {len(earthquakes)} quakes | "
         f"Posted: {new_count[0]} | Errors: {error_count[0]} | "
         f"Cache: {len(posted)}"
