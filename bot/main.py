@@ -40,6 +40,9 @@ FIRE_MIN_ACRES     = 10.0
 FIRE_GROWTH_FACTOR = 0.5
 
 # NIFC WFIGS live fire perimeters — Sierra bbox filtered
+# CAL FIRE GeoJSON API — California incidents, updates every ~15 min
+CALFIRE_URL = "https://www.fire.ca.gov/umbraco/api/IncidentApi/GeoJsonList?inactive=false"
+
 NIFC_FIRE_URL = (
     "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/"
     "WFIGS_Interagency_Perimeters_Current/FeatureServer/0/query"
@@ -725,6 +728,95 @@ def format_airnow_tweet(obs: dict) -> str:
 
 
 
+
+# ── CAL FIRE incident fetch ───────────────────────────────────────────────────
+def fetch_calfire() -> list[dict]:
+    """Fetch active CAL FIRE incidents filtered to Sierra bbox."""
+    headers = {
+        "User-Agent": "SierraNevadaWX/1.0 (github.com/bdgroves/sierra-alert-bot)",
+    }
+    try:
+        resp = requests.get(CALFIRE_URL, headers=headers, timeout=30)
+        resp.raise_for_status()
+        data = resp.json()
+        features = data.get("features", []) if isinstance(data, dict) else data
+
+        sierra = []
+        for f in features:
+            props = f.get("properties", {}) if isinstance(f, dict) else {}
+            geo   = f.get("geometry", {}) if isinstance(f, dict) else {}
+
+            # Skip if contained >= 85% or acres < minimum
+            contained = props.get("PercentContained") or 0
+            acres     = props.get("AcresBurned") or 0
+            if contained >= 85 or acres < FIRE_MIN_ACRES:
+                continue
+
+            # Filter by coordinates to Sierra bbox
+            coords = geo.get("coordinates", [None, None]) if geo else [None, None]
+            if coords and len(coords) >= 2:
+                lon, lat = coords[0], coords[1]
+                if (lon is not None and lat is not None and
+                        SIERRA_BBOX[0] <= lon <= SIERRA_BBOX[2] and
+                        SIERRA_BBOX[1] <= lat <= SIERRA_BBOX[3]):
+                    sierra.append(f)
+
+        log.info(f"Fetched {len(sierra)} CAL FIRE incidents in Sierra bbox.")
+        return sierra
+    except requests.RequestException as e:
+        log.error(f"CAL FIRE fetch error: {e}")
+        return []
+
+
+def calfire_uid(props: dict) -> str:
+    """Stable UID for a CAL FIRE incident."""
+    raw = props.get("UniqueId") or props.get("Name", "unknown")
+    return "calfire-" + hashlib.md5(raw.encode()).hexdigest()
+
+
+def calfire_growth_uid(props: dict) -> str:
+    """Growth-bucketed UID — new tweet when fire grows 50%+."""
+    import math
+    raw   = props.get("UniqueId") or props.get("Name", "unknown")
+    acres = props.get("AcresBurned") or 0
+    if acres > 0:
+        bucket = int(math.log(max(acres, FIRE_MIN_ACRES) / FIRE_MIN_ACRES,
+                               1 + FIRE_GROWTH_FACTOR))
+    else:
+        bucket = 0
+    return "calfire-" + hashlib.md5(f"{raw}-growth{bucket}".encode()).hexdigest()
+
+
+def format_calfire_tweet(props: dict) -> str:
+    name      = (props.get("Name") or "Unknown Fire").title()
+    acres     = props.get("AcresBurned") or 0
+    contained = props.get("PercentContained")
+    county    = props.get("Counties") or props.get("County") or ""
+    status    = props.get("Status") or ""
+    updated   = props.get("Updated") or ""
+    url       = props.get("CanonicalUrl") or ""
+
+    contained_str = f"{int(contained)}% contained" if contained is not None else "containment unknown"
+    size_str      = f"{acres:,.0f} acres" if acres >= 1000 else f"{acres:.0f} acres"
+
+    if acres >= 10000: emoji = "🔥🔥"
+    elif acres >= 1000: emoji = "🔥"
+    else:               emoji = "🌿🔥"
+
+    location = f"{county}, CA" if county else "Sierra Nevada, CA"
+
+    body = (
+        f"{emoji} CAL FIRE - {name}\n"
+        f"{size_str} - {contained_str}\n"
+        f"{location}"
+    )
+    if url:
+        full_url = f"https://www.fire.ca.gov{url}" if url.startswith("/") else url
+        body += "\n" + full_url
+    body += "\n#SierraNevada #wildfire #CAwx #CalFire"
+
+    return body[:MAX_TWEET_LEN]
+
 # ── Post tweet ────────────────────────────────────────────────────────────────
 def post_tweet(client, text: str, uid: str, posted: set,
                new_count: list, error_count: list) -> None:
@@ -792,6 +884,19 @@ def run() -> None:
             growth_text = "📈 " + text[2:] if text.startswith("🔥") else "📈 " + text
             post_tweet(client, growth_text, growth_uid, posted, new_count, error_count)
 
+    # ── CAL FIRE incidents ────────────────────────────────────────────────────
+    calfire_incidents = fetch_calfire()
+    for feature in calfire_incidents:
+        props      = feature.get("properties", {})
+        new_uid    = calfire_uid(props)
+        growth_uid = calfire_growth_uid(props)
+        text       = format_calfire_tweet(props)
+        is_new     = new_uid not in posted
+        post_tweet(client, text, new_uid, posted, new_count, error_count)
+        if not is_new and growth_uid not in posted:
+            growth_text = "📈 " + text[2:] if text.startswith("🔥") else "📈 " + text
+            post_tweet(client, growth_text, growth_uid, posted, new_count, error_count)
+
     # ── IEM Local Storm Reports ───────────────────────────────────────────────
     lsrs = fetch_lsr(LOOKBACK_MINUTES)
     for feature in lsrs:
@@ -819,7 +924,7 @@ def run() -> None:
 
     save_cache(posted)
     log.info(
-        f"Done. NWS: {len(nws_alerts)} alerts | Fires: {len(fires)} | LSR: {len(lsrs)} | AQ: {len(aq_obs)} | "
+        f"Done. NWS: {len(nws_alerts)} alerts | NIFC: {len(fires)} | CAL FIRE: {len(calfire_incidents)} | LSR: {len(lsrs)} | AQ: {len(aq_obs)} | "
         f"EQ: {len(earthquakes)} quakes | "
         f"Posted: {new_count[0]} | Errors: {error_count[0]} | "
         f"Cache: {len(posted)}"
