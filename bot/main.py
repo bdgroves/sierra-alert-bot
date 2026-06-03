@@ -358,7 +358,7 @@ def format_eq_tweet(props: dict, geometry: dict) -> str:
 def fetch_fires() -> list[dict]:
     """Fetch active fire perimeters intersecting the Sierra Nevada bbox."""
     params = {
-        "where":         "attr_IncidentTypeCategory = 'WF'",
+        "where":         "attr_IncidentTypeCategory = 'WF' AND (attr_PercentContained < 85 OR attr_PercentContained IS NULL)",
         "geometry":      f"{SIERRA_BBOX[0]},{SIERRA_BBOX[1]},{SIERRA_BBOX[2]},{SIERRA_BBOX[3]}",
         "geometryType":  "esriGeometryEnvelope",
         "spatialRel":    "esriSpatialRelIntersects",
@@ -375,9 +375,18 @@ def fetch_fires() -> list[dict]:
         resp = requests.get(NIFC_FIRE_URL, params=params, headers=headers, timeout=30)
         resp.raise_for_status()
         features = resp.json().get("features", [])
-        # Filter to minimum size
+        # Filter to minimum size AND strictly within Sierra bbox by fire origin point
+        def in_sierra_bbox(attrs):
+            lat = attrs.get("attr_InitialLatitude")
+            lon = attrs.get("attr_InitialLongitude")
+            if lat is None or lon is None:
+                return True  # keep if no coords — let NWS zone filter handle it
+            return (SIERRA_BBOX[1] <= lat <= SIERRA_BBOX[3] and
+                    SIERRA_BBOX[0] <= lon <= SIERRA_BBOX[2])
+
         filtered = [f for f in features
-                    if (f.get("attributes", {}).get("poly_GISAcres") or 0) >= FIRE_MIN_ACRES]
+                    if (f.get("attributes", {}).get("poly_GISAcres") or 0) >= FIRE_MIN_ACRES
+                    and in_sierra_bbox(f.get("attributes", {}))]
         log.info(f"Fetched {len(filtered)} Sierra fires ≥{FIRE_MIN_ACRES} acres from NIFC.")
         return filtered
     except requests.RequestException as e:
@@ -517,10 +526,11 @@ def run() -> None:
         growth_uid = fire_growth_uid(attrs)
 
         text = format_fire_tweet(attrs)
+        is_new_fire = new_uid not in posted
         # Post new fire discovery
         post_tweet(client, text, new_uid, posted, new_count, error_count)
-        # Post growth update (only if fire already known but grew)
-        if new_uid in posted and growth_uid not in posted:
+        # Post growth update ONLY if fire was already known (not brand new this run)
+        if not is_new_fire and growth_uid not in posted:
             growth_text = "📈 " + text[2:] if text.startswith("🔥") else "📈 " + text
             post_tweet(client, growth_text, growth_uid, posted, new_count, error_count)
 
