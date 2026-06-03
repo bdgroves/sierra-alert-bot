@@ -32,6 +32,7 @@ jobs:
           TWITTER_API_SECRET:    ${{ secrets.TWITTER_API_SECRET }}
           TWITTER_ACCESS_TOKEN:  ${{ secrets.TWITTER_ACCESS_TOKEN }}
           TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
+          AIRNOW_API_KEY:        ${{ secrets.AIRNOW_API_KEY }}
           LOOKBACK_MINUTES:      "120"
           CACHE_FILE:            "posted_ids.json"
         run: pixi run bot
