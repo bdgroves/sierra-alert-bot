@@ -86,6 +86,24 @@ LSR_TYPES = {
     "O":  ("⚠️", "Other",             "any"),
 }
 
+
+# AirNow API — air quality monitoring
+AIRNOW_URL     = "https://www.airnowapi.org/aq/observation/bbox/current/"
+AIRNOW_MIN_AQI = 101  # Unhealthy for Sensitive Groups threshold
+
+# AQI category → emoji
+def aqi_emoji(aqi: int) -> str:
+    if aqi >= 301: return "☠️"
+    if aqi >= 201: return "🚨"
+    if aqi >= 151: return "😷"
+    return "⚠️"
+
+def aqi_label(aqi: int) -> str:
+    if aqi >= 301: return "Hazardous"
+    if aqi >= 201: return "Very Unhealthy"
+    if aqi >= 151: return "Unhealthy"
+    return "Unhealthy for Sensitive Groups"
+
 # ── Sierra Nevada NWS forecast zones ─────────────────────────────────────────
 # Covers the full Sierra Nevada mountain range and surrounding foothills
 # Source: api.weather.gov/zones
@@ -598,6 +616,92 @@ def format_lsr_tweet(props: dict, coords: list) -> str:
 
     return body[:MAX_TWEET_LEN]
 
+
+# ── AirNow air quality fetch ──────────────────────────────────────────────────
+def fetch_airnow() -> list[dict]:
+    """Fetch current AQI observations in Sierra bbox from AirNow API."""
+    api_key = os.environ.get("AIRNOW_API_KEY", "")
+    if not api_key:
+        log.warning("AIRNOW_API_KEY not set — skipping AQ check.")
+        return []
+
+    params = {
+        "format":       "application/json",
+        "BBOX":         f"{SIERRA_BBOX[0]},{SIERRA_BBOX[1]},{SIERRA_BBOX[2]},{SIERRA_BBOX[3]}",
+        "dataType":     "A",   # AQI values
+        "ParameterName": "PM2.5,PM10,OZONE",
+        "API_KEY":      api_key,
+    }
+    try:
+        resp = requests.get(AIRNOW_URL, params=params, timeout=30)
+        resp.raise_for_status()
+        observations = resp.json()
+        # Filter to AQI >= threshold
+        bad_air = [o for o in observations
+                   if isinstance(o, dict) and
+                   (o.get("AQI") or 0) >= AIRNOW_MIN_AQI]
+        log.info(f"Fetched {len(observations)} AirNow obs, {len(bad_air)} above AQI {AIRNOW_MIN_AQI}.")
+        return bad_air
+    except requests.RequestException as e:
+        log.error(f"AirNow fetch error: {e}")
+        return []
+
+
+def airnow_uid(obs: dict) -> str:
+    """UID that changes when AQI crosses category boundaries — re-tweets on worsening."""
+    site   = obs.get("ReportingArea", "") + obs.get("StateCode", "")
+    param  = obs.get("ParameterName", "")
+    aqi    = obs.get("AQI", 0)
+    # Bucket: 101-150, 151-200, 201-300, 300+
+    if aqi >= 301:   bucket = "hazardous"
+    elif aqi >= 201: bucket = "very_unhealthy"
+    elif aqi >= 151: bucket = "unhealthy"
+    else:            bucket = "sensitive"
+    return "aq-" + hashlib.md5(f"{site}-{param}-{bucket}".encode()).hexdigest()
+
+
+def format_airnow_tweet(obs: dict) -> str:
+    aqi       = obs.get("AQI", 0)
+    area      = obs.get("ReportingArea", "Sierra Nevada")
+    state     = obs.get("StateCode", "CA")
+    param     = obs.get("ParameterName", "PM2.5")
+    category  = obs.get("Category", {}).get("Name", aqi_label(aqi))
+    hour_str  = obs.get("HourObserved", "")
+    date_str  = obs.get("DateObserved", "")
+
+    emoji = aqi_emoji(aqi)
+    label = aqi_label(aqi)
+
+    # Friendly parameter name
+    param_name = {
+        "PM2.5": "Fine Particles (PM2.5)",
+        "PM10":  "Coarse Particles (PM10)",
+        "OZONE": "Ozone",
+    }.get(param, param)
+
+    # Time
+    time_label = ""
+    if date_str and hour_str != "":
+        try:
+            from zoneinfo import ZoneInfo
+            dt = datetime.strptime(f"{date_str.strip()} {int(hour_str):02d}:00",
+                                   "%Y-%m-%d %H:%M")
+            dt = dt.replace(tzinfo=ZoneInfo("America/Los_Angeles"))
+            tz_abbr = "PDT" if dt.dst() else "PST"
+            time_label = f" · {dt.strftime('%I:%M %p').lstrip('0')} {tz_abbr}"
+        except Exception:
+            pass
+
+    body = (
+        f"{emoji} Air Quality Alert - {area}, {state}\n"
+        f"AQI {aqi} - {label}\n"
+        f"{param_name}{time_label}\n"
+        "#SierraNevada #AirQuality #" + state.lower() + "wx"
+    )
+    return body[:MAX_TWEET_LEN]
+
+
+
 # ── Post tweet ────────────────────────────────────────────────────────────────
 def post_tweet(client, text: str, uid: str, posted: set,
                new_count: list, error_count: list) -> None:
@@ -674,6 +778,13 @@ def run() -> None:
         text   = format_lsr_tweet(props, coords)
         post_tweet(client, text, uid, posted, new_count, error_count)
 
+    # ── AirNow air quality ────────────────────────────────────────────────────
+    aq_obs = fetch_airnow()
+    for obs in aq_obs:
+        uid  = airnow_uid(obs)
+        text = format_airnow_tweet(obs)
+        post_tweet(client, text, uid, posted, new_count, error_count)
+
     # ── USGS earthquakes ──────────────────────────────────────────────────────
     earthquakes = fetch_earthquakes(LOOKBACK_MINUTES)
     for feature in earthquakes:
@@ -685,7 +796,7 @@ def run() -> None:
 
     save_cache(posted)
     log.info(
-        f"Done. NWS: {len(nws_alerts)} alerts | Fires: {len(fires)} | LSR: {len(lsrs)} | "
+        f"Done. NWS: {len(nws_alerts)} alerts | Fires: {len(fires)} | LSR: {len(lsrs)} | AQ: {len(aq_obs)} | "
         f"EQ: {len(earthquakes)} quakes | "
         f"Posted: {new_count[0]} | Errors: {error_count[0]} | "
         f"Cache: {len(posted)}"
