@@ -195,7 +195,17 @@ def fetch_nws_alerts(lookback_minutes: int) -> list[dict]:
 
         # Check if alert affects any Sierra zone
         ugc_zones = props.get("geocode", {}).get("UGC", [])
-        affects_sierra = any(z in SIERRA_NWS_ZONES for z in ugc_zones)
+        area_desc = props.get("areaDesc", "").lower()
+        sierra_counties = [
+            "sierra", "tuolumne", "mariposa", "calaveras", "amador",
+            "el dorado", "placer", "nevada", "plumas", "lassen",
+            "mono", "inyo", "fresno", "tulare", "kern", "shasta",
+            "tahoe", "mammoth", "yosemite", "sequoia", "kings canyon"
+        ]
+        affects_sierra = (
+            any(z in SIERRA_NWS_ZONES for z in ugc_zones) or
+            any(c in area_desc for c in sierra_counties)
+        )
         if not affects_sierra:
             continue
 
@@ -220,12 +230,16 @@ def fetch_nws_alerts(lookback_minutes: int) -> list[dict]:
 def fetch_earthquakes(lookback_minutes: int) -> list[dict]:
     """Fetch USGS earthquakes in the Sierra Nevada bounding box."""
     cutoff = datetime.now(timezone.utc) - timedelta(minutes=lookback_minutes)
+    # Sierra Nevada bounding box
     params = {
-        "format":    "geojson",
-        "starttime": cutoff.strftime("%Y-%m-%dT%H:%M:%S"),
+        "format":       "geojson",
+        "starttime":    cutoff.strftime("%Y-%m-%dT%H:%M:%S"),
         "minmagnitude": EQ_MIN_MAGNITUDE,
-        "bbox":      SIERRA_BBOX,
-        "orderby":   "time",
+        "minlatitude":  "35.5",
+        "maxlatitude":  "41.0",
+        "minlongitude": "-120.5",
+        "maxlongitude": "-117.5",
+        "orderby":      "time",
     }
     try:
         resp = requests.get(USGS_EQ_URL, params=params, timeout=30)
