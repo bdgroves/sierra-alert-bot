@@ -122,28 +122,30 @@ def aqi_label(aqi: int) -> str:
 
 
 # USGS Stream Gauges — Sierra Nevada key rivers
-# Format: (site_id, name, river, flood_stage_ft, action_stage_ft)
+# Format: (site_id, name, river, minor_flood_ft, moderate_flood_ft)
+# Thresholds from NWS/CNRFC — only tweet at MINOR FLOOD STAGE or above
+# Minor = property damage begins; Moderate = structures inundated/evacuations
 SIERRA_GAUGES = [
-    # Tuolumne River
-    ("11276500", "Hetch Hetchy",          "Tuolumne River",   13.0,  10.0),
-    ("11289650", "Don Pedro",             "Tuolumne River",   12.0,   9.0),
-    ("11290000", "Modesto",               "Tuolumne River",   27.0,  20.0),
-    # Merced River
-    ("11270900", "Yosemite Valley",       "Merced River",     10.0,   7.0),
-    ("11274000", "Merced",                "Merced River",     25.0,  18.0),
-    # American River
-    ("11446500", "Fair Oaks",             "American River",   28.0,  20.0),
-    # Kings River
-    ("11251000", "Pine Flat Dam",         "Kings River",      20.0,  15.0),
-    # Truckee River
-    ("10338000", "Tahoe City",            "Truckee River",     6.3,   5.5),
-    ("10346000", "Reno",                  "Truckee River",    12.0,   8.0),
+    # Tuolumne River — NWS verified
+    ("11276500", "Hetch Hetchy",          "Tuolumne River",    9.0,  11.0),
+    ("11289650", "Don Pedro",             "Tuolumne River",   20.0,  25.0),
+    ("11290000", "Modesto",               "Tuolumne River",   55.0,  62.0),
+    # Merced River — NWS verified
+    ("11270900", "Happy Isles/Yosemite",  "Merced River",      7.5,   9.0),
+    ("11274000", "Merced",                "Merced River",     71.0,  74.0),
+    # American River — NWS verified
+    ("11446500", "Fair Oaks",             "American River",   25.0,  33.0),
+    # Kings River — NWS verified
+    ("11251000", "Pine Flat",             "Kings River",      18.0,  22.0),
+    # Truckee River — NWS verified
+    ("10338000", "Tahoe City",            "Truckee River",     6.3,   6.8),
+    ("10346000", "Reno",                  "Truckee River",    11.0,  13.5),
     # San Joaquin River
-    ("11303500", "Vernalis",              "San Joaquin River", 28.0,  20.0),
-    # Kern River
-    ("11186000", "Kernville",             "Kern River",       10.0,   7.0),
+    ("11303500", "Vernalis",              "San Joaquin River", 28.0,  36.0),
+    # Kern River — NWS verified
+    ("11186000", "Kernville",             "Kern River",        8.5,  11.0),
     # Walker River
-    ("10301000", "Coleville",             "Walker River",      8.0,   6.0),
+    ("10301000", "Coleville",             "Walker River",      6.5,   8.0),
 ]
 
 USGS_IV_URL = "https://waterservices.usgs.gov/nwis/iv/"
@@ -892,24 +894,24 @@ def fetch_gauges() -> list[dict]:
 
         # Check which gauges are above action or flood stage
         alerts = []
-        for site_id, label, river, flood_ft, action_ft in SIERRA_GAUGES:
+        for site_id, label, river, minor_ft, moderate_ft in SIERRA_GAUGES:
             if site_id not in readings:
                 continue
             r     = readings[site_id]
             stage = r["stage"]
-            if stage >= action_ft:
+            if stage >= minor_ft:
                 alerts.append({
                     "site_id":    site_id,
                     "label":      label,
                     "river":      river,
                     "stage":      stage,
-                    "flood_ft":   flood_ft,
-                    "action_ft":  action_ft,
+                    "minor_ft":   minor_ft,
+                    "moderate_ft": moderate_ft,
                     "datetime":   r["datetime"],
-                    "at_flood":   stage >= flood_ft,
+                    "severity":   "moderate" if stage >= moderate_ft else "minor",
                 })
 
-        log.info(f"Checked {len(readings)} Sierra gauges, {len(alerts)} above action stage.")
+        log.info(f"Checked {len(readings)} Sierra gauges, {len(alerts)} at flood stage.")
         return alerts
     except Exception as e:
         log.error(f"USGS gauge processing error: {e}")
@@ -918,11 +920,9 @@ def fetch_gauges() -> list[dict]:
 
 def gauge_uid(alert: dict) -> str:
     """UID that changes when gauge crosses flood stage threshold."""
-    level = "flood" if alert["at_flood"] else "action"
-    # Also bucket by foot increments above flood stage for re-alerts on rising water
-    if alert["at_flood"]:
-        feet_above = int(alert["stage"] - alert["flood_ft"])
-        level = f"flood+{feet_above}ft"
+    level = alert["severity"]
+    feet_above = int(alert["stage"] - alert["minor_ft"])
+    level = f"{level}+{feet_above}ft"
     return "gauge-" + hashlib.md5(
         f"{alert['site_id']}-{level}".encode()
     ).hexdigest()
@@ -932,18 +932,20 @@ def format_gauge_tweet(alert: dict) -> str:
     river    = alert["river"]
     label    = alert["label"]
     stage    = alert["stage"]
-    flood_ft = alert["flood_ft"]
-    at_flood = alert["at_flood"]
+    minor_ft    = alert["minor_ft"]
+    moderate_ft = alert["moderate_ft"]
+    severity    = alert["severity"]
 
-    if at_flood:
-        emoji  = "🌊🌊" if stage >= flood_ft + 3 else "🌊"
-        status = "FLOOD STAGE"
-        above  = stage - flood_ft
-        detail = f"{stage:.1f} ft — {above:.1f} ft above flood stage ({flood_ft} ft)"
+    if severity == "moderate":
+        emoji  = "🌊🌊"
+        status = "MODERATE FLOODING"
+        above  = stage - moderate_ft
+        detail = f"{stage:.1f} ft — {above:.1f} ft above moderate flood stage ({moderate_ft} ft)"
     else:
-        emoji  = "💧"
-        status = "Action Stage"
-        detail = f"{stage:.1f} ft — approaching flood stage ({flood_ft} ft)"
+        emoji  = "🌊"
+        status = "MINOR FLOODING"
+        above  = stage - minor_ft
+        detail = f"{stage:.1f} ft — {above:.1f} ft above minor flood stage ({minor_ft} ft)"
 
     # Time in Pacific
     time_str = ""
