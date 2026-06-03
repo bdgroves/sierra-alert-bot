@@ -1,0 +1,35 @@
+[project]
+name = "sierra-alert-bot"
+version = "1.0.0"
+description = "Sierra Nevada weather, earthquake, and environmental alert bot for @SierraNevadaWX"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.pixi.workspace]
+channels  = ["conda-forge"]
+platforms = ["linux-64", "osx-arm64", "osx-64", "win-64"]
+
+[tool.pixi.dependencies]
+python = ">=3.12,<3.13"
+
+[tool.pixi.pypi-dependencies]
+tweepy   = ">=4.14,<5"
+requests = ">=2.32,<3"
+
+[tool.pixi.tasks]
+bot     = "python bot/main.py"
+dry-run = { cmd = "python bot/main.py", env = { DRY_RUN = "1" } }
+check-nws = "python -c \"import requests; r=requests.get('https://api.weather.gov/alerts/active/area/CA',headers={'User-Agent':'test','Accept':'application/geo+json'}); print(f'{len(r.json()[\\\"features\\\"])} active CA alerts')\""
+check-eq  = "python -c \"import requests; r=requests.get('https://earthquake.usgs.gov/fdsnws/event/1/query',params={'format':'geojson','minmagnitude':'2.5','bbox':'-120.5,35.5,-117.5,41.0','starttime':'2026-01-01'}); print(f'{len(r.json()[\\\"features\\\"])} Sierra earthquakes since Jan 1')\""
+
+[tool.pixi.feature.dev.dependencies]
+pytest = ">=8,<9"
+ruff   = ">=0.4,<1"
+
+[tool.pixi.feature.dev.tasks]
+lint = "ruff check bot/"
+fmt  = "ruff format bot/"
+
+[tool.pixi.environments]
+default = { features = [],      solve-group = "default" }
+dev     = { features = ["dev"], solve-group = "default" }
