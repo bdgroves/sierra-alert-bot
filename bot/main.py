@@ -849,22 +849,34 @@ def format_calfire_tweet(props: dict) -> str:
 # ── USGS Stream Gauge fetch ───────────────────────────────────────────────────
 def fetch_gauges() -> list[dict]:
     """Fetch current stage readings for Sierra Nevada stream gauges."""
-    site_ids = ",".join(g[0] for g in SIERRA_GAUGES)
-    params = {
-        "sites":       site_ids,
-        "parameterCd": "00065",  # Gage height in feet
-        "format":      "json",
-        "siteStatus":  "active",
-    }
+    # Fetch in two batches to avoid timeout on large requests
     headers = {
         "User-Agent": "SierraNevadaWX/1.0 (github.com/bdgroves/sierra-alert-bot)",
         "Accept":     "application/json",
     }
-    try:
-        resp = requests.get(USGS_IV_URL, params=params, headers=headers, timeout=30)
-        resp.raise_for_status()
-        time_series = resp.json().get("value", {}).get("timeSeries", [])
+    all_gauges = SIERRA_GAUGES
+    mid = len(all_gauges) // 2
+    batches = [all_gauges[:mid], all_gauges[mid:]]
+    time_series = []
 
+    for batch in batches:
+        site_ids = ",".join(g[0] for g in batch)
+        params = {
+            "sites":       site_ids,
+            "parameterCd": "00065",
+            "format":      "json",
+            "siteStatus":  "active",
+        }
+        try:
+            resp = requests.get(USGS_IV_URL, params=params,
+                                headers=headers, timeout=20)
+            resp.raise_for_status()
+            time_series += resp.json().get("value", {}).get("timeSeries", [])
+        except requests.RequestException as e:
+            log.warning(f"USGS batch fetch error (non-fatal): {e}")
+            continue
+
+    try:
         # Build lookup: site_id -> latest stage
         readings = {}
         for ts in time_series:
@@ -899,8 +911,8 @@ def fetch_gauges() -> list[dict]:
 
         log.info(f"Checked {len(readings)} Sierra gauges, {len(alerts)} above action stage.")
         return alerts
-    except requests.RequestException as e:
-        log.error(f"USGS gauge fetch error: {e}")
+    except Exception as e:
+        log.error(f"USGS gauge processing error: {e}")
         return []
 
 
