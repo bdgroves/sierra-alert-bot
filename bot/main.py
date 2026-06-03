@@ -633,6 +633,7 @@ def fetch_airnow() -> list[dict]:
     }
     try:
         resp = requests.get(AIRNOW_URL, params=params, timeout=30)
+        log.info(f"AirNow status: {resp.status_code}, content[:200]: {resp.text[:200]}")
         resp.raise_for_status()
         observations = resp.json()
         # Filter to AQI >= threshold
