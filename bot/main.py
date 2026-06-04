@@ -121,26 +121,23 @@ def aqi_label(aqi: int) -> str:
     return "Unhealthy for Sensitive Groups"
 
 
-# USGS Stream Gauges — Sierra Nevada key rivers
-# Format: (site_id, name, river, minor_flood_ft, moderate_flood_ft)
-# NWS/CNRFC verified thresholds — tweet only at MINOR FLOOD STAGE or above
-# Kept to highest-impact gauges for reliability
-SIERRA_GAUGES = [
-    # Tuolumne River ❤️
-    ("11290000", "Modesto",               "Tuolumne River",   55.0,  62.0),
-    ("11276500", "Hetch Hetchy",          "Tuolumne River",    9.0,  11.0),
-    # Merced River
-    ("11270900", "Happy Isles/Yosemite",  "Merced River",      7.5,   9.0),
-    ("11274000", "Merced",                "Merced River",     71.0,  74.0),
-    # American River
-    ("11446500", "Fair Oaks",             "American River",   25.0,  33.0),
-    # Truckee River
-    ("10346000", "Reno",                  "Truckee River",    11.0,  13.5),
-    # Kings River
-    ("11251000", "Pine Flat",             "Kings River",      18.0,  22.0),
-]
 
-USGS_IV_URL = "https://waterservices.usgs.gov/nwis/iv/"
+
+# NWS National Water Prediction Service API — faster and more reliable than USGS direct
+NWPS_GAUGE_URL = "https://api.water.noaa.gov/nwps/v1/gauges/{gauge_id}"
+
+# NWS gauge IDs for Sierra Nevada rivers
+# Format: (nwps_id, name, river)
+# Flood stages pulled dynamically from the API itself — no hardcoding needed!
+SIERRA_NWPS_GAUGES = [
+    ("mdsc1",  "Modesto",              "Tuolumne River"),
+    ("hchy1",  "Hetch Hetchy",         "Tuolumne River"),
+    ("hisc1",  "Happy Isles/Yosemite", "Merced River"),
+    ("merc1",  "Merced",               "Merced River"),
+    ("foac1",  "Fair Oaks",            "American River"),
+    ("rnkn2",  "Reno",                 "Truckee River"),
+    ("pnfc1",  "Pine Flat",            "Kings River"),
+]
 
 # ── Sierra Nevada NWS forecast zones ─────────────────────────────────────────
 # Covers the full Sierra Nevada mountain range and surrounding foothills
@@ -840,68 +837,56 @@ def format_calfire_tweet(props: dict) -> str:
     return body[:MAX_TWEET_LEN]
 
 
-# ── USGS Stream Gauge fetch ───────────────────────────────────────────────────
+# ── NWPS Stream Gauge fetch ──────────────────────────────────────────────────
 def fetch_gauges() -> list[dict]:
-    """Fetch current stage readings for Sierra Nevada stream gauges."""
+    """Fetch Sierra gauge status from NWS NWPS API — gets flood stages dynamically."""
     headers = {
         "User-Agent": "SierraNevadaWX/1.0 (github.com/bdgroves/sierra-alert-bot)",
         "Accept":     "application/json",
     }
-    site_ids = ",".join(g[0] for g in SIERRA_GAUGES)
-    params = {
-        "sites":       site_ids,
-        "parameterCd": "00065",
-        "format":      "json",
-        "siteStatus":  "active",
-    }
-    time_series = []
-    try:
-        resp = requests.get(USGS_IV_URL, params=params,
-                            headers=headers, timeout=15)
-        resp.raise_for_status()
-        time_series = resp.json().get("value", {}).get("timeSeries", [])
-    except requests.RequestException as e:
-        log.warning(f"USGS fetch timed out — skipping gauges this run: {e}")
-        return []
-
-    try:
-        # Build lookup: site_id -> latest stage
-        readings = {}
-        for ts in time_series:
-            site_id = ts["sourceInfo"]["siteCode"][0]["value"]
-            vals    = ts["values"][0]["value"]
-            if vals:
-                latest = vals[-1]
-                readings[site_id] = {
-                    "stage":    float(latest["value"]),
-                    "datetime": latest["dateTime"],
-                    "name":     ts["sourceInfo"]["siteName"],
-                }
-
-        # Check which gauges are above action or flood stage
-        alerts = []
-        for site_id, label, river, minor_ft, moderate_ft in SIERRA_GAUGES:
-            if site_id not in readings:
+    alerts = []
+    for gauge_id, label, river in SIERRA_NWPS_GAUGES:
+        try:
+            url  = NWPS_GAUGE_URL.format(gauge_id=gauge_id)
+            resp = requests.get(url, headers=headers, timeout=10)
+            if resp.status_code != 200:
                 continue
-            r     = readings[site_id]
-            stage = r["stage"]
+            data = resp.json()
+
+            # Get current observed stage
+            obs   = data.get("observed", {})
+            stage = obs.get("primary", {}).get("value")
+            if stage is None:
+                continue
+            stage = float(stage)
+
+            # Get flood thresholds from API
+            thresholds = data.get("flood", {}).get("categories", {})
+            minor_ft    = thresholds.get("minor")
+            moderate_ft = thresholds.get("moderate")
+            if minor_ft is None:
+                continue
+
+            minor_ft    = float(minor_ft)
+            moderate_ft = float(moderate_ft) if moderate_ft else minor_ft + 5
+
             if stage >= minor_ft:
                 alerts.append({
-                    "site_id":    site_id,
-                    "label":      label,
-                    "river":      river,
-                    "stage":      stage,
-                    "minor_ft":   minor_ft,
+                    "gauge_id":    gauge_id,
+                    "label":       label,
+                    "river":       river,
+                    "stage":       stage,
+                    "minor_ft":    minor_ft,
                     "moderate_ft": moderate_ft,
-                    "datetime":   r["datetime"],
-                    "severity":   "moderate" if stage >= moderate_ft else "minor",
+                    "datetime":    obs.get("timestamp", ""),
+                    "severity":    "moderate" if stage >= moderate_ft else "minor",
                 })
+        except Exception as e:
+            log.warning(f"NWPS gauge {gauge_id} error (non-fatal): {e}")
+            continue
 
-        log.info(f"Checked {len(readings)} Sierra gauges, {len(alerts)} at flood stage.")
-        return alerts
-    except Exception as e:
-        log.error(f"USGS gauge processing error: {e}")
-        return []
+    log.info(f"Checked {len(SIERRA_NWPS_GAUGES)} Sierra gauges, {len(alerts)} at flood stage.")
+    return alerts
 
 
 def gauge_uid(alert: dict) -> str:
@@ -910,7 +895,7 @@ def gauge_uid(alert: dict) -> str:
     feet_above = int(alert["stage"] - alert["minor_ft"])
     level = f"{level}+{feet_above}ft"
     return "gauge-" + hashlib.md5(
-        f"{alert['site_id']}-{level}".encode()
+        f"{alert['gauge_id']}-{level}".encode()
     ).hexdigest()
 
 
