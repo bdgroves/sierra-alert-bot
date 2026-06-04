@@ -15,10 +15,14 @@ python = ">=3.12,<3.13"
 [tool.pixi.pypi-dependencies]
 tweepy   = ">=4.14,<5"
 requests = ">=2.32,<3"
+metpy    = ">=1.6,<2"
+siphon   = ">=0.9,<1"
 
 [tool.pixi.tasks]
-bot     = "python bot/main.py"
-dry-run = { cmd = "python bot/main.py", env = { DRY_RUN = "1" } }
+bot       = "python bot/main.py"
+dry-run   = { cmd = "python bot/main.py", env = { DRY_RUN = "1" } }
+skewt     = "python tools/sierra_skewt.py"
+skewt-all = "python tools/sierra_skewt.py --all"
 check-nws = "python -c \"import requests; r=requests.get('https://api.weather.gov/alerts/active/area/CA',headers={'User-Agent':'test','Accept':'application/geo+json'}); print(f'{len(r.json()[\\\"features\\\"])} active CA alerts')\""
 check-eq  = "python -c \"import requests; r=requests.get('https://earthquake.usgs.gov/fdsnws/event/1/query',params={'format':'geojson','minmagnitude':'2.5','bbox':'-120.5,35.5,-117.5,41.0','starttime':'2026-01-01'}); print(f'{len(r.json()[\\\"features\\\"])} Sierra earthquakes since Jan 1')\""
 
