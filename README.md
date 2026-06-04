@@ -217,5 +217,5 @@ MIT. Use it, fork it, build on it. If you extend it to another mountain range, o
 
 ---
 
-*Built in the Tri-Cities, watching the Sierra Nevada.*  
+*Built in Lakewood, WA, watching the Sierra Nevada.*  
 *[@bdgroves](https://twitter.com/bdgroves) · [@SierraNevadaWX](https://twitter.com/SierraNevadaWX)*
