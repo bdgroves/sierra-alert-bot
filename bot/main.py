@@ -465,9 +465,24 @@ def fetch_fires() -> list[dict]:
     headers = {
         "User-Agent": "SierraNevadaWX/1.0 (github.com/bdgroves/sierra-alert-bot)",
     }
+    # Retry up to 3 times with backoff — ESRI servers occasionally drop connections
+    import time as _time
+    last_err = None
+    for attempt in range(3):
+        try:
+            resp = requests.get(NIFC_FIRE_URL, params=params,
+                               headers=headers, timeout=30)
+            resp.raise_for_status()
+            break
+        except Exception as _e:
+            last_err = _e
+            if attempt < 2:
+                _time.sleep(5 * (attempt + 1))
+                log.warning(f"NIFC attempt {attempt+1} failed, retrying...")
+    else:
+        raise last_err
     try:
-        resp = requests.get(NIFC_FIRE_URL, params=params, headers=headers, timeout=30)
-        resp.raise_for_status()
+        resp = resp  # already set
         features = resp.json().get("features", [])
         # Filter to minimum size AND strictly within Sierra bbox by fire origin point
         def in_sierra_bbox(attrs):
