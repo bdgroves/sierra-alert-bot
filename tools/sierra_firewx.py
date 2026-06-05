@@ -177,6 +177,22 @@ def fetch_obs(station_id: str) -> dict | None:
 
         if temp_c is None or dewp_c is None:
             return None
+        # Check obs age — warn if stale but don't reject (some stations report slowly)
+        obs_age_str = ''
+        if timestamp:
+            try:
+                from datetime import timezone as _tz
+                obs_dt = datetime.fromisoformat(timestamp.replace('Z','+00:00'))
+                age_min = (datetime.now(_tz.utc) - obs_dt).total_seconds() / 60
+                age_label = f"{age_min:.0f}m ago"
+                obs_age_str = age_label
+                if age_min > 120:
+                    print(f"  ⚠  Obs is {age_min:.0f} min old (stale)")
+                    obs_age_str = f"STALE {age_label}"
+                else:
+                    print(f"  Obs age: {age_label}")
+            except Exception:
+                pass
 
         temp_f     = temp_c * 9/5 + 32
         dewp_f     = dewp_c * 9/5 + 32
@@ -195,6 +211,7 @@ def fetch_obs(station_id: str) -> dict | None:
             'wind_mph':  round(wind_mph, 1),
             'gust_mph':  round(gust_mph, 1),
             'timestamp': timestamp,
+            'age_str':   obs_age_str,
         }
     except Exception as e:
         print(f"  ⚠  {station_id} obs error: {e}")
@@ -266,144 +283,170 @@ def rh_color(v):
 def plot_firewx(results: list, haines: int | None,
                 save_path: str | None = None, show: bool = True):
     """Plot the Sierra fire weather dashboard."""
-
     n = len(results)
     if n == 0:
         print("No data to plot.")
         return
 
-    now_str = datetime.now(timezone.utc).strftime('%HZ %B %d, %Y')
-
-    fig = plt.figure(figsize=(12, 8), dpi=130, facecolor=BG)
+    now_str = datetime.now(timezone.utc).strftime('%HZ  %B %d, %Y')
+    fig = plt.figure(figsize=(12, 6.75), dpi=150, facecolor=BG)
     gs  = gridspec.GridSpec(3, n, figure=fig,
-                            left=0.05, right=0.97,
-                            top=0.88, bottom=0.06,
-                            wspace=0.3, hspace=0.55)
+                            left=0.03, right=0.97,
+                            top=0.86, bottom=0.16,
+                            wspace=0.12, hspace=0.12)
 
-    # Row labels
-    row_labels = ['FFWI', 'HDW', 'RH / Wind']
-
+    # ── Column headers ────────────────────────────────────────────────────────
     for col, r in enumerate(results):
-        stn   = r['station']
-        info  = STATIONS.get(stn, {'name': stn, 'elev_ft': 0, 'desc': ''})
-        obs   = r['obs']
-        ffwi  = r['ffwi']
-        hdw   = r['hdw']
-        rf    = r['red_flag']
+        stn  = r['station']
+        info = STATIONS.get(stn, {'name': stn, 'elev_ft': 0, 'desc': ''})
+        rf   = r['red_flag']
+        cx   = (col + 0.5) / n
 
-        # Column header
-        fig.text((col + 0.5) / n * 0.92 + 0.05, 0.915,
-                 f"{stn}  {info['name']}",
-                 ha='center', color=WHITE, fontsize=10, fontweight='bold')
-        fig.text((col + 0.5) / n * 0.92 + 0.05, 0.897,
-                 f"{info['elev_ft']:,} ft  ·  {info['desc']}",
+        fig.text(cx, 0.930, stn, ha='center',
+                 color=WHITE, fontsize=12, fontweight='bold')
+        fig.text(cx, 0.914, f"{info['name']}  {info['elev_ft']:,} ft",
                  ha='center', color=MUTED, fontsize=8)
-
-        # Red Flag banner
         if rf['red_flag']:
-            fig.text((col + 0.5) / n * 0.92 + 0.05, 0.877,
-                     '🔥 RED FLAG',
-                     ha='center', color=RED, fontsize=9, fontweight='bold')
+            fig.text(cx, 0.899, 'RED FLAG',
+                     ha='center', color=RED, fontsize=8, fontweight='bold')
         elif rf['watch']:
-            fig.text((col + 0.5) / n * 0.92 + 0.05, 0.877,
-                     '⚠️  WATCH',
-                     ha='center', color=ORANGE, fontsize=9)
+            fig.text(cx, 0.899, 'WATCH',
+                     ha='center', color=ORANGE, fontsize=8, fontweight='bold')
 
-        # ── Row 0: FFWI gauge ─────────────────────────────────────────────
-        ax0 = fig.add_subplot(gs[0, col])
-        ax0.set_facecolor(BG2)
-        ax0.set_xlim(0, 100); ax0.set_ylim(0, 1)
-        ax0.set_xticks([]); ax0.set_yticks([])
-        for sp in ax0.spines.values(): sp.set_color('#333')
+    # ── Gauges ────────────────────────────────────────────────────────────────
+    for col, r in enumerate(results):
+        obs  = r['obs']
+        ffwi = r['ffwi']
+        hdw  = r['hdw']
+        rf   = r['red_flag']
 
-        # Background danger zones
-        for (x0, x1, c, lbl) in [(0,25,'#1a3a1a','Low'),
-                                   (25,50,'#3a3a00','Mod'),
-                                   (50,75,'#3a2000','High'),
-                                   (75,100,'#3a0000','Crit')]:
-            ax0.axvspan(x0, x1, alpha=0.4, color=c)
-            ax0.text((x0+x1)/2, 0.08, lbl, ha='center',
-                     fontsize=6, color='#555')
+        def make_gauge(row, value, label, scale, zones, color_fn):
+            ax = fig.add_subplot(gs[row, col])
+            ax.set_facecolor('#111')
+            ax.set_xlim(0, scale)
+            ax.set_ylim(0, 1)
+            ax.axis('off')
 
-        # Value bar
-        ax0.barh(0.5, min(ffwi, 100), height=0.35,
-                 color=ffwi_color(ffwi), alpha=0.9)
-        ax0.axvline(min(ffwi, 100), color=ffwi_color(ffwi),
-                    linewidth=2, alpha=0.8)
-        ax0.text(50, 0.82, f'FFWI  {ffwi}',
-                 ha='center', color=ffwi_color(ffwi),
-                 fontsize=11, fontweight='bold')
+            # Zone backgrounds
+            for (z0, z1, zc) in zones:
+                ax.barh(0.5, z1-z0, left=z0, height=1.0,
+                        color=zc, alpha=1.0, zorder=1)
 
-        # ── Row 1: HDW gauge ──────────────────────────────────────────────
-        ax1 = fig.add_subplot(gs[1, col])
-        ax1.set_facecolor(BG2)
-        ax1.set_xlim(0, 300); ax1.set_ylim(0, 1)
-        ax1.set_xticks([]); ax1.set_yticks([])
-        for sp in ax1.spines.values(): sp.set_color('#333')
+            # Value bar
+            bar = min(value, scale)
+            ax.barh(0.5, bar, left=0, height=0.72,
+                    color=color_fn(value), alpha=1.0, zorder=2)
 
-        for (x0, x1, c) in [(0,40,'#1a3a1a'),(40,80,'#3a3a00'),
-                              (80,160,'#3a2000'),(160,300,'#3a0000')]:
-            ax1.axvspan(x0, x1, alpha=0.4, color=c)
+            # Label inside bar
+            val_str = f'{label}  {value:,.0f}' if value >= 10 else f'{label}  {value:.1f}'
+            ax.text(max(bar * 0.5, scale * 0.05), 0.5,
+                    val_str, ha='center', va='center',
+                    color='white', fontsize=10, fontweight='bold', zorder=3)
+            return ax
 
-        ax1.barh(0.5, min(hdw, 300), height=0.35,
-                 color=hdw_color(hdw), alpha=0.9)
-        ax1.text(150, 0.82, f'HDW  {hdw}',
-                 ha='center', color=hdw_color(hdw),
-                 fontsize=11, fontweight='bold')
+        # FFWI — scale 0-250
+        make_gauge(0, ffwi, 'FFWI', 250,
+                   [(0,25,'#0a200a'),(25,50,'#1e1e00'),
+                    (50,75,'#200a00'),(75,250,'#1a0000')],
+                   ffwi_color)
 
-        # ── Row 2: RH + Wind text ─────────────────────────────────────────
+        # HDW — scale 0-5000
+        make_gauge(1, hdw, 'HDW', 5000,
+                   [(0,80,'#0a200a'),(80,160,'#1e1e00'),
+                    (160,400,'#200a00'),(400,5000,'#1a0000')],
+                   hdw_color)
+
+        # Conditions panel
         ax2 = fig.add_subplot(gs[2, col])
         ax2.set_facecolor(BG2)
         ax2.set_xlim(0, 1); ax2.set_ylim(0, 1)
-        ax2.set_xticks([]); ax2.set_yticks([])
-        for sp in ax2.spines.values(): sp.set_color('#333')
+        ax2.axis('off')
 
-        rh_c = rh_color(obs['rh'])
-        ax2.text(0.5, 0.78, f"{obs['temp_f']:.0f}°F",
-                 ha='center', color=ORANGE, fontsize=13, fontweight='bold')
-        ax2.text(0.5, 0.55, f"RH  {obs['rh']:.0f}%",
-                 ha='center', color=rh_c, fontsize=11, fontweight='bold')
-        ax2.text(0.5, 0.33,
-                 f"Wind  {obs['wind_mph']:.0f} mph",
-                 ha='center', color=CYAN, fontsize=10)
-        if obs['gust_mph'] > 0:
-            ax2.text(0.5, 0.14,
-                     f"Gusts  {obs['gust_mph']:.0f} mph",
-                     ha='center', color=CYAN, fontsize=9, alpha=0.8)
+        # Temp
+        if obs['temp_f'] is not None:
+            ax2.text(0.5, 0.82, f"{obs['temp_f']:.0f}°F",
+                     ha='center', va='center', color=ORANGE,
+                     fontsize=14, fontweight='bold')
+            rh_c = rh_color(obs['rh'])
+            ax2.text(0.5, 0.58, f"RH  {obs['rh']:.0f}%",
+                     ha='center', va='center', color=rh_c,
+                     fontsize=12, fontweight='bold')
+        else:
+            ax2.text(0.5, 0.65, 'No data',
+                     ha='center', va='center', color='#555',
+                     fontsize=12)
+        # Wind
+        wind_val = obs['wind_mph'] or 0
+        wind_str = "Wind  Calm" if wind_val < 2 else f"Wind  {wind_val:.0f} mph"
+        has_gust = (obs['gust_mph'] or 0) > 1
+        wind_y = 0.40 if has_gust else 0.36
+        ax2.text(0.5, wind_y, wind_str,
+                 ha='center', va='center', color=CYAN, fontsize=10)
+        # Gusts
+        if has_gust:
+            ax2.text(0.5, 0.18, f"Gusts  {obs['gust_mph']:.0f} mph",
+                     ha='center', va='center', color=CYAN,
+                     fontsize=9, alpha=0.85)
+        # Stale data warning
+        if obs.get('age_str'):
+            ax2.text(0.5, 0.04, obs['age_str'],
+                     ha='center', va='center', color='#666', fontsize=7)
 
-    # ── Haines panel (spans full width at bottom) ─────────────────────────
-    fig.text(0.5, 0.03,
-             f"Haines Index (REV sounding):  "
-             f"{haines if haines else 'N/A'}  "
-             f"{'— ' + ['','','Very Low','Low','Moderate','High','Very High'][haines] if haines else ''}",
-             ha='center',
-             color=haines_color(haines) if haines else MUTED,
-             fontsize=10, fontweight='bold')
+    # ── Row labels + descriptions (left side) ───────────────────────────────
+    row_info = [
+        ('FFWI', 'Fire spread rate'),
+        ('HDW',  'Heat × wind'),
+        ('Cond', 'Surface obs'),
+    ]
+    row_tops = [0.80, 0.80 - (0.80-0.12)/3, 0.80 - 2*(0.80-0.12)/3]
+    for ri, (lbl, desc) in enumerate(row_info):
+        mid_y = row_tops[ri] - (0.80-0.12)/6
+        fig.text(0.008, mid_y, lbl, ha='center', va='center',
+                 color=MUTED, fontsize=7.5, fontweight='bold', rotation=90)
 
-    # ── Title ─────────────────────────────────────────────────────────────
-    fig.text(0.5, 0.965,
-             'Sierra Nevada Fire Weather Indices',
-             ha='center', color=WHITE, fontsize=14, fontweight='bold')
-    fig.text(0.5, 0.945,
-             f'{now_str}  ·  NWS Surface Obs + REV Upper Air Sounding',
-             ha='center', color=MUTED, fontsize=9)
-    fig.text(0.5, 0.927,
-             'FFWI > 50 = significant  ·  FFWI > 75 = critical  ·  '
-             'Red Flag: RH < 15% AND winds > 25 mph',
+    # ── Title ─────────────────────────────────────────────────────────────────
+    fig.text(0.5, 0.972, 'Sierra Nevada Fire Weather',
+             ha='center', color=WHITE, fontsize=16, fontweight='bold')
+    fig.text(0.5, 0.954, now_str,
+             ha='center', color=MUTED, fontsize=10)
+    fig.text(0.5, 0.940,
+             'FFWI = fire spread rate  ·  HDW = heat×wind intensity  ·  '
+             'Red Flag: RH<15% & winds>25mph',
              ha='center', color='#555', fontsize=8)
 
-    # ── Footer ────────────────────────────────────────────────────────────
-    fig.text(0.5, 0.005,
-             '@SierraNevadaWX  ·  Data: NWS API + Iowa State RAOB  ·  '
-             'Indices: Fosberg 1978, Haines 1988, Srock et al. 2018',
+    # ── Color legend — simple spaced text ───────────────────────────────────
+    leg_y = 0.108
+    # Draw colored squares + labels spaced evenly
+    items = [('Low  0-25', GREEN, 0.12),
+             ('Moderate  25-50', GOLD, 0.30),
+             ('High  50-75', ORANGE, 0.52),
+             ('Critical  75+', RED, 0.72)]
+    for lbl, lc, lx in items:
+        fig.text(lx, leg_y, '■ ', ha='left', color=lc, fontsize=9)
+        fig.text(lx + 0.025, leg_y, lbl, ha='left', color='#999', fontsize=7.5)
+
+    # ── Haines + footer ───────────────────────────────────────────────────────
+    haines_labels = ['','','Very Low','Low','Moderate','High','Very High']
+    h_str = (f"Haines Index: {haines}  ({haines_labels[haines]})"
+             if haines else "Haines Index: N/A")
+    fig.text(0.5, 0.080, h_str, ha='center',
+             color=haines_color(haines) if haines else MUTED,
+             fontsize=10, fontweight='bold')
+    fig.text(0.5, 0.060,
+             'Haines = atmospheric dryness & instability (2=very low, 6=very high)',
+             ha='center', color='#555', fontsize=7.5)
+    fig.text(0.5, 0.028,
+             '@SierraNevadaWX  ·  NWS API + Iowa State RAOB  ·  '
+             'Fosberg 1978  Haines 1988  Srock et al. 2018',
              ha='center', color='#444', fontsize=7)
 
     if save_path:
-        plt.savefig(save_path, dpi=130, bbox_inches='tight', facecolor=BG)
-        print(f"  💾 {save_path}")
+        plt.savefig(save_path, dpi=150, bbox_inches='tight', facecolor=BG)
+        print(f"  Saved: {save_path}")
     if show:
         plt.show()
     plt.close(fig)
+
 
 
 # ── CLI ───────────────────────────────────────────────────────────────────────
@@ -439,13 +482,22 @@ if __name__ == '__main__':
         print(f"\nFetching {stn}...")
         obs = fetch_obs(stn)
         if obs is None:
-            print(f"  ⚠  No data for {stn}")
-            continue
+            print(f"  ⚠  No data for {stn} — using placeholder")
+            obs = {
+                'temp_f': None, 'dewp_f': None, 'rh': None,
+                'wind_mph': None, 'gust_mph': 0,
+                'timestamp': '', 'age_str': 'No data'
+            }
 
-        ffwi = fosberg_ffwi(obs['temp_f'], obs['rh'], obs['wind_mph'])
-        hdw  = hdw_index(obs['temp_f'], obs['rh'], obs['wind_mph'])
-        rf   = red_flag_check(obs['temp_f'], obs['rh'],
-                               obs['wind_mph'], obs['gust_mph'])
+        if obs['temp_f'] is None:
+            ffwi = 0.0; hdw = 0.0
+            rf   = {'red_flag': False, 'watch': False,
+                    'rh_crit': False, 'wind_crit': False, 'temp_crit': False}
+        else:
+            ffwi = fosberg_ffwi(obs['temp_f'], obs['rh'], obs['wind_mph'] or 0)
+            hdw  = hdw_index(obs['temp_f'], obs['rh'], obs['wind_mph'] or 0)
+            rf   = red_flag_check(obs['temp_f'], obs['rh'],
+                                   obs['wind_mph'] or 0, obs['gust_mph'] or 0)
 
         print(f"  {obs['temp_f']:.0f}°F  RH:{obs['rh']:.0f}%  "
               f"Wind:{obs['wind_mph']:.0f}mph  Gusts:{obs['gust_mph']:.0f}mph")
