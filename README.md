@@ -26,7 +26,7 @@ No ads. No clickbait. No weather personality telling you to stay tuned. Just the
 | 🌊 **NWPS Stream Gauges** | Minor flood stage on 7 Sierra rivers | The snowmelt reckoning arriving downstream |
 | 🌋 **USGS Earthquakes** | M2.5+ in the Sierra bbox | The Sierra Nevada sits on active fault systems |
 
-The Sierra bounding box covers `-121.0°W to -117.5°W, 35.5°N to 41.5°N` — from Lassen in the north to the White Mountains in the south, from the Central Valley foothills to the Nevada Great Basin.
+The Sierra bounding box covers `-121.0°W to -117.5°W, 36.0°N to 41.5°N` — from Lassen in the north to the White Mountains in the south, from the Central Valley foothills to the Nevada Great Basin.
 
 ---
 
@@ -50,10 +50,10 @@ Flood stages from NWS/CNRFC. The bot tweets at **minor flood stage** — when pr
 
 ## 🛠️ How It's Built
 
-**Runtime:** GitHub Actions, scheduled every ~5 minutes  
-**Language:** Python 3.12  
-**Package manager:** [pixi](https://prefix.dev/docs/pixi/)  
-**Twitter API:** Tweepy v4 (Basic tier)  
+**Runtime:** GitHub Actions, scheduled every ~5 minutes
+**Language:** Python 3.12
+**Package manager:** [pixi](https://prefix.dev/docs/pixi/)
+**Twitter API:** Tweepy v4 (Basic tier)
 **Deduplication:** SHA-MD5 cache committed to `posted_ids.json`
 
 ```
@@ -61,8 +61,9 @@ sierra-alert-bot/
 ├── bot/
 │   └── main.py              # The engine — all 7 data sources
 ├── tools/
-│   ├── sierra_skewt.py      # MetPy Skew-T upper air sounding plots
-│   └── nexrad_analysis.py   # Py-ART NEXRAD Level 2 dual-pol analysis
+│   ├── nexrad_analysis.py   # NEXRAD Level 2 dual-pol analysis (Py-ART)
+│   ├── sierra_firewx.py     # Sierra fire weather dashboard (FFWI/HDW/Haines)
+│   └── sierra_skewt.py      # MetPy Skew-T upper air sounding plots
 ├── .github/
 │   └── workflows/
 │       └── sierra-bot.yml   # GitHub Actions schedule
@@ -90,88 +91,160 @@ AIRNOW_API_KEY        # free at airnow.gov
 
 ## 🌡️ The Science Tools
 
-This repo isn't just a bot. It's a growing toolkit for understanding the Sierra Nevada atmosphere.
-
-### Skew-T Log-P Soundings
-
-```bash
-pixi run skewt                    # Latest Reno (REV) sounding
-pixi run skewt-all                # All 4 stations → skewt_output/
-pixi run -- python tools/sierra_skewt.py --station OAK --time 12Z
-```
-
-Twice a day, weather balloons launch from Reno, Oakland, Salt Lake City, and Vandenberg. They rise to 100,000 feet, measuring temperature, humidity, and wind every few meters. `sierra_skewt.py` pulls that data via the Iowa State RAOB archive and plots it as a professional Skew-T Log-P diagram with:
-
-- Temperature and dewpoint profiles
-- Wind barbs showing shear with altitude
-- Parcel path with CAPE/CIN shading
-- LCL, LFC, and EL markers
-- Hodograph inset (colored by pressure level)
-- Indices panel: CAPE, CIN, LI, PW, LCL
-
-**Reading the Sierra morning sounding:**  
-When Reno (REV) shows CAPE near zero and a massive dewpoint depression between 500–700 hPa, that's the Great Basin drying out — a classic setup for dry lightning and high fire danger on the eastern slope by afternoon. When Salt Lake City shows negative LI with no CIN cap, that instability is heading your way.
-
-**Stations:**
-| ID | Location | What it tells you |
-|----|----------|------------------|
-| REV | Reno, NV | Eastern Sierra, Great Basin moisture |
-| OAK | Oakland, CA | Marine layer depth, western slope stability |
-| VBG | Vandenberg, CA | Southern California offshore flow |
-| SLC | Salt Lake City, UT | Great Basin instability moving west |
+This repo isn't just a bot. It's a growing toolkit for understanding the Sierra Nevada atmosphere — and severe weather anywhere in the country.
 
 ---
 
-### NEXRAD Level 2 Dual-Pol Analysis
+### 🔥 Sierra Fire Weather Dashboard
+
+```bash
+pixi run firewx                    # All 5 Sierra stations, current conditions
+pixi run firewx-save               # Save PNG to firewx_output/
+pixi run -- python tools/sierra_firewx.py --station KBIH
+```
+
+Pulls live NWS surface observations from 5 Sierra stations and the latest REV upper air sounding from Reno. Calculates three fire weather indices and plots a Twitter-ready dashboard:
+
+**The three indices:**
+
+| Index | What it measures | Red Flag threshold |
+|-------|-----------------|-------------------|
+| **FFWI** Fosberg Fire Weather Index | Rate of fire spread based on fuel moisture, temp, wind | > 50 significant, > 75 critical |
+| **HDW** Hot-Dry-Windy Index | Vapor pressure deficit × wind speed — the two key fire spread drivers | > 80 high, > 160 extreme |
+| **Haines Index** | Atmospheric dryness and instability aloft — how much a fire can grow | 5-6 = high/very high |
+
+**Sierra monitoring stations:**
+
+| Station | Location | Elevation |
+|---------|----------|-----------|
+| KRNO | Reno-Tahoe International | 4,415 ft |
+| KTVL | Lake Tahoe Airport | 6,264 ft |
+| KMMH | Mammoth Yosemite Airport | 7,135 ft |
+| KBLU | Blue Canyon | 5,284 ft |
+| KBIH | Bishop (Owens Valley) | 4,124 ft |
+
+**June 5, 2026 — Real data from a Fire Weather Watch day:**
+```
+KBIH Bishop:   97°F  RH:9%   Wind:70mph  Gusts:91mph  FFWI:205  HDW:3822  🔥 RED FLAG
+KMMH Mammoth:  81°F  RH:16%  Wind:29mph  Gusts:62mph  FFWI:76   HDW:869
+KRNO Reno:     90°F  RH:8%   Wind:33mph              FFWI:97   HDW:1450  🔥 RED FLAG
+Haines: 5 (High)
+```
+
+---
+
+### 📡 NEXRAD Level 2 Dual-Pol Analysis
 
 ```bash
 pixi run nexrad-ok              # Latest KVNX (Vance AFB, Oklahoma)
 pixi run nexrad-sierra          # Latest KRGX (Reno — Sierra radar)
-pixi run -- python tools/nexrad_analysis.py --radar KBBX  # Beale AFB
-pixi run -- python tools/nexrad_analysis.py --radar KHNX  # Hanford
+pixi run -- python tools/nexrad_analysis.py --radar KDLH   # Duluth MN
+pixi run -- python tools/nexrad_analysis.py --radar KLBB   # Lubbock TX
+pixi run -- python tools/nexrad_analysis.py --radar KMAF --sweep 4
+pixi run -- python tools/nexrad_analysis.py --all-sweeps --radar KMPX
 ```
 
-NOAA puts every NEXRAD scan on AWS S3 within seconds of it completing — free, public, real-time. `nexrad_analysis.py` pulls the latest volume from `s3://unidata-nexrad-level2`, reads all six dual-pol fields with [Py-ART](https://arm-doe.github.io/pyart/), and produces a dark-themed 6-panel analysis plot with automatic signature detection:
+NOAA puts every NEXRAD scan on AWS S3 within seconds of it completing — free, public, real-time. `nexrad_analysis.py` pulls the latest volume from `s3://unidata-nexrad-level2`, reads all six dual-pol fields with [Py-ART](https://arm-doe.github.io/pyart/), and produces a dark-themed 6-panel analysis plot with automatic signature detection.
 
 **The six fields:**
 
 | Field | What it measures | What to look for |
 |-------|-----------------|-----------------|
 | **Z** Reflectivity | Precipitation intensity | Hook echo, bow echo, hail core |
-| **V** Velocity | Radial wind speed | Tight green/red couplet = rotation = TVS |
+| **V** Velocity | Radial wind — dealiased | Tight green/red couplet = rotation = TVS |
 | **SW** Spectrum Width | Turbulence | High values near rotation core |
 | **ZDR** Diff Reflectivity | Drop shape/size | Near 0 dB = tumbling hail |
-| **CC** Correlation Coeff | Scatterer uniformity | <0.80 inside high-Z = **tornado debris** |
+| **CC** Correlation Coeff | Scatterer uniformity | <0.80 inside high-Z = tornado debris |
 | **PhiDP** Diff Phase | Total rain accumulation | Rapid increase = flash flood rainfall |
 
-**Automatic detection:**
+**Automatic signature detection:**
 
-- 🟣 **TDS** (Tornado Debris Signature): Z>40 AND CC<0.80 — lofted non-meteorological debris. When you see magenta dots on the CC panel, there is almost certainly a tornado on the ground.
-- 🟡 **TVS proxy**: Z>45 AND SW>7 — turbulent high-reflectivity. Check the velocity panel for the rotation couplet.
-- 🩵 **Hail signature**: Z>55 AND ZDR~0 — large hail tumbling randomly in the beam.
+- 🟣 **TDS** (Tornado Debris Signature): Z>40 AND CC<0.80 — lofted non-meteorological debris
+- 🟡 **TVS proxy**: Z>45 AND SW>7 — turbulent high-reflectivity, check velocity for rotation
+- 🩵 **Hail signature**: Z>55 AND ZDR~0 — large hail tumbling randomly in the beam
+
+**Technical details:**
+- Automatic split-cut VCP detection — velocity plotted from the correct sweep (not sweep 0 which is reflectivity-only on most NEXRAD VCPs)
+- `dealias_region_based` velocity dealiasing with CC gate filter
+- Falls back to raw velocity if dealiasing produces empty output
+- Strips Zillow/corporate AWS credentials from environment for true anonymous S3 access
 
 **Sierra Nevada radars:**
 ```
-KRGX  Reno, NV        — eastern Sierra crest, Tahoe basin
+KRGX  Reno, NV        — eastern Sierra crest, Tahoe basin  (7,807 ft elevation!)
 KBBX  Beale AFB, CA   — northern Sierra, Sacramento Valley
 KHNX  Hanford, CA     — southern Sierra, San Joaquin Valley
 ```
 
 ---
 
-## 🌩️ A Day in the Life
+### 🌡️ Skew-T Log-P Soundings
 
-On June 4, 2026, while building this system, we watched a severe thunderstorm outbreak unfold in real time over north-central Oklahoma. The bot was watching the Sierra while we pivoted the NEXRAD tool east:
+```bash
+pixi run skewt                    # Latest Reno (REV) sounding
+pixi run skewt-all                # All 4 stations → skewt_output/
+```
 
-- `KVNX` scan at 21Z showed a massive bow echo centered over Alfalfa and Garfield County
-- **TDS: 54 pixels detected** — CC below 0.80 inside a high-Z core near Enid
-- **Hail signature: 11 pixels** — Z>55 with ZDR near zero
-- The tornado warning polygon was visible on the QGIS radar overlay
-- `#okwx` confirmed severe thunderstorm warnings for Alfalfa, Garfield, and Grant County
+Twice a day, weather balloons launch from Reno, Oakland, Salt Lake City, and Vandenberg. They rise to 100,000 feet, measuring temperature, humidity, and wind every few meters. `sierra_skewt.py` pulls that data via the Iowa State RAOB archive and plots it as a professional Skew-T Log-P diagram with hodograph, CAPE/CIN shading, and indices panel.
 
-The "TDS" turned out to be a hail/rain mixture rather than tornado debris — a good reminder that signatures must be read in context across all six fields. The velocity panel was range-folded. The CC was 0.75–0.79, not the 0.60 you'd expect from a real debris field.
+**Stations:** REV (Reno), OAK (Oakland), VBG (Vandenberg), SLC (Salt Lake City)
 
-Science in real time. That's the point.
+---
+
+## 🌩️ Bow Echo — What It Looks Like
+
+A bow echo is what happens when a squall line gets punched from behind by a rear inflow jet. The middle of the line accelerates faster than the ends, bending into a bow shape. The apex is where the most violent straight-line winds occur — often 60-80 mph.
+
+**The four stages we watch for:**
+
+| Stage | FFWI | Winds | Threat | Warning type |
+|-------|------|-------|--------|-------------|
+| 1 — Gentle bow | — | 40-50 mph | SVR | Severe Thunderstorm |
+| 2 — Classic bow | — | 60-75 mph | SVR | Severe Thunderstorm |
+| 3 — Intense bow | — | 75-90 mph | SVR + possible TOR | Tornado possible |
+| 4 — Derecho | — | 90-130+ mph | Widespread destruction | Multiple TOR + SVR |
+
+A **derecho** is a bow echo that has traveled more than 400 miles maintaining 58+ mph winds. They are effectively inland hurricanes.
+
+**What to watch for on radar:**
+- Bow sharpening — apex getting pointier = rear inflow intensifying
+- Comma head — northern book-end vortex wrapping into a curl = rotation
+- Debris notch — gap in precip on south flank = strong inflow
+
+---
+
+## 🌩️ A Day in the Life — June 5, 2026
+
+While building this system, we watched a severe weather outbreak unfold in real time across four states simultaneously:
+
+**Minnesota MCS (morning):**
+- Classic bow echo tracking from west MN toward Duluth
+- KDLH dual-pol confirmed hail signatures and book-end vortex development
+- Bow evolved Stage 2→3, comma head developed, then system collapsed
+- Severe Thunderstorm Warning issued by WFO Duluth — no tornado
+
+**Oklahoma supercell (midday):**
+- KVNX scan showed TDS 55px, Hail 52px near Cleo Springs/Helena
+- Ground truth (#okwx): Severe Thunderstorm Warning, 60 mph winds, 1" hail
+- Lesson: slow-moving storm (10-15 mph) + large hail = TDS false alarm
+- TDS pixel count decreasing scan-to-scan confirmed storm weakening
+
+**Fort Stockton TX supercell:**
+- Warned cell near I-10/US-67 interchange
+- KMAF contaminated by Permian Basin oil infrastructure ground clutter
+- KDFX (Del Rio) at long range — beam overshooting, sampling anvil
+- Davis Mountains create significant radar gap — spotters essential here
+
+**New Mexico/Texas Panhandle cluster (afternoon):**
+- KFDX showed rotation couplet with TDS 56px and Hail 73px
+- KLBB Lubbock: Hail 112px — highest count of the day — baseball-sized hail
+- Multiple discrete supercells, Severe Thunderstorm Warnings confirmed
+
+**Sierra Nevada fire weather (afternoon):**
+- Bishop FFWI 205, RH 9%, 91 mph gusts — off the scale
+- Reno FFWI 97, RH 8% — Red Flag conditions
+- Haines Index 5 (High) from 12Z REV sounding
+- Fire Weather Watch upgraded to Red Flag Warning
 
 ---
 
@@ -181,11 +254,7 @@ Science in real time. That's the point.
 
 The Sierra Nevada runs 400 miles along California's eastern spine. It generates its own weather. It feeds rivers that water 40 million people. It burns — sometimes catastrophically. It shakes. It floods. It hosts the deepest snowpack in North America and some of the most complex terrain-driven convection on the continent.
 
-**What this bot has already caught in its first days:**
-- 🔥 Sage Fire — Inyo County, 30 acres, 50% contained (before NIFC listed it)
-- 🌊 Tuolumne River at Modesto — running 36.4 ft (19 feet below flood stage — the thresholds matter)
-- 🌊 Merced River at Merced — 49.4 ft
-- ☀️ AQI monitoring across 8 Sierra stations — ready for fire season
+KRGX, the Reno NEXRAD, sits at **7,807 feet elevation** — one of the highest radar sites in the country — because the terrain blocks ground-level coverage. Even then there are significant beam blockage issues in the deep valleys. The forecasters at WFO Reno are Sierra terrain specialists working with the same data this toolkit uses.
 
 ---
 
@@ -201,6 +270,7 @@ The Sierra Nevada runs 400 miles along California's eastern spine. It generates 
 | Stream Gauges | NWS NWPS | `api.water.noaa.gov/nwps/v1/gauges/{id}` |
 | Earthquakes | USGS | `earthquake.usgs.gov/fdsnws/event/1/query` |
 | Upper Air Soundings | Iowa State RAOB | Siphon / IAStateUpperAir |
+| Surface Observations | NWS API | `api.weather.gov/stations/{id}/observations/latest` |
 | NEXRAD Level 2 | NOAA / Unidata | `s3://unidata-nexrad-level2` |
 
 ---
@@ -217,5 +287,5 @@ MIT. Use it, fork it, build on it. If you extend it to another mountain range, o
 
 ---
 
-*Built in Lakewood, WA, watching the Sierra Nevada.*  
+*Built in Lakewood, WA, watching the Sierra Nevada.*
 *[@bdgroves](https://twitter.com/bdgroves) · [@SierraNevadaWX](https://twitter.com/SierraNevadaWX)*
