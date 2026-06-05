@@ -772,13 +772,16 @@ def fetch_calfire() -> list[dict]:
                 continue
 
             # Filter by coordinates to Sierra bbox
-            coords = geo.get("coordinates", [None, None]) if geo else [None, None]
-            if coords and len(coords) >= 2:
-                lon, lat = coords[0], coords[1]
-                if (lon is not None and lat is not None and
-                        SIERRA_BBOX[0] <= lon <= SIERRA_BBOX[2] and
+            # Must have valid non-null coordinates — null coords slip through otherwise
+            coords = geo.get("coordinates", []) if geo else []
+            if (coords and len(coords) >= 2 and
+                    coords[0] is not None and coords[1] is not None):
+                lon, lat = float(coords[0]), float(coords[1])
+                if (SIERRA_BBOX[0] <= lon <= SIERRA_BBOX[2] and
                         SIERRA_BBOX[1] <= lat <= SIERRA_BBOX[3]):
                     sierra.append(f)
+            else:
+                log.debug(f"CAL FIRE: skipping '{props.get('Name','?')}' — no valid coordinates")
 
         log.info(f"Fetched {len(sierra)} CAL FIRE incidents in Sierra bbox.")
         return sierra
