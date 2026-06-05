@@ -810,22 +810,34 @@ def fetch_calfire() -> list[dict]:
 
 def calfire_uid(props: dict) -> str:
     """Stable UID for a CAL FIRE incident — must never change across updates.
-    
-    Priority: UniqueId (GUID) > incident number > Name+County
-    Never hash on mutable fields like acres, containment, or coordinates.
+
+    Returns TWO keys: one based on UniqueId GUID, one based on Name+County.
+    Both get added to the cache so either form of the same fire is deduplicated.
+    This handles the case where CAL FIRE changes the UniqueId between updates.
     """
+    name   = (props.get("Name") or "unknown").strip().upper()
+    county = (props.get("Counties") or props.get("County") or "").strip().upper()
+    name_key = "calfire-" + hashlib.md5(f"{name}-{county}".encode()).hexdigest()[:8]
+
     uid = (props.get("UniqueId") or
            props.get("IncidentID") or
            props.get("incident_id") or
            None)
     if uid:
-        raw = str(uid)
-    else:
-        # Fallback: name + county — stable enough
-        name   = (props.get("Name") or "unknown").strip().upper()
-        county = (props.get("Counties") or props.get("County") or "").strip().upper()
-        raw    = f"{name}-{county}"
-    return "calfire-" + hashlib.md5(raw.encode()).hexdigest()[:8]
+        guid_key = "calfire-" + hashlib.md5(str(uid).encode()).hexdigest()[:8]
+        return guid_key, name_key   # return both
+    return name_key, name_key       # same key twice if no GUID
+
+
+def calfire_already_posted(props: dict, cache: set) -> bool:
+    """Returns True if either the GUID-based or name-based UID is in cache."""
+    k1, k2 = calfire_uid(props)
+    return k1 in cache or k2 in cache
+
+
+def calfire_cache_keys(props: dict) -> tuple:
+    """Returns both cache keys to add after posting."""
+    return calfire_uid(props)
 
 
 def calfire_growth_uid(props: dict) -> str:
@@ -1036,6 +1048,8 @@ def run() -> None:
         is_new_fire = new_uid not in posted
         # Post new fire discovery
         post_tweet(client, text, new_uid, posted, new_count, error_count)
+        # Also cache the name-based key so future updates don't re-tweet
+        posted.add(k2)
         # Post growth update ONLY if fire was already known (not brand new this run)
         if not is_new_fire and growth_uid not in posted:
             growth_text = "📈 " + text[2:] if text.startswith("🔥") else "📈 " + text
@@ -1045,10 +1059,12 @@ def run() -> None:
     calfire_incidents = fetch_calfire()
     for feature in calfire_incidents:
         props      = feature.get("properties", {})
-        new_uid    = calfire_uid(props)
+        k1, k2     = calfire_uid(props)
         growth_uid = calfire_growth_uid(props)
         text       = format_calfire_tweet(props)
-        is_new     = new_uid not in posted
+        is_new     = not calfire_already_posted(props, posted)
+        # Use guid-based key as primary, add both to cache after posting
+        new_uid    = k1
         post_tweet(client, text, new_uid, posted, new_count, error_count)
         if not is_new and growth_uid not in posted:
             growth_text = "📈 " + text[2:] if text.startswith("🔥") else "📈 " + text
