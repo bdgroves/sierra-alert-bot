@@ -10,3 +10,6 @@ build/
 Thumbs.db
 .vscode/
 .idea/
+
+nexrad_output/
+firewx_output/
