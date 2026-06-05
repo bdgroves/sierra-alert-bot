@@ -26,9 +26,11 @@ bot       = "python bot/main.py"
 dry-run   = { cmd = "python bot/main.py", env = { DRY_RUN = "1" } }
 skewt     = "python tools/sierra_skewt.py"
 skewt-all = "python tools/sierra_skewt.py --all"
-nexrad    = "python tools/nexrad_analysis.py"
-nexrad-ok = "python tools/nexrad_analysis.py --radar KVNX"
+nexrad        = "python tools/nexrad_analysis.py"
+nexrad-ok     = "python tools/nexrad_analysis.py --radar KVNX"
 nexrad-sierra = "python tools/nexrad_analysis.py --radar KRGX"
+firewx        = "python tools/sierra_firewx.py --all"
+firewx-save   = "python tools/sierra_firewx.py --all --save"
 check-nws = "python -c \"import requests; r=requests.get('https://api.weather.gov/alerts/active/area/CA',headers={'User-Agent':'test','Accept':'application/geo+json'}); print(f'{len(r.json()[\\\"features\\\"])} active CA alerts')\""
 check-eq  = "python -c \"import requests; r=requests.get('https://earthquake.usgs.gov/fdsnws/event/1/query',params={'format':'geojson','minmagnitude':'2.5','bbox':'-120.5,35.5,-117.5,41.0','starttime':'2026-01-01'}); print(f'{len(r.json()[\\\"features\\\"])} Sierra earthquakes since Jan 1')\""
 
