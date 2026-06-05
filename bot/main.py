@@ -1048,8 +1048,6 @@ def run() -> None:
         is_new_fire = new_uid not in posted
         # Post new fire discovery
         post_tweet(client, text, new_uid, posted, new_count, error_count)
-        # Also cache the name-based key so future updates don't re-tweet
-        posted.add(k2)
         # Post growth update ONLY if fire was already known (not brand new this run)
         if not is_new_fire and growth_uid not in posted:
             growth_text = "📈 " + text[2:] if text.startswith("🔥") else "📈 " + text
@@ -1066,6 +1064,7 @@ def run() -> None:
         # Use guid-based key as primary, add both to cache after posting
         new_uid    = k1
         post_tweet(client, text, new_uid, posted, new_count, error_count)
+        posted.add(k2)  # cache name-based key to prevent re-tweet on record update
         if not is_new and growth_uid not in posted:
             growth_text = "📈 " + text[2:] if text.startswith("🔥") else "📈 " + text
             post_tweet(client, growth_text, growth_uid, posted, new_count, error_count)
