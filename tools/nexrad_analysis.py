@@ -65,7 +65,7 @@ BG2 = '#161b22'
 # ── Dual-pol panel config ─────────────────────────────────────────────────────
 PANELS = [
     ('reflectivity',             'Reflectivity (Z)',          'NWSRef',    -10, 75,   'dBZ'),
-    ('velocity',                 'Velocity (V)',               'NWSVel',    -30, 30,   'kt'),
+    ('corrected_velocity',       'Velocity (V) — Dealiased',  'NWSVel',    -60, 60,   'm/s'),
     ('spectrum_width',           'Spectrum Width (SW)',        'NWS_SPW',    0,  10,   'm/s'),
     ('differential_reflectivity','Diff Reflectivity (ZDR)',   'Carbone42',  -2,  6,   'dB'),
     ('cross_correlation_ratio',  'Correlation Coeff (CC)',    'Wild25',     0.2, 1.05, ''),
@@ -193,6 +193,58 @@ def plot_nexrad(radar_file: str, sweep_idx: int = 0,
     print(f"  Fields:  {avail}")
     print(f"  Sweeps:  {radar.nsweeps}")
 
+    # ── Find best velocity sweep (NEXRAD split-cut: vel may be on sweep+1) ─────
+    # VCP 11/12/21/215: sweep 0 = refl only (long PRF), sweep 1 = vel+refl
+    vel_sweep = sweep_idx
+    if 'velocity' in avail:
+        for test_sweep in range(min(radar.nsweeps, sweep_idx + 4)):
+            r    = radar.sweep_start_ray_index['data'][test_sweep]
+            vd   = radar.fields['velocity']['data'][r]
+            n_valid = int(np.sum(~np.ma.getmaskarray(vd)))
+            if n_valid > 100:
+                vel_sweep = test_sweep
+                if test_sweep != sweep_idx:
+                    elev_v = float(radar.fixed_angle['data'][test_sweep])
+                    print(f"  ℹ  Velocity on sweep {test_sweep} "
+                          f"({elev_v:.1f}° — split-cut VCP)")
+                break
+
+    # ── Velocity dealiasing ────────────────────────────────────────────────────
+    if 'velocity' in avail:
+        try:
+            gf = pyart.filters.GateFilter(radar)
+            gf.exclude_invalid('velocity')
+            if 'cross_correlation_ratio' in avail:
+                gf.exclude_below('cross_correlation_ratio', 0.5)
+
+            corr_vel = pyart.correct.dealias_region_based(
+                radar, gatefilter=gf, keep_original=False
+            )
+            # Verify dealiasing actually produced valid data
+            r = radar.sweep_start_ray_index['data'][vel_sweep]
+            n_corr = int(np.sum(~np.ma.getmaskarray(corr_vel['data'][r])))
+            n_raw  = int(np.sum(~np.ma.getmaskarray(
+                          radar.fields['velocity']['data'][r])))
+
+            if n_corr > 50:
+                radar.add_field('corrected_velocity', corr_vel,
+                                replace_existing=True)
+                avail.append('corrected_velocity')
+                print(f"  ✅ Velocity dealiased ({n_corr} valid gates)")
+            else:
+                # Dealiasing masked everything — use raw velocity
+                radar.add_field('corrected_velocity',
+                                radar.fields['velocity'].copy(),
+                                replace_existing=True)
+                avail.append('corrected_velocity')
+                print(f"  ℹ  Using raw velocity ({n_raw} valid gates)")
+        except Exception as e:
+            print(f"  ⚠  Dealiasing error ({e}), using raw velocity")
+            radar.add_field('corrected_velocity',
+                            radar.fields['velocity'].copy(),
+                            replace_existing=True)
+            avail.append('corrected_velocity')
+
     # ── Figure ────────────────────────────────────────────────────────────────
     fig = plt.figure(figsize=(14, 9), dpi=130, facecolor=BG)
     gs  = gridspec.GridSpec(2, 3, figure=fig,
@@ -208,8 +260,12 @@ def plot_nexrad(radar_file: str, sweep_idx: int = 0,
         for sp in ax.spines.values():
             sp.set_color('#333')
 
+        # Use vel_sweep for velocity/SW panels — may differ from sweep_idx
+        is_vel_field = field in ('corrected_velocity', 'velocity', 'spectrum_width')
+        plot_sweep = vel_sweep if is_vel_field else sweep_idx
+
         if field in avail:
-            display.plot_ppi(field, sweep=sweep_idx, vmin=vmin, vmax=vmax,
+            display.plot_ppi(field, sweep=plot_sweep, vmin=vmin, vmax=vmax,
                              cmap=cmap, colorbar_label=unit, title='', ax=ax)
         else:
             ax.text(0.5, 0.5, 'Not available', transform=ax.transAxes,
