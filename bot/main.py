@@ -49,7 +49,10 @@ NIFC_FIRE_URL = (
 )
 
 # Sierra bbox as separate coords for ESRI API
-SIERRA_BBOX = (-121.0, 35.5, -117.5, 41.5)
+# Sierra Nevada bounding box
+# Southern boundary raised to 36.0 to exclude southern Kern County / Mojave
+# Eastern boundary kept at -117.5 to include White Mountains / Inyo
+SIERRA_BBOX = (-121.0, 36.0, -117.5, 41.5)
 
 
 # IEM Local Storm Reports API
@@ -791,9 +794,23 @@ def fetch_calfire() -> list[dict]:
 
 
 def calfire_uid(props: dict) -> str:
-    """Stable UID for a CAL FIRE incident."""
-    raw = props.get("UniqueId") or props.get("Name", "unknown")
-    return "calfire-" + hashlib.md5(raw.encode()).hexdigest()
+    """Stable UID for a CAL FIRE incident — must never change across updates.
+    
+    Priority: UniqueId (GUID) > incident number > Name+County
+    Never hash on mutable fields like acres, containment, or coordinates.
+    """
+    uid = (props.get("UniqueId") or
+           props.get("IncidentID") or
+           props.get("incident_id") or
+           None)
+    if uid:
+        raw = str(uid)
+    else:
+        # Fallback: name + county — stable enough
+        name   = (props.get("Name") or "unknown").strip().upper()
+        county = (props.get("Counties") or props.get("County") or "").strip().upper()
+        raw    = f"{name}-{county}"
+    return "calfire-" + hashlib.md5(raw.encode()).hexdigest()[:8]
 
 
 def calfire_growth_uid(props: dict) -> str:
