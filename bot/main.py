@@ -34,7 +34,10 @@ DRY_RUN          = os.environ.get("DRY_RUN", "").lower() in ("1", "true", "yes")
 
 
 # Minimum fire size to report (acres)
-FIRE_MIN_ACRES     = 10.0
+FIRE_MIN_ACRES          = 10.0
+
+# Tuolumne County gets a lower threshold — catch fires earlier for Wikipedia drafting
+TUOLUMNE_MIN_ACRES      = 3.0
 
 # Growth threshold to re-tweet an existing fire (fraction — 0.5 = 50% bigger)
 FIRE_GROWTH_FACTOR = 0.5
@@ -577,71 +580,49 @@ def format_fire_tweet(attrs: dict) -> str:
 
 
 
+
 # ── Tuolumne County Wikipedia draft helpers ───────────────────────────────────
 def is_tuolumne_fire(attrs: dict) -> bool:
-    """Return True if the fire origin is in Tuolumne County, CA."""
     county = (attrs.get("attr_POOCounty") or "").lower()
     state  = (attrs.get("attr_POOState") or "")
     return "tuolumne" in county and state == "US-CA"
 
 
 def format_wikipedia_draft_tweet(attrs: dict) -> str:
-    """
-    Draft a Wikipedia wikitext table row for a new Tuolumne County fire.
-    Tweets a compact version; full row is logged to stdout for copy-paste.
-    """
-    name  = (attrs.get("poly_IncidentName") or "Unknown").title()
-    acres = round(attrs.get("poly_GISAcres") or 0)
-    cause = attrs.get("attr_FireCauseSpecific") or attrs.get("attr_FireCauseGeneral") or "Undetermined"
-    county_raw = attrs.get("attr_POOCounty") or "Tuolumne"
+    name   = (attrs.get("poly_IncidentName") or "Unknown").title()
+    acres  = round(attrs.get("poly_GISAcres") or 0)
+    cause  = attrs.get("attr_FireCauseSpecific") or attrs.get("attr_FireCauseGeneral") or "Undetermined"
     agency = attrs.get("attr_POOJurisdictionalAgency") or "CAL FIRE"
-    fid    = attrs.get("attr_UniqueFireIdentifier") or ""
-
-    # Discovery date for {{dts}} template
     disc_ms = attrs.get("attr_FireDiscoveryDateTime")
     if disc_ms:
         disc_dt = datetime.fromtimestamp(disc_ms / 1000, tz=timezone.utc)
-        dts = f"{{{{dts|{disc_dt.year}|{disc_dt.month}|{disc_dt.day}|format=md}}}}"
+        year, month, day = disc_dt.year, disc_dt.month, disc_dt.day
+        dts      = "{{" + f"dts|{year}|{month}|{day}|format=md" + "}}"
         date_str = disc_dt.strftime("%B %-d")
+        ref_url  = f"https://www.fire.ca.gov/incidents/2026/{month}/{day}/{name.lower().replace(' ','-')}-fire"
     else:
-        dts = "{{dts|2026|?|?|format=md}}"
+        dts      = "{{dts|2026|?|?|format=md}}"
         date_str = "?"
+        ref_url  = "https://www.fire.ca.gov/"
 
-    # CAL FIRE URL
-    if fid:
-        suffix  = fid.split("-")[-1].lower()
-        ref_url = f"https://www.fire.ca.gov/incidents/2026/{disc_dt.month}/{disc_dt.day}/{name.lower().replace(' ','-')}-fire"
-    else:
-        ref_url = "https://www.fire.ca.gov/"
+    row_lines = [
+        "|-",
+        f"|{name}",
+        "|Near [location], Tuolumne County",
+        f"|" + "{{" + f"no|{acres}" + "}}",
+        f"|{dts}",
+        "|",
+        f"|{cause}. Managed by {agency}. [Add notes.]",
+        f'|<ref>' + "{{" + f'cite web |title={name} Fire |url={ref_url} |publisher=CAL FIRE |access-date={datetime.now(timezone.utc).strftime("%B %-d, %Y")}' + "}}" + "</ref>",
+    ]
+    wiki_row = "\n".join(row_lines)
+    log.info("\n" + "="*60 + "\nWIKIPEDIA DRAFT ROW — 2026 Tuolumne County wildfires\n" + "="*60 + "\n" + wiki_row + "\n" + "="*60)
 
-    # Full wikitext row — logged, not tweeted
-    wiki_row = (
-        f"|-\n"
-        f"|{name}\n"
-        f"|Near [location], {county_raw} County\n"
-        f"|{{{{no|{acres}}}}}\n"
-        f"|{dts}\n"
-        f"|\n"
-        f"|{cause}. Managed by {agency}. [Add notes.]\n"
-        f"|<ref>{{{{cite web |title={name} Fire "
-        f"|url={ref_url} "
-        f"|publisher=CAL FIRE |access-date={datetime.now(timezone.utc).strftime('%B %-d, %Y')}"
-        f"}}}}</ref>"
-    )
-    log.info(
-        f"\n{'='*60}\n"
-        f"WIKIPEDIA DRAFT ROW — 2026 Tuolumne County wildfires\n"
-        f"{'='*60}\n"
-        f"{wiki_row}\n"
-        f"{'='*60}"
-    )
-
-    # Short tweet version — points to the page
     tweet = (
-        f"📋 NEW TUOLUMNE FIRE — Wikipedia draft ready\n"
+        f"NEW TUOLUMNE FIRE - Wikipedia draft ready\n"
         f"Fire: {name} | {acres} ac | {cause} | {date_str}\n"
-        f"Add to: en.wikipedia.org/wiki/2026_Tuolumne_County_wildfires\n"
-        f"Full wikitext row in bot logs."
+        "Add to: en.wikipedia.org/wiki/2026_Tuolumne_County_wildfires\n"
+        "Full wikitext row in bot logs."
     )
     return tweet[:280]
 
@@ -1108,6 +1089,14 @@ def run() -> None:
     fires = fetch_fires()
     for feature in fires:
         attrs = feature.get("attributes", {})
+        acres = attrs.get("poly_GISAcres") or 0
+
+        # Tuolumne County uses a lower reporting threshold
+        tuolumne = is_tuolumne_fire(attrs)
+        min_acres = TUOLUMNE_MIN_ACRES if tuolumne else FIRE_MIN_ACRES
+        if acres < min_acres:
+            continue
+
         # Tweet on new fires (first-seen UID)
         new_uid    = fire_uid(attrs)
         # Tweet again on significant growth (growth-bucketed UID)
@@ -1122,10 +1111,8 @@ def run() -> None:
             growth_text = "📈 " + text[2:] if text.startswith("🔥") else "📈 " + text
             post_tweet(client, growth_text, growth_uid, posted, new_count, error_count)
 
-        # ── Tuolumne County Wikipedia draft ──────────────────────────────────
-        # On first detection of a new Tuolumne fire, tweet a Wikipedia draft
-        # prompt and log the full wikitext row for copy-paste into the article.
-        if is_new_fire and is_tuolumne_fire(attrs):
+        # Tuolumne Wikipedia draft on first detection
+        if is_new_fire and tuolumne:
             wiki_uid  = "wiki-draft-" + fire_uid(attrs)[5:]
             wiki_text = format_wikipedia_draft_tweet(attrs)
             post_tweet(client, wiki_text, wiki_uid, posted, new_count, error_count)
