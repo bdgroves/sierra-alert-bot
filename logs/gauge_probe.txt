@@ -1,0 +1,86 @@
+149 gauges
+AKYC1	South Fork American River near Kyburz	not_defined	1.86
+ARBC1	San Joaquin River near Auberry	not_defined	9.02
+AVYC1	North Fork Stanislaus River near Avery	not_defined	0.463
+BPRC1	East Walker River at Bridgeport Reservoir	no_flooding	6445.83
+CBAC1	South Fork American River at Placerville - Chili Bar	not_defined	1.57
+CBLN2	Carson River below Lahontan Dam	not_defined	4.38
+CDYN2	Carson River at Dayton	out_of_service	15.6
+CEMC1	East Fork Carson River near Markleeville	no_flooding	2.15
+CLEC1	West Walker River near Coleville (Lower Gage)	no_flooding	2.06
+CRGN2	Carson River near Genoa	out_of_service	5.14
+DCHC1	Donner Creek near Truckee	no_flooding	2.22
+DCKC1	Donner Creek at Donner Lk Nr Truckee	no_flooding	3
+DRRN2	Carson River at Deer Run Road	no_flooding	3.05
+EVYN2	Eagle Valley Creek at At Carson City	no_flooding	4.52
+EWBC1	East Walker River near Bridgeport	no_flooding	3.07
+EWBN2	East Walker R at Morgan Bridge	not_defined	7.94
+EWEN2	East Walker blw Rough Ck near the Elbow	not_defined	2.89
+EWMN2	East Walker River near Mason	not_defined	4.45
+EWRN2	East Walker R at Ivy Bridge 	not_defined	8.5
+EWSN2	East Walker River above Strosnider Ditch	no_flooding	3.21
+FARC1	Truckee River at Farad	no_flooding	3.97
+FTCN2	Carson River near Fort Churchill	no_flooding	1.24
+FTHC1	Kaweah River at Foothill Ditch	not_defined	0.73
+GRDN2	East Fork Carson River near Gardnerville	no_flooding	9.45
+GVAC1	San Joaquin River above Gravelly Ford	not_defined	3.22
+GYRC1	North Fork Yuba River below Goodyears Bar	not_defined	1.65
+HOYN2	West Walker River at Hoye Bridge nr Wellington	no_flooding	1.53
+HPIC1	Merced River at Happy Isles	no_flooding	0.61
+ILAC1	Independence Lake near Truckee	not_defined	6946.07
+KGPC1	South Fork Kings River above Boyden Cavern	not_defined	3.92
+KREC1	Kings River (CA) near Trimmer	not_defined	2.33
+KTRC1	Kaweah River at Three Rivers	not_defined	0.033
+KWRC1	Kaweah River at McKay Point	not_defined	1.76
+LDXC1	Kaweah River at Lemoncove Ditch	not_defined	1.58
+LHDN2	Carson River at Lahontan Reservoir	no_flooding	4128.55
+MASN2	Walker River near Mason - Snyder Lane	no_flooding	3.93
+MBPC1	Marble Fork  Kaweah River	not_defined	6.74
+MDSC1	Tuolumne River at Modesto	no_flooding	37.01
+MFAC1	Middle Fork American River near Foresthill	not_defined	8.33
+MFPC1	Middle Fork American River Above Middle Fork Power Plant	not_defined	0.075
+MFTC1	Middle Fork Feather River near Portola	no_flooding	4845.47
+MIEC1	Merced River at Shaffer Bridge	not_defined	1.41
+MIIC1	South Fork Merced River at Wawona	not_defined	1.68
+MOGN2	Truckee River near Mogul	no_flooding	5.66
+NFCC1	North Fork Kings River at Cliff Camp	not_defined	3.26
+NIXN2	Truckee River near Nixon	no_flooding	3.49
+NKDC1	North Fork Kings River above Dinkey Creek	not_defined	1.43
+NMFC1	North Fork of Middle Fork American River - Foresthill	obs_not_current	-999
+NTDN2	North Truckee Drain at Spanish Springs Road	no_flooding	1.15
+NWMC1	San Joaquin River at Newman	no_flooding	48.12
+OBBC1	Stanislaus River at Orange Blossom Bridge	no_flooding	3.35
+OURC1	Middle Fork Yuba River at Our House	not_defined	17.08
+POHC1	Merced River at Pohono Bridge	no_flooding	0.97
+PSRC1	Prosser Creek Reservoir near Truckee	no_flooding	5719.77
+RJQC1	San Joaquin River below Redinger Lake	obs_not_current	-999
+RSBC1	San Joaquin River below HWY 145	not_defined	3.07
+SGNC1	Sagehen Creek nr Truckee	no_flooding	1.5
+SJMC1	San Joaquin River near Mendota	not_defined	4.06
+SJXC1	San Joaquin River near HWY 41	not_defined	6.78
+SSTC1	San Joaquin River near Stevinson	not_defined	60.81
+STVC1	Merced River at Stevinson	no_flooding	56.78
+STWN2	Carson River near Carson City	no_flooding	1.48
+TBDN2	Truckee River below Derby Dam	no_flooding	2.35
+TNTN2	Truckee River near Tracy	no_flooding	6.67
+TOPN2	West Walker River at Topaz Lake	not_defined	4984.26
+TRCC1	Truckee River near Truckee	no_flooding	1.64
+TRRN2	Truckee River at Reno	no_flooding	4.14
+TRTC1	Truckee River at Tahoe City	no_flooding	2.54
+TRZN2	Carson River near Fallon	no_flooding	2.42
+UTHC1	Upper Truckee River above Meyers	no_flooding	4.65
+UTRC1	Upper Truckee River at South Lake Tahoe	out_of_service	3.06
+VISN2	Truckee River at Vista	no_flooding	6.96
+WADN2	Truckee River at Wadsworth	no_flooding	4.7
+WALN2	Walker River near Wabuska	no_flooding	3.4
+WBMN2	Walker River below Mason WMA at RR Xing	not_defined	5.3
+WBWN2	Walker River above PT Site below Weber Reservoir near Schurz	no_flooding	9.78
+WLHN2	Walker River at Walker Lake	not_defined	3914.48
+WOOC1	West Fork Carson River at Woodfords	no_flooding	9.55
+WRMN2	Walker River nr mouth at Walker Lake	not_defined	-1.98
+WRYN2	Walker River below Yerington Weir near Yerington	not_defined	1.3
+WSIN2	Walker River near Schurz	no_flooding	1.36
+WVRN2	Walker River at Weber Reservoir	no_flooding	4201.71
+WWBC1	West Walker River near Coleville (Upper Gage)	no_flooding	0.76
+WWHN2	West Walker River near Hudson	no_flooding	1.26
+WYWN2	Walker River at Miller Ln	out_of_service	-999
