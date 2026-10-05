@@ -1,0 +1,21 @@
+name: Find gauges
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q requests && mkdir -p logs && python tools/find_gauges.py
+      - run: |
+          git config user.name "Sierra Nevada Alert Bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add logs/gauge_probe.txt && git commit -q -m "chore: gauge probe [skip ci]" && git pull -q --rebase origin main && git push -q
