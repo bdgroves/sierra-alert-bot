@@ -1,0 +1,23 @@
+2026-10-05 03:19:05,124 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-05 03:19:05,124 [INFO] New cache format: this run marks current items as seen and posts nothing.
+2026-10-05 03:19:06,299 [INFO] X credentials work: @SierraNevadaWX
+2026-10-05 03:19:06,484 [INFO] NWS CA: 21 active alerts
+2026-10-05 03:19:06,535 [INFO] NWS NV: 0 active alerts
+2026-10-05 03:19:06,536 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-05 03:19:07,172 [INFO] CAL FIRE: 5 active Sierra incidents
+2026-10-05 03:19:07,385 [INFO] NIFC: 2 Nevada fires in the Sierra box
+2026-10-05 03:19:07,386 [INFO] [bootstrap] seen fire:4883092e-485f-429d-878d-819f01172840
+2026-10-05 03:19:07,387 [INFO] [bootstrap] seen fire:2026-nvtmfx-030869
+2026-10-05 03:19:07,387 [INFO] [bootstrap] seen fire:033439b0-d0ed-435a-a61b-d3dabb77d4b3
+2026-10-05 03:19:07,387 [INFO] [bootstrap] seen fire:02c537f3-28cc-4e63-95d4-969f773b94ef
+2026-10-05 03:19:07,874 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-05 03:19:53,751 [WARNING] AirNow Yosemite: HTTPSConnectionPool(host='www.airnowapi.org', port=443): Read timed out. (read timeout=15)
+2026-10-05 03:20:34,877 [INFO] Gauge mdsc1: no flooding 37.01
+2026-10-05 03:20:35,050 [WARNING] Gauge hchy1: 404 Client Error: Not Found for url: https://api.water.noaa.gov/nwps/v1/gauges/hchy1
+2026-10-05 03:20:35,157 [WARNING] Gauge hisc1: 404 Client Error: Not Found for url: https://api.water.noaa.gov/nwps/v1/gauges/hisc1
+2026-10-05 03:20:35,403 [WARNING] Gauge merc1: 404 Client Error: Not Found for url: https://api.water.noaa.gov/nwps/v1/gauges/merc1
+2026-10-05 03:20:35,570 [WARNING] Gauge foac1: 404 Client Error: Not Found for url: https://api.water.noaa.gov/nwps/v1/gauges/foac1
+2026-10-05 03:20:35,660 [WARNING] Gauge rnkn2: 404 Client Error: Not Found for url: https://api.water.noaa.gov/nwps/v1/gauges/rnkn2
+2026-10-05 03:20:35,775 [WARNING] Gauge pnfc1: 404 Client Error: Not Found for url: https://api.water.noaa.gov/nwps/v1/gauges/pnfc1
+2026-10-05 03:20:35,911 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-05 03:20:35,913 [INFO] Done. posted=0 failed=0 held=0 bootstrap=True dry_run=False cache=7
