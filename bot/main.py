@@ -370,11 +370,20 @@ def run_smoke(poster: Poster) -> None:
 
 # ── River gauges ──────────────────────────────────────────────────────────────
 NWPS_URL = "https://api.water.noaa.gov/nwps/v1/gauges/{}"
-GAUGES = [
-    ("mdsc1", "Tuolumne River at Modesto"), ("hchy1", "Tuolumne River at Hetch Hetchy"),
-    ("hisc1", "Merced River at Happy Isles"), ("merc1", "Merced River near Merced"),
-    ("foac1", "American River at Fair Oaks"), ("rnkn2", "Truckee River at Reno"),
-    ("pnfc1", "Kings River at Pine Flat"),
+GAUGES = [  # NWPS IDs with flood stages defined (checked Oct 2026 by tools/find_gauges.py)
+    ("MDSC1", "Tuolumne River at Modesto"),
+    ("OBBC1", "Stanislaus River at Orange Blossom Bridge"),
+    ("HPIC1", "Merced River at Happy Isles"),
+    ("POHC1", "Merced River at Pohono Bridge"),
+    ("TRTC1", "Truckee River at Tahoe City"),
+    ("UTHC1", "Upper Truckee River above Meyers"),
+    ("FARC1", "Truckee River at Farad"),
+    ("TRRN2", "Truckee River at Reno"),
+    ("WOOC1", "West Fork Carson River at Woodfords"),
+    ("CEMC1", "East Fork Carson River near Markleeville"),
+    ("GRDN2", "East Fork Carson River near Gardnerville"),
+    ("CLEC1", "West Walker River near Coleville"),
+    ("EWBC1", "East Walker River near Bridgeport"),
 ]
 FLOOD_LEVELS = ("minor", "moderate", "major")
 

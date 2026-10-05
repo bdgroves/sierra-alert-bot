@@ -40,17 +40,16 @@ The Sierra bounding box covers `-121.0°W to -117.5°W, 36.0°N to 41.5°N` — 
 
 When the snowpack releases, it all flows somewhere. These are the gauges that tell us what's coming:
 
-| River | Station | Minor Flood | Moderate Flood |
-|-------|---------|------------|----------------|
-| Tuolumne | Modesto | 55 ft | 62 ft |
-| Tuolumne | Hetch Hetchy | 9 ft | 11 ft |
-| Merced | Happy Isles / Yosemite Valley | 7.5 ft | 9 ft |
-| Merced | Merced | 71 ft | 74 ft |
-| American | Fair Oaks | 25 ft | 33 ft |
-| Truckee | Reno | 11 ft | 13.5 ft |
-| Kings | Pine Flat | 18 ft | 22 ft |
+| River | Gauge |
+|-------|-------|
+| Tuolumne | Modesto |
+| Stanislaus | Orange Blossom Bridge |
+| Merced | Happy Isles · Pohono Bridge (Yosemite Valley) |
+| Truckee | Tahoe City · Upper Truckee above Meyers · Farad · Reno |
+| Carson | West Fork at Woodfords · East Fork near Markleeville · near Gardnerville |
+| Walker | West Walker near Coleville · East Walker near Bridgeport |
 
-Flood stages from NWS/CNRFC. The bot posts at **minor flood stage** — when property damage begins — not at action stage. We're not here to cry wolf.
+Flood stages come live from the NWS National Water Prediction Service; `tools/find_gauges.py` lists every Sierra gauge that has them. The bot posts at **minor flood stage** — when property damage begins — not at action stage. We're not here to cry wolf.
 
 ---
 

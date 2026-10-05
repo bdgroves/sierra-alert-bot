@@ -133,8 +133,8 @@ def test_big_new_fire_covers_milestones(bot):
 
 def test_gauges_and_lsr(bot):
     main, core, feeds, x, tmp = bot
-    feeds["gauge"] = {"rnkn2": {"status": {"observed": {"primary": 14.2, "floodCategory": "minor"}}},
-                      "mdsc1": {"status": {"observed": {"primary": 50.0, "floodCategory": "action"}}}}
+    feeds["gauge"] = {"TRRN2": {"status": {"observed": {"primary": 14.2, "floodCategory": "minor"}}},
+                      "MDSC1": {"status": {"observed": {"primary": 50.0, "floodCategory": "action"}}}}
     pt = {"type": "Feature", "geometry": {"coordinates": [-119.0, 37.6]}}
     feeds["lsr"] = [dict(pt, properties={"typetext": "HAIL", "magnitude": "0.5", "city": "X", "valid": "2026-10-04T20:00:00Z"}),
                     dict(pt, properties={"typetext": "SNOW", "magnitude": "30", "city": "Mammoth Lakes",
