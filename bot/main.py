@@ -89,6 +89,7 @@ def run_alerts(poster: Poster) -> None:
             continue
         zones = sierra_zones(p)
         if not zones:
+            log.info(f"  not Sierra: {ev} — {(p.get('areaDesc') or '')[:120]}")
             continue
         key = alert_key(p, "sierra")
         if not key:
