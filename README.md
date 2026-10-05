@@ -16,15 +16,21 @@ No ads. No clickbait. No weather personality telling you to stay tuned. Just the
 
 ## 📡 What It Watches
 
-| Source | Trigger | Why It Matters |
-|--------|---------|----------------|
-| 🌩️ **NWS Weather Alerts** | Any Sierra zone warning | The official word from forecasters watching the same sky |
-| 🔥 **NIFC Wildfire Perimeters** | New fire or 50%+ growth, <85% contained, ≥10 acres | Fires that are still fighting back |
-| 🔥 **CAL FIRE Incidents** | Same thresholds, faster CA updates | Aerial intel — sometimes ahead of NIFC by hours |
-| ⛈️ **IEM Storm Reports** | Any LSR in the Sierra bbox | Trained spotters on the ground calling it in |
-| 😷 **AirNow Air Quality** | AQI >100 at 8 Sierra stations | When smoke makes the air a hazard |
-| 🌊 **NWPS Stream Gauges** | Minor flood stage on 7 Sierra rivers | The snowmelt reckoning arriving downstream |
-| 🌋 **USGS Earthquakes** | M2.5+ in the Sierra bbox | The Sierra Nevada sits on active fault systems |
+Only what matters — one post per hazard, never one per bulletin.
+
+| Source | Posts when | Why It Matters |
+|--------|-----------|----------------|
+| 🌩️ **NWS warnings** | A new warning for a Sierra zone (red flag, winter storm, blizzard, high wind, flood, flash flood, extreme heat or cold, avalanche, severe storm, evacuation) | The official word from forecasters watching the same sky |
+| 🔥 **CAL FIRE** (California) | New fire at 100+ acres (10+ in Tuolumne County), then at 1k, 5k, 10k, 25k, 50k, 100k and 250k acres | Fires that are still fighting back |
+| 🔥 **NIFC** (Nevada side) | Same thresholds | One feed per state, so no fire posts twice |
+| ⛈️ **IEM spotter reports** | Tornado, flash flood or debris flow, avalanche, 1"+ hail, 75+ mph gusts, 2 ft+ of snow | Trained spotters on the ground calling it in |
+| 😷 **AirNow smoke** | PM2.5 AQI 151+ (Unhealthy) near a mountain town, once per level per day | When smoke makes the air a hazard |
+| 🌊 **NWPS stream gauges** | Minor flood or worse, once per level per day | The snowmelt reckoning arriving downstream |
+| 🌋 **USGS earthquakes** | M3.5+ | The Sierra Nevada sits on active fault systems |
+
+NWS updates, extensions and cancellations of a hazard already posted never repost, and zones sharing a hazard in one run become one post. Zones are matched by **zone name** (West Slope Northern Sierra Nevada, Mono County, Greater Lake Tahoe Area…), so the Valley halves of Fresno, Tulare and Kern counties stay out. At most 6 posts per run.
+
+New Tuolumne County fires also get a draft row for the Wikipedia list. That goes to a **GitHub issue** in this repo (and `logs/tuolumne_drafts.md`), not to X.
 
 The Sierra bounding box covers `-121.0°W to -117.5°W, 36.0°N to 41.5°N` — from Lassen in the north to the White Mountains in the south, from the Central Valley foothills to the Nevada Great Basin.
 
@@ -44,29 +50,33 @@ When the snowpack releases, it all flows somewhere. These are the gauges that te
 | Truckee | Reno | 11 ft | 13.5 ft |
 | Kings | Pine Flat | 18 ft | 22 ft |
 
-Flood stages from NWS/CNRFC. The bot tweets at **minor flood stage** — when property damage begins — not at action stage. We're not here to cry wolf.
+Flood stages from NWS/CNRFC. The bot posts at **minor flood stage** — when property damage begins — not at action stage. We're not here to cry wolf.
 
 ---
 
 ## 🛠️ How It's Built
 
-**Runtime:** GitHub Actions, scheduled every ~5 minutes
+**Runtime:** GitHub Actions on a schedule (GitHub runs it when it can, lately every few hours)
 **Language:** Python 3.12
 **Package manager:** [pixi](https://prefix.dev/docs/pixi/)
 **Twitter API:** Tweepy v4 (Basic tier)
-**Deduplication:** SHA-MD5 cache committed to `posted_ids.json`
+**Deduplication:** keyed cache (NWS event numbers, fire IDs, quake IDs) committed to `posted_ids.json`, pruned after 45 days
 
 ```
 sierra-alert-bot/
 ├── bot/
-│   └── main.py              # The engine — all 7 data sources
+│   ├── main.py              # What to post (sources and filters)
+│   └── core.py              # Cache, posting, run log (shared with nws-alert-bot)
+├── tests/test_bot.py        # Offline tests with fake feeds and a fake X client
+├── logs/                    # last_run.log + posts.jsonl, committed each run
 ├── tools/
 │   ├── nexrad_analysis.py   # NEXRAD Level 2 dual-pol analysis (Py-ART)
 │   ├── sierra_firewx.py     # Sierra fire weather dashboard (FFWI/HDW/Haines)
 │   └── sierra_skewt.py      # MetPy Skew-T upper air sounding plots
 ├── .github/
 │   └── workflows/
-│       └── sierra-bot.yml   # GitHub Actions schedule
+│       ├── sierra-bot.yml   # Schedule + manual dry run
+│       └── test.yml         # Tests on every code push
 └── pyproject.toml           # pixi dependencies
 ```
 
@@ -86,6 +96,16 @@ TWITTER_ACCESS_TOKEN
 TWITTER_ACCESS_SECRET
 AIRNOW_API_KEY        # free at airnow.gov
 ```
+
+### Is it working?
+
+Every run commits its own record, so you never need the Actions log:
+
+- `logs/last_run.log` — the full log of the latest run
+- `logs/posts.jsonl` — every post attempt (posted, held, or the exact X error)
+- `posted_ids.json` → `state` — `x_ok`, `x_error`, `x_error_since`, and `x_check` (a no-post check of the X keys, run on the first run of a new cache)
+
+If X starts refusing posts, the run **fails once** so GitHub emails you, then keeps logging quietly until posting works again. **Run workflow** with *Dry run* ticked shows what would post without posting.
 
 ---
 

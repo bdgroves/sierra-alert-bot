@@ -2,45 +2,65 @@ name: Sierra Nevada Alert Bot
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    # GitHub runs scheduled jobs when it can (lately every ~3 h); off-the-hour
+    # minutes get picked up more reliably than :00 and :05.
+    - cron: "3,18,33,48 * * * *"
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run: log what would post, post nothing"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
+  issues: write  # Tuolumne fire -> Wikipedia draft issue
+
+concurrency:
+  group: alert-bot
+  cancel-in-progress: false
 
 jobs:
   post-alerts:
-    name: Fetch & Post Sierra Nevada Alerts
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 8
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 1
 
-      - name: Set up pixi
-        uses: prefix-dev/setup-pixi@v0.9.6
+      - uses: prefix-dev/setup-pixi@v0.9.6
         with:
           pixi-version: v0.41.4
           cache: true
 
-      - name: Run Sierra Nevada Alert Bot
+      # Fails (once) if X starts refusing posts, so GitHub sends an email.
+      # The first run on the new cache posts nothing and checks the X keys.
+      - name: Run bot
         env:
           TWITTER_API_KEY:       ${{ secrets.TWITTER_API_KEY }}
           TWITTER_API_SECRET:    ${{ secrets.TWITTER_API_SECRET }}
           TWITTER_ACCESS_TOKEN:  ${{ secrets.TWITTER_ACCESS_TOKEN }}
           TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
           AIRNOW_API_KEY:        ${{ secrets.AIRNOW_API_KEY }}
-          LOOKBACK_MINUTES:      "120"
-          CACHE_FILE:            "posted_ids.json"
+          GH_TOKEN:              ${{ github.token }}
+          DRY_RUN:               ${{ inputs.dry_run && '1' || '' }}
+          CACHE_FILE:            posted_ids.json
+          LOG_DIR:               logs
         run: pixi run bot
 
-      - name: Save alert cache to repo
+      # Always save the cache and the run log, even when the run failed.
+      - name: Save cache and log
+        if: always()
         run: |
           git config user.name  "Sierra Nevada Alert Bot"
           git config user.email "bot@users.noreply.github.com"
-          git add posted_ids.json || true
-          git diff --cached --quiet || git commit -m "chore: update alert cache [skip ci]"
-          git push || echo "Nothing to push"
+          git add posted_ids.json logs/ || true
+          git diff --cached --quiet && exit 0
+          git commit -q -m "chore: update alert cache [skip ci]"
+          for i in 1 2 3; do
+            git pull -q --rebase origin main && git push -q && exit 0
+            sleep 5
+          done
+          echo "::warning::could not push cache"
