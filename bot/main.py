@@ -40,7 +40,7 @@ TAGS = "#SierraNevada"
 # ── NWS ───────────────────────────────────────────────────────────────────────
 # Zone names (from areaDesc) that are Sierra Nevada. Matching on zone names,
 # not county names, keeps out the Valley halves of Fresno, Tulare and Kern
-# counties, and the old "nevada" match that caught all of the state of Nevada.
+# counties.
 SIERRA_WORDS = (
     "sierra", "tahoe", "yosemite", "sequoia", "kings canyon", "mono", "mammoth",
     "owens valley", "white mountains", "tuolumne", "mariposa", "calaveras",
