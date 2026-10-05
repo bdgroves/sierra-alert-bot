@@ -1,35 +1,31 @@
-2026-10-05 03:24:47,942 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-05 03:24:48,355 [INFO] NWS CA: 21 active alerts
-2026-10-05 03:24:48,559 [INFO] NWS NV: 0 active alerts
-2026-10-05 03:24:48,560 [INFO]   not Sierra: Extreme Heat Warning — Death Valley National Park
-2026-10-05 03:24:48,560 [INFO]   not Sierra: Extreme Heat Warning — Santa Ana Mountains and Foothills
-2026-10-05 03:24:48,560 [INFO]   not Sierra: Extreme Heat Warning — Orange County Coastal
-2026-10-05 03:24:48,560 [INFO]   not Sierra: Extreme Heat Warning — San Bernardino and Riverside County Valleys-The Inland Empire
-2026-10-05 03:24:48,561 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Coastal Areas
-2026-10-05 03:24:48,561 [INFO]   not Sierra: Extreme Heat Warning — Orange County Inland
-2026-10-05 03:24:48,561 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Inland Valleys
-2026-10-05 03:24:48,561 [INFO]   not Sierra: Extreme Heat Warning — Catalina and Santa Barbara Islands; Santa Clarita Valley; Ventura County Beaches; Ventura County Inland Coast; Lake Casi
-2026-10-05 03:24:48,561 [INFO]   not Sierra: Extreme Heat Warning — Cuyama Valley; Santa Barbara County Southwestern Coast; Santa Barbara County Southeastern Coast; Santa Ynez Mountains We
-2026-10-05 03:24:48,561 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-10-05 03:24:49,181 [INFO] CAL FIRE: 5 active Sierra incidents
-2026-10-05 03:24:49,311 [INFO] NIFC: 2 Nevada fires in the Sierra box
-2026-10-05 03:24:49,792 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-10-05 03:25:04,903 [WARNING] AirNow South Lake Tahoe: HTTPSConnectionPool(host='www.airnowapi.org', port=443): Read timed out. (read timeout=15)
-2026-10-05 03:25:28,620 [WARNING] AirNow Sequoia NP: HTTPSConnectionPool(host='www.airnowapi.org', port=443): Read timed out. (read timeout=15)
-2026-10-05 03:25:43,702 [WARNING] AirNow Reno: HTTPSConnectionPool(host='www.airnowapi.org', port=443): Read timed out. (read timeout=15)
-2026-10-05 03:25:58,886 [WARNING] AirNow Bishop: HTTPSConnectionPool(host='www.airnowapi.org', port=443): Read timed out. (read timeout=15)
-2026-10-05 03:25:59,141 [INFO] Gauge MDSC1: no flooding 37.01
-2026-10-05 03:25:59,272 [INFO] Gauge OBBC1: no flooding 3.35
-2026-10-05 03:25:59,467 [INFO] Gauge HPIC1: no flooding 0.61
-2026-10-05 03:25:59,507 [INFO] Gauge POHC1: no flooding 0.97
-2026-10-05 03:25:59,651 [INFO] Gauge TRTC1: no flooding 2.54
-2026-10-05 03:25:59,685 [INFO] Gauge UTHC1: no flooding 4.65
-2026-10-05 03:25:59,740 [INFO] Gauge FARC1: no flooding 3.97
-2026-10-05 03:25:59,881 [INFO] Gauge TRRN2: no flooding 4.14
-2026-10-05 03:26:00,023 [INFO] Gauge WOOC1: no flooding 9.55
-2026-10-05 03:26:00,141 [INFO] Gauge CEMC1: no flooding 2.15
-2026-10-05 03:26:00,352 [INFO] Gauge GRDN2: no flooding 9.45
-2026-10-05 03:26:00,578 [INFO] Gauge CLEC1: no flooding 2.06
-2026-10-05 03:26:00,722 [INFO] Gauge EWBC1: no flooding 3.07
-2026-10-05 03:26:01,022 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-05 03:26:01,023 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=True cache=7
+2026-10-05 10:39:26,292 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-05 10:39:26,962 [INFO] NWS CA: 19 active alerts
+2026-10-05 10:39:27,082 [INFO] NWS NV: 0 active alerts
+2026-10-05 10:39:27,083 [INFO]   not Sierra: Extreme Heat Warning — Orange County Coastal
+2026-10-05 10:39:27,083 [INFO]   not Sierra: Extreme Heat Warning — Santa Ana Mountains and Foothills
+2026-10-05 10:39:27,083 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Coastal Areas
+2026-10-05 10:39:27,083 [INFO]   not Sierra: Extreme Heat Warning — Orange County Inland
+2026-10-05 10:39:27,083 [INFO]   not Sierra: Extreme Heat Warning — San Bernardino and Riverside County Valleys-The Inland Empire
+2026-10-05 10:39:27,083 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Inland Valleys
+2026-10-05 10:39:27,083 [INFO]   not Sierra: Extreme Heat Warning — Death Valley National Park
+2026-10-05 10:39:27,083 [INFO]   not Sierra: Extreme Heat Warning — Catalina and Santa Barbara Islands; Santa Clarita Valley; Ventura County Beaches; Ventura County Inland Coast; Lake Casi
+2026-10-05 10:39:27,083 [INFO]   not Sierra: Extreme Heat Warning — Cuyama Valley; Santa Barbara County Southwestern Coast; Santa Barbara County Southeastern Coast; Santa Ynez Mountains We
+2026-10-05 10:39:27,083 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-05 10:39:27,432 [INFO] CAL FIRE: 4 active Sierra incidents
+2026-10-05 10:39:27,667 [INFO] NIFC: 2 Nevada fires in the Sierra box
+2026-10-05 10:39:28,008 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-05 10:39:30,836 [INFO] Gauge MDSC1: no flooding 36.93
+2026-10-05 10:39:31,177 [INFO] Gauge OBBC1: no flooding 3.35
+2026-10-05 10:39:31,584 [INFO] Gauge HPIC1: no flooding 0.6
+2026-10-05 10:39:31,932 [INFO] Gauge POHC1: no flooding 0.96
+2026-10-05 10:39:32,206 [INFO] Gauge TRTC1: no flooding 2.54
+2026-10-05 10:39:32,554 [INFO] Gauge UTHC1: no flooding 4.65
+2026-10-05 10:39:32,903 [INFO] Gauge FARC1: no flooding 3.97
+2026-10-05 10:39:33,221 [INFO] Gauge TRRN2: no flooding 4.22
+2026-10-05 10:39:33,589 [INFO] Gauge WOOC1: no flooding 9.55
+2026-10-05 10:39:33,907 [INFO] Gauge CEMC1: no flooding 2.15
+2026-10-05 10:39:34,257 [INFO] Gauge GRDN2: no flooding 9.45
+2026-10-05 10:39:35,139 [INFO] Gauge CLEC1: no flooding 2.05
+2026-10-05 10:39:35,404 [INFO] Gauge EWBC1: no flooding 3.07
+2026-10-05 10:39:35,476 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-05 10:39:35,477 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False cache=7
