@@ -45,6 +45,9 @@ jobs:
           TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
           AIRNOW_API_KEY:        ${{ secrets.AIRNOW_API_KEY }}
           GH_TOKEN:              ${{ github.token }}
+          # X stands by (watches, logs, posts nothing) until this repo variable
+          # is set to "on": Settings → Secrets and variables → Actions → Variables.
+          POST_TO_X:             ${{ vars.POST_TO_X }}
           DRY_RUN:               ${{ inputs.dry_run && '1' || '' }}
           CACHE_FILE:            posted_ids.json
           LOG_DIR:               logs

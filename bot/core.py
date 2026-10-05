@@ -38,6 +38,10 @@ CACHE_KEEP_DAYS = 45
 POSTS_LOG_KEEP = 500
 
 DRY_RUN = os.environ.get("DRY_RUN", "").lower() in ("1", "true", "yes")
+# X stands by unless POST_TO_X is "on" (a repo variable). Standing by, the bot
+# still watches everything and logs what it would have posted, and marks it
+# seen, so switching X back on never dumps a backlog of stale alerts.
+STANDBY = os.environ.get("POST_TO_X", "on").lower() != "on"
 CACHE_FILE = os.environ.get("CACHE_FILE", "posted_ids.json")
 LOG_DIR = os.environ.get("LOG_DIR", "logs")
 MAX_POSTS_PER_RUN = int(os.environ.get("MAX_POSTS_PER_RUN", "6"))
@@ -151,7 +155,7 @@ class Poster:
         self.skipped_cap = 0
         self.blocked = False  # X refused auth/plan; stop trying this run
         self.last_error = ""
-        if not DRY_RUN:
+        if not DRY_RUN and not STANDBY:
             self.client = self._client()
             if cache.bootstrap or os.environ.get("CHECK_X"):
                 self.check_x()
@@ -214,6 +218,12 @@ class Poster:
             self.skipped_cap += 1
             log.info(f"[cap] holding {key} for next run")
             return False
+        if STANDBY and not DRY_RUN:
+            self.cache.add(key, *also_mark)
+            self._record(kind, key, text, "standing by (POST_TO_X is off)")
+            log.info(f"[standby] would post {key}\n{text}\n")
+            self.posted += 1
+            return True
         if DRY_RUN:
             log.info(f"[DRY RUN] {kind} {key}\n{text}\n")
             self._record(kind, key, text, "dry-run")
@@ -259,7 +269,7 @@ class Poster:
                 exit_code = 1
             else:
                 log.error(f"X still refusing posts (since {st['x_error_since']}).")
-        elif self.posted and not DRY_RUN:
+        elif self.posted and not DRY_RUN and not STANDBY:
             if not was_ok:
                 log.info("X is accepting posts again.")
             st.update({"x_ok": True, "x_error": "", "x_error_since": ""})
@@ -267,7 +277,7 @@ class Poster:
         self.cache.save()
         log.info(
             f"Done. posted={self.posted} failed={self.failed} held={self.skipped_cap} "
-            f"bootstrap={self.cache.bootstrap} dry_run={DRY_RUN} cache={len(self.cache.seen)}"
+            f"bootstrap={self.cache.bootstrap} dry_run={DRY_RUN} standby={STANDBY} cache={len(self.cache.seen)}"
         )
         return exit_code
 

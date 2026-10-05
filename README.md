@@ -106,6 +106,8 @@ Every run commits its own record, so you never need the Actions log:
 
 If X starts refusing posts, the run **fails once** so GitHub emails you, then keeps logging quietly until posting works again. **Run workflow** with *Dry run* ticked shows what would post without posting.
 
+**Standing by:** X posting is off while the X developer account has no API credits (X answers "402 Payment Required: credits depleted"). The bot keeps watching every feed and logs what it *would* have posted to `logs/posts.jsonl`, marking each item as seen, so nothing stale floods out later. To turn X back on, set the repository variable `POST_TO_X` to `on` (Settings → Secrets and variables → Actions → Variables).
+
 ---
 
 ## 🌡️ The Science Tools
