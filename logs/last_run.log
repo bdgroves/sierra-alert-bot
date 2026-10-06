@@ -1,31 +1,31 @@
-2026-10-05 19:29:45,100 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-05 19:29:45,386 [INFO] NWS CA: 20 active alerts
-2026-10-05 19:29:45,513 [INFO] NWS NV: 0 active alerts
-2026-10-05 19:29:45,513 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Inland Valleys
-2026-10-05 19:29:45,513 [INFO]   not Sierra: Extreme Heat Warning — Santa Ana Mountains and Foothills
-2026-10-05 19:29:45,513 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Coastal Areas
-2026-10-05 19:29:45,513 [INFO]   not Sierra: Extreme Heat Warning — San Bernardino and Riverside County Valleys-The Inland Empire
-2026-10-05 19:29:45,513 [INFO]   not Sierra: Extreme Heat Warning — Orange County Inland
-2026-10-05 19:29:45,513 [INFO]   not Sierra: Extreme Heat Warning — Orange County Coastal
-2026-10-05 19:29:45,513 [INFO]   not Sierra: Extreme Heat Warning — Death Valley National Park
-2026-10-05 19:29:45,513 [INFO]   not Sierra: Extreme Heat Warning — Cuyama Valley; Santa Barbara County Southwestern Coast; Santa Barbara County Southeastern Coast; Santa Ynez Mountains We
-2026-10-05 19:29:45,513 [INFO]   not Sierra: Extreme Heat Warning — Catalina and Santa Barbara Islands; Santa Clarita Valley; Ventura County Beaches; Ventura County Inland Coast; Lake Casi
-2026-10-05 19:29:45,514 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-10-05 19:29:46,031 [INFO] CAL FIRE: 4 active Sierra incidents
-2026-10-05 19:29:46,310 [INFO] NIFC: 2 Nevada fires in the Sierra box
-2026-10-05 19:29:46,682 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-10-05 19:29:49,906 [INFO] Gauge MDSC1: no flooding 36.97
-2026-10-05 19:29:50,250 [INFO] Gauge OBBC1: no flooding 3.35
-2026-10-05 19:29:50,593 [INFO] Gauge HPIC1: obs not current 
-2026-10-05 19:29:50,830 [INFO] Gauge POHC1: no flooding 0.96
-2026-10-05 19:29:51,173 [INFO] Gauge TRTC1: no flooding 2.54
-2026-10-05 19:29:51,527 [INFO] Gauge UTHC1: no flooding 4.66
-2026-10-05 19:29:51,933 [INFO] Gauge FARC1: no flooding 3.98
-2026-10-05 19:29:52,170 [INFO] Gauge TRRN2: no flooding 4.27
-2026-10-05 19:29:52,406 [INFO] Gauge WOOC1: no flooding 9.56
-2026-10-05 19:29:52,815 [INFO] Gauge CEMC1: no flooding 2.15
-2026-10-05 19:29:53,161 [INFO] Gauge GRDN2: no flooding 9.45
-2026-10-05 19:29:53,474 [INFO] Gauge CLEC1: no flooding 2.06
-2026-10-05 19:29:53,756 [INFO] Gauge EWBC1: no flooding 3.07
-2026-10-05 19:29:54,159 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-05 19:29:54,160 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=7
+2026-10-06 00:55:39,143 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-06 00:55:39,632 [INFO] NWS CA: 21 active alerts
+2026-10-06 00:55:39,766 [INFO] NWS NV: 0 active alerts
+2026-10-06 00:55:39,767 [INFO]   not Sierra: Extreme Heat Warning — Death Valley National Park
+2026-10-06 00:55:39,767 [INFO]   not Sierra: Extreme Heat Warning — Catalina and Santa Barbara Islands; Santa Clarita Valley; Ventura County Beaches; Ventura County Inland Coast; Lake Casi
+2026-10-06 00:55:39,767 [INFO]   not Sierra: Extreme Heat Warning — Cuyama Valley; Santa Barbara County Southwestern Coast; Santa Barbara County Southeastern Coast; Santa Ynez Mountains We
+2026-10-06 00:55:39,768 [INFO]   not Sierra: Extreme Heat Warning — Orange County Inland
+2026-10-06 00:55:39,768 [INFO]   not Sierra: Extreme Heat Warning — Orange County Coastal
+2026-10-06 00:55:39,768 [INFO]   not Sierra: Extreme Heat Warning — San Bernardino and Riverside County Valleys-The Inland Empire
+2026-10-06 00:55:39,768 [INFO]   not Sierra: Extreme Heat Warning — Santa Ana Mountains and Foothills
+2026-10-06 00:55:39,768 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Coastal Areas
+2026-10-06 00:55:39,768 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Inland Valleys
+2026-10-06 00:55:39,768 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-06 00:55:40,097 [INFO] CAL FIRE: 4 active Sierra incidents
+2026-10-06 00:55:40,303 [INFO] NIFC: 2 Nevada fires in the Sierra box
+2026-10-06 00:55:40,543 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-06 00:55:42,322 [INFO] Gauge MDSC1: no flooding 37.0
+2026-10-06 00:55:42,581 [INFO] Gauge OBBC1: no flooding 3.36
+2026-10-06 00:55:42,837 [INFO] Gauge HPIC1: obs not current 
+2026-10-06 00:55:43,058 [INFO] Gauge POHC1: no flooding 0.96
+2026-10-06 00:55:43,180 [INFO] Gauge TRTC1: no flooding 2.55
+2026-10-06 00:55:43,282 [INFO] Gauge UTHC1: no flooding 4.65
+2026-10-06 00:55:43,460 [INFO] Gauge FARC1: no flooding 3.97
+2026-10-06 00:55:43,595 [INFO] Gauge TRRN2: no flooding 4.26
+2026-10-06 00:55:43,827 [INFO] Gauge WOOC1: no flooding 9.56
+2026-10-06 00:55:44,006 [INFO] Gauge CEMC1: no flooding 2.16
+2026-10-06 00:55:44,195 [INFO] Gauge GRDN2: no flooding 9.45
+2026-10-06 00:55:44,425 [INFO] Gauge CLEC1: no flooding 2.06
+2026-10-06 00:55:44,524 [INFO] Gauge EWBC1: no flooding 3.0
+2026-10-06 00:55:44,711 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-06 00:55:44,712 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=7
