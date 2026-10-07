@@ -1,34 +1,34 @@
-2026-10-07 09:22:25,560 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-07 09:22:26,049 [INFO] NWS CA: 24 active alerts
-2026-10-07 09:22:26,243 [INFO] NWS NV: 0 active alerts
-2026-10-07 09:22:26,244 [INFO]   not Sierra: Extreme Heat Warning — Parker Valley; Gila River Valley; Palo Verde Valley; Chuckwalla Valley
-2026-10-07 09:22:26,244 [INFO]   not Sierra: Extreme Heat Warning — Imperial County West; Imperial Valley
-2026-10-07 09:22:26,244 [INFO]   not Sierra: Extreme Heat Warning — Santa Ana Mountains and Foothills
-2026-10-07 09:22:26,244 [INFO]   not Sierra: Extreme Heat Warning — Coachella Valley; San Diego County Deserts; San Gorgonio Pass Near Banning
-2026-10-07 09:22:26,244 [INFO]   not Sierra: Extreme Heat Warning — Orange County Coastal
-2026-10-07 09:22:26,244 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Inland Valleys
-2026-10-07 09:22:26,244 [INFO]   not Sierra: Extreme Heat Warning — Orange County Inland
-2026-10-07 09:22:26,244 [INFO]   not Sierra: Extreme Heat Warning — San Bernardino and Riverside County Valleys-The Inland Empire
-2026-10-07 09:22:26,244 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Coastal Areas
-2026-10-07 09:22:26,244 [INFO]   not Sierra: Extreme Heat Warning — Death Valley National Park
-2026-10-07 09:22:26,245 [INFO]   not Sierra: Extreme Heat Warning — Catalina and Santa Barbara Islands; Santa Clarita Valley; Ventura County Beaches; Ventura County Inland Coast; Lake Casi
-2026-10-07 09:22:26,245 [INFO]   not Sierra: Extreme Heat Warning — Cuyama Valley; Santa Barbara County Southwestern Coast; Santa Barbara County Southeastern Coast; Santa Ynez Mountains We
-2026-10-07 09:22:26,245 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-10-07 09:22:26,638 [INFO] CAL FIRE: 4 active Sierra incidents
-2026-10-07 09:22:26,869 [INFO] NIFC: 2 Nevada fires in the Sierra box
-2026-10-07 09:22:27,070 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-10-07 09:22:28,468 [INFO] Gauge MDSC1: no flooding 36.89
-2026-10-07 09:22:28,765 [INFO] Gauge OBBC1: no flooding 2.93
-2026-10-07 09:22:28,950 [INFO] Gauge HPIC1: no flooding 0.59
-2026-10-07 09:22:29,159 [INFO] Gauge POHC1: no flooding 0.86
-2026-10-07 09:22:29,331 [INFO] Gauge TRTC1: no flooding 2.54
-2026-10-07 09:22:29,524 [INFO] Gauge UTHC1: no flooding 4.65
-2026-10-07 09:22:29,756 [INFO] Gauge FARC1: no flooding 3.96
-2026-10-07 09:22:30,057 [INFO] Gauge TRRN2: no flooding 4.11
-2026-10-07 09:22:30,336 [INFO] Gauge WOOC1: no flooding 9.55
-2026-10-07 09:22:30,517 [INFO] Gauge CEMC1: no flooding 2.16
-2026-10-07 09:22:30,838 [INFO] Gauge GRDN2: no flooding 9.46
-2026-10-07 09:22:31,104 [INFO] Gauge CLEC1: no flooding 2.04
-2026-10-07 09:22:31,295 [INFO] Gauge EWBC1: no flooding 3.0
-2026-10-07 09:22:31,704 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-07 09:22:31,706 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=7
+2026-10-07 16:51:52,150 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-07 16:51:52,641 [INFO] NWS CA: 23 active alerts
+2026-10-07 16:51:52,684 [INFO] NWS NV: 1 active alerts
+2026-10-07 16:51:52,685 [INFO]   not Sierra: Extreme Heat Warning — Cuyama Valley; Santa Barbara County Southwestern Coast; Santa Barbara County Southeastern Coast; Santa Ynez Mountains We
+2026-10-07 16:51:52,685 [INFO]   not Sierra: Extreme Heat Warning — Catalina and Santa Barbara Islands; Santa Clarita Valley; Ventura County Beaches; Ventura County Inland Coast; Lake Casi
+2026-10-07 16:51:52,685 [INFO]   not Sierra: Extreme Heat Warning — Death Valley National Park
+2026-10-07 16:51:52,686 [INFO]   not Sierra: Extreme Heat Warning — Imperial County West; Imperial Valley
+2026-10-07 16:51:52,686 [INFO]   not Sierra: Extreme Heat Warning — Parker Valley; Gila River Valley; Palo Verde Valley; Chuckwalla Valley
+2026-10-07 16:51:52,686 [INFO]   not Sierra: Extreme Heat Warning — Orange County Coastal
+2026-10-07 16:51:52,686 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Inland Valleys
+2026-10-07 16:51:52,686 [INFO]   not Sierra: Extreme Heat Warning — Orange County Inland
+2026-10-07 16:51:52,686 [INFO]   not Sierra: Extreme Heat Warning — Santa Ana Mountains and Foothills
+2026-10-07 16:51:52,686 [INFO]   not Sierra: Extreme Heat Warning — San Bernardino and Riverside County Valleys-The Inland Empire
+2026-10-07 16:51:52,686 [INFO]   not Sierra: Extreme Heat Warning — Coachella Valley; San Diego County Deserts; San Gorgonio Pass Near Banning
+2026-10-07 16:51:52,686 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Coastal Areas
+2026-10-07 16:51:52,686 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-07 16:51:53,012 [INFO] CAL FIRE: 4 active Sierra incidents
+2026-10-07 16:51:53,223 [INFO] NIFC: 2 Nevada fires in the Sierra box
+2026-10-07 16:51:53,417 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-07 16:51:54,590 [INFO] Gauge MDSC1: no flooding 36.94
+2026-10-07 16:51:54,819 [INFO] Gauge OBBC1: no flooding 3.33
+2026-10-07 16:51:54,989 [INFO] Gauge HPIC1: no flooding 0.59
+2026-10-07 16:51:55,167 [INFO] Gauge POHC1: no flooding 0.9
+2026-10-07 16:51:55,365 [INFO] Gauge TRTC1: no flooding 2.54
+2026-10-07 16:51:55,659 [INFO] Gauge UTHC1: no flooding 4.64
+2026-10-07 16:51:55,838 [INFO] Gauge FARC1: no flooding 3.96
+2026-10-07 16:51:56,022 [INFO] Gauge TRRN2: no flooding 4.11
+2026-10-07 16:51:56,198 [INFO] Gauge WOOC1: no flooding 9.55
+2026-10-07 16:51:56,440 [INFO] Gauge CEMC1: no flooding 2.16
+2026-10-07 16:51:56,759 [INFO] Gauge GRDN2: no flooding 9.46
+2026-10-07 16:51:57,033 [INFO] Gauge CLEC1: no flooding 2.05
+2026-10-07 16:51:57,209 [INFO] Gauge EWBC1: no flooding 3.0
+2026-10-07 16:51:57,383 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-07 16:51:57,384 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=7
