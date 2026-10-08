@@ -1,34 +1,36 @@
-2026-10-08 15:32:30,177 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-08 15:32:30,634 [INFO] NWS CA: 28 active alerts
-2026-10-08 15:32:30,759 [INFO] NWS NV: 3 active alerts
-2026-10-08 15:32:30,760 [INFO]   not Sierra: Extreme Heat Warning — Cuyama Valley; Santa Barbara County Southwestern Coast; Santa Barbara County Southeastern Coast; Santa Ynez Mountains We
-2026-10-08 15:32:30,760 [INFO]   not Sierra: Extreme Heat Warning — Catalina and Santa Barbara Islands; Santa Clarita Valley; Ventura County Beaches; Ventura County Inland Coast; Lake Casi
-2026-10-08 15:32:30,760 [INFO]   not Sierra: Extreme Heat Warning — Death Valley National Park
-2026-10-08 15:32:30,760 [INFO]   not Sierra: Extreme Heat Warning — San Bernardino and Riverside County Valleys-The Inland Empire
-2026-10-08 15:32:30,760 [INFO]   not Sierra: Extreme Heat Warning — Coachella Valley; San Diego County Deserts; San Gorgonio Pass Near Banning
-2026-10-08 15:32:30,760 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Inland Valleys
-2026-10-08 15:32:30,760 [INFO]   not Sierra: Extreme Heat Warning — Orange County Coastal
-2026-10-08 15:32:30,760 [INFO]   not Sierra: Extreme Heat Warning — Santa Ana Mountains and Foothills
-2026-10-08 15:32:30,760 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Coastal Areas
-2026-10-08 15:32:30,760 [INFO]   not Sierra: Extreme Heat Warning — Orange County Inland
-2026-10-08 15:32:30,760 [INFO]   not Sierra: Extreme Heat Warning — Parker Valley; Gila River Valley; Palo Verde Valley; Chuckwalla Valley
-2026-10-08 15:32:30,760 [INFO]   not Sierra: Extreme Heat Warning — Imperial County West; Imperial Valley
-2026-10-08 15:32:30,760 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-10-08 15:32:31,222 [INFO] CAL FIRE: 2 active Sierra incidents
-2026-10-08 15:32:31,417 [INFO] NIFC: 2 Nevada fires in the Sierra box
-2026-10-08 15:32:31,617 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-10-08 15:32:35,115 [INFO] Gauge MDSC1: no flooding 36.98
-2026-10-08 15:32:35,342 [INFO] Gauge OBBC1: no flooding 3.34
-2026-10-08 15:32:35,615 [INFO] Gauge HPIC1: no flooding 0.59
-2026-10-08 15:32:35,775 [INFO] Gauge POHC1: no flooding 0.93
-2026-10-08 15:32:35,964 [INFO] Gauge TRTC1: no flooding 2.54
-2026-10-08 15:32:36,196 [INFO] Gauge UTHC1: no flooding 4.64
-2026-10-08 15:32:36,453 [INFO] Gauge FARC1: no flooding 3.95
-2026-10-08 15:32:36,727 [INFO] Gauge TRRN2: no flooding 4.13
-2026-10-08 15:32:37,057 [INFO] Gauge WOOC1: no flooding 9.55
-2026-10-08 15:32:37,388 [INFO] Gauge CEMC1: no flooding 2.16
-2026-10-08 15:32:37,681 [INFO] Gauge GRDN2: no flooding 9.46
-2026-10-08 15:32:37,808 [INFO] Gauge CLEC1: no flooding 2.04
-2026-10-08 15:32:38,080 [INFO] Gauge EWBC1: no flooding 3.06
-2026-10-08 15:32:38,486 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-08 15:32:38,522 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=7
+2026-10-08 20:48:03,988 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-08 20:48:04,715 [INFO] NWS CA: 33 active alerts
+2026-10-08 20:48:04,779 [INFO] NWS NV: 8 active alerts
+2026-10-08 20:48:04,780 [INFO]   not Sierra: Extreme Heat Warning — Imperial County West; Imperial Valley
+2026-10-08 20:48:04,780 [INFO]   not Sierra: Extreme Heat Warning — Parker Valley; Gila River Valley; Palo Verde Valley; Chuckwalla Valley
+2026-10-08 20:48:04,780 [INFO]   not Sierra: Red Flag Warning — Modoc County Except for the Surprise Valley
+2026-10-08 20:48:04,781 [INFO]   not Sierra: Extreme Heat Warning — Cuyama Valley; Santa Barbara County Southwestern Coast; Santa Barbara County Southeastern Coast; Santa Ynez Mountains We
+2026-10-08 20:48:04,781 [INFO]   not Sierra: Extreme Heat Warning — Catalina and Santa Barbara Islands; Santa Clarita Valley; Ventura County Beaches; Ventura County Inland Coast; Lake Casi
+2026-10-08 20:48:04,781 [INFO]   not Sierra: Extreme Heat Warning — Death Valley National Park
+2026-10-08 20:48:04,781 [INFO]   not Sierra: Extreme Heat Warning — San Bernardino and Riverside County Valleys-The Inland Empire
+2026-10-08 20:48:04,781 [INFO]   not Sierra: Extreme Heat Warning — Coachella Valley; San Diego County Deserts; San Gorgonio Pass Near Banning
+2026-10-08 20:48:04,781 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Inland Valleys
+2026-10-08 20:48:04,781 [INFO]   not Sierra: Extreme Heat Warning — Orange County Coastal
+2026-10-08 20:48:04,781 [INFO]   not Sierra: Extreme Heat Warning — Orange County Inland
+2026-10-08 20:48:04,781 [INFO]   not Sierra: Extreme Heat Warning — San Diego County Coastal Areas
+2026-10-08 20:48:04,781 [INFO]   not Sierra: Extreme Heat Warning — Santa Ana Mountains and Foothills
+2026-10-08 20:48:04,781 [INFO]   not Sierra: Red Flag Warning — Humboldt County - Quinn; Western Elko County, northern Eureka and Lander Counties north of Interstate 80; Central Elko C
+2026-10-08 20:48:04,781 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-08 20:48:05,469 [INFO] CAL FIRE: 2 active Sierra incidents
+2026-10-08 20:48:05,725 [INFO] NIFC: 2 Nevada fires in the Sierra box
+2026-10-08 20:48:06,057 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-08 20:48:07,708 [INFO] Gauge MDSC1: no flooding 36.96
+2026-10-08 20:48:07,852 [INFO] Gauge OBBC1: no flooding 3.36
+2026-10-08 20:48:07,904 [INFO] Gauge HPIC1: no flooding 0.58
+2026-10-08 20:48:07,957 [INFO] Gauge POHC1: no flooding 0.93
+2026-10-08 20:48:08,095 [INFO] Gauge TRTC1: no flooding 2.54
+2026-10-08 20:48:08,218 [INFO] Gauge UTHC1: no flooding 4.63
+2026-10-08 20:48:08,360 [INFO] Gauge FARC1: no flooding 3.95
+2026-10-08 20:48:08,565 [INFO] Gauge TRRN2: no flooding 4.14
+2026-10-08 20:48:08,789 [INFO] Gauge WOOC1: no flooding 9.56
+2026-10-08 20:48:09,038 [INFO] Gauge CEMC1: no flooding 2.16
+2026-10-08 20:48:09,164 [INFO] Gauge GRDN2: no flooding 9.45
+2026-10-08 20:48:09,194 [INFO] Gauge CLEC1: no flooding 2.05
+2026-10-08 20:48:09,223 [INFO] Gauge EWBC1: no flooding 3.06
+2026-10-08 20:48:09,599 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-08 20:48:09,600 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=7
