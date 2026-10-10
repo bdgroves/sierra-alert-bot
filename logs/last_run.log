@@ -1,28 +1,24 @@
-2026-10-10 02:48:10,436 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-10 02:48:12,077 [INFO] NWS CA: 39 active alerts
-2026-10-10 02:48:12,205 [INFO] NWS NV: 14 active alerts
-2026-10-10 02:48:12,205 [INFO]   not Sierra: Extreme Heat Warning — Coachella Valley; San Diego County Deserts; San Gorgonio Pass Near Banning
-2026-10-10 02:48:12,206 [INFO]   not Sierra: Extreme Heat Warning — Imperial County West; Imperial Valley
-2026-10-10 02:48:12,206 [INFO]   not Sierra: Extreme Heat Warning — Death Valley National Park
-2026-10-10 02:48:12,206 [INFO]   not Sierra: Red Flag Warning — Southeastern Humboldt County and northern Lander County
-2026-10-10 02:48:12,206 [INFO]   not Sierra: Red Flag Warning — Humboldt County - Quinn; Western Elko County, northern Eureka and Lander Counties north of Interstate 80; Central Elko C
-2026-10-10 02:48:12,206 [INFO]   not Sierra: Red Flag Warning — Humboldt County - Quinn; Western Elko County, northern Eureka and Lander Counties north of Interstate 80; Central Elko C
-2026-10-10 02:48:12,206 [INFO] NWS: 1 Sierra warning products in 1 hazards
-2026-10-10 02:48:12,605 [INFO] CAL FIRE: 3 active Sierra incidents
-2026-10-10 02:48:12,945 [INFO] NIFC: 2 Nevada fires in the Sierra box
-2026-10-10 02:48:13,345 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-10-10 02:48:16,423 [INFO] Gauge MDSC1: no flooding 37.02
-2026-10-10 02:48:16,814 [INFO] Gauge OBBC1: no flooding 3.35
-2026-10-10 02:48:17,079 [INFO] Gauge HPIC1: no flooding 0.58
-2026-10-10 02:48:17,412 [INFO] Gauge POHC1: no flooding 0.98
-2026-10-10 02:48:17,780 [INFO] Gauge TRTC1: no flooding 2.54
-2026-10-10 02:48:18,126 [INFO] Gauge UTHC1: no flooding 5.07
-2026-10-10 02:48:18,465 [INFO] Gauge FARC1: no flooding 3.96
-2026-10-10 02:48:18,866 [INFO] Gauge TRRN2: no flooding 4.13
-2026-10-10 02:48:19,294 [INFO] Gauge WOOC1: no flooding 9.68
-2026-10-10 02:48:19,613 [INFO] Gauge CEMC1: no flooding 2.15
-2026-10-10 02:48:19,894 [INFO] Gauge GRDN2: no flooding 9.45
-2026-10-10 02:48:20,265 [INFO] Gauge CLEC1: no flooding 2.05
-2026-10-10 02:48:20,576 [INFO] Gauge EWBC1: no flooding 3.08
-2026-10-10 02:48:20,979 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-10 02:48:20,980 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=8
+2026-10-10 09:07:00,834 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-10 09:07:01,483 [INFO] NWS CA: 35 active alerts
+2026-10-10 09:07:01,689 [INFO] NWS NV: 11 active alerts
+2026-10-10 09:07:01,690 [INFO]   not Sierra: Red Flag Warning — Southeastern Humboldt County and northern Lander County
+2026-10-10 09:07:01,690 [INFO]   not Sierra: Red Flag Warning — Humboldt County - Quinn; Western Elko County, northern Eureka and Lander Counties north of Interstate 80; Central Elko C
+2026-10-10 09:07:01,690 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-10 09:07:01,992 [INFO] CAL FIRE: 2 active Sierra incidents
+2026-10-10 09:07:02,268 [INFO] NIFC: 2 Nevada fires in the Sierra box
+2026-10-10 09:07:02,831 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-10 09:07:05,021 [INFO] Gauge MDSC1: no flooding 37.02
+2026-10-10 09:07:05,478 [INFO] Gauge OBBC1: no flooding 3.33
+2026-10-10 09:07:05,579 [INFO] Gauge HPIC1: no flooding 0.58
+2026-10-10 09:07:05,870 [INFO] Gauge POHC1: no flooding 0.94
+2026-10-10 09:07:06,230 [INFO] Gauge TRTC1: no flooding 2.54
+2026-10-10 09:07:06,481 [INFO] Gauge UTHC1: no flooding 5.11
+2026-10-10 09:07:06,712 [INFO] Gauge FARC1: no flooding 3.96
+2026-10-10 09:07:07,063 [INFO] Gauge TRRN2: no flooding 4.21
+2026-10-10 09:07:07,301 [INFO] Gauge WOOC1: no flooding 9.68
+2026-10-10 09:07:07,536 [INFO] Gauge CEMC1: no flooding 2.15
+2026-10-10 09:07:07,663 [INFO] Gauge GRDN2: no flooding 9.45
+2026-10-10 09:07:08,006 [INFO] Gauge CLEC1: no flooding 2.05
+2026-10-10 09:07:08,459 [INFO] Gauge EWBC1: no flooding 3.08
+2026-10-10 09:07:08,633 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-10 09:07:08,634 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=8
