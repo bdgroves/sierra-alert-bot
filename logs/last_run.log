@@ -1,24 +1,23 @@
-2026-10-10 09:07:00,834 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-10 09:07:01,483 [INFO] NWS CA: 35 active alerts
-2026-10-10 09:07:01,689 [INFO] NWS NV: 11 active alerts
-2026-10-10 09:07:01,690 [INFO]   not Sierra: Red Flag Warning — Southeastern Humboldt County and northern Lander County
-2026-10-10 09:07:01,690 [INFO]   not Sierra: Red Flag Warning — Humboldt County - Quinn; Western Elko County, northern Eureka and Lander Counties north of Interstate 80; Central Elko C
-2026-10-10 09:07:01,690 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-10-10 09:07:01,992 [INFO] CAL FIRE: 2 active Sierra incidents
-2026-10-10 09:07:02,268 [INFO] NIFC: 2 Nevada fires in the Sierra box
-2026-10-10 09:07:02,831 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-10-10 09:07:05,021 [INFO] Gauge MDSC1: no flooding 37.02
-2026-10-10 09:07:05,478 [INFO] Gauge OBBC1: no flooding 3.33
-2026-10-10 09:07:05,579 [INFO] Gauge HPIC1: no flooding 0.58
-2026-10-10 09:07:05,870 [INFO] Gauge POHC1: no flooding 0.94
-2026-10-10 09:07:06,230 [INFO] Gauge TRTC1: no flooding 2.54
-2026-10-10 09:07:06,481 [INFO] Gauge UTHC1: no flooding 5.11
-2026-10-10 09:07:06,712 [INFO] Gauge FARC1: no flooding 3.96
-2026-10-10 09:07:07,063 [INFO] Gauge TRRN2: no flooding 4.21
-2026-10-10 09:07:07,301 [INFO] Gauge WOOC1: no flooding 9.68
-2026-10-10 09:07:07,536 [INFO] Gauge CEMC1: no flooding 2.15
-2026-10-10 09:07:07,663 [INFO] Gauge GRDN2: no flooding 9.45
-2026-10-10 09:07:08,006 [INFO] Gauge CLEC1: no flooding 2.05
-2026-10-10 09:07:08,459 [INFO] Gauge EWBC1: no flooding 3.08
-2026-10-10 09:07:08,633 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-10 09:07:08,634 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=8
+2026-10-10 15:26:08,675 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-10 15:26:09,631 [INFO] NWS CA: 36 active alerts
+2026-10-10 15:26:09,846 [INFO] NWS NV: 10 active alerts
+2026-10-10 15:26:09,848 [INFO]   not Sierra: Red Flag Warning — Southeastern Humboldt County and northern Lander County; Humboldt County - Quinn; Western Elko County, northern Eureka a
+2026-10-10 15:26:09,848 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-10 15:26:10,184 [INFO] CAL FIRE: 2 active Sierra incidents
+2026-10-10 15:26:10,439 [INFO] NIFC: 2 Nevada fires in the Sierra box
+2026-10-10 15:26:10,641 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-10 15:26:12,655 [INFO] Gauge MDSC1: no flooding 37.01
+2026-10-10 15:26:12,854 [INFO] Gauge OBBC1: no flooding 3.35
+2026-10-10 15:26:13,157 [INFO] Gauge HPIC1: no flooding 0.58
+2026-10-10 15:26:13,481 [INFO] Gauge POHC1: no flooding 0.92
+2026-10-10 15:26:13,624 [INFO] Gauge TRTC1: no flooding 2.54
+2026-10-10 15:26:13,922 [INFO] Gauge UTHC1: no flooding 5.1
+2026-10-10 15:26:14,294 [INFO] Gauge FARC1: no flooding 3.96
+2026-10-10 15:26:14,696 [INFO] Gauge TRRN2: no flooding 4.18
+2026-10-10 15:26:15,032 [INFO] Gauge WOOC1: no flooding 9.69
+2026-10-10 15:26:15,252 [INFO] Gauge CEMC1: no flooding 2.15
+2026-10-10 15:26:15,490 [INFO] Gauge GRDN2: no flooding 9.46
+2026-10-10 15:26:15,736 [INFO] Gauge CLEC1: no flooding 2.05
+2026-10-10 15:26:15,845 [INFO] Gauge EWBC1: no flooding 3.09
+2026-10-10 15:26:16,692 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-10 15:26:16,702 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=8
