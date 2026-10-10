@@ -1,24 +1,26 @@
-2026-10-10 19:28:31,703 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-10 19:28:32,202 [INFO] NWS CA: 44 active alerts
-2026-10-10 19:28:32,356 [INFO] NWS NV: 11 active alerts
-2026-10-10 19:28:32,357 [INFO]   not Sierra: Red Flag Warning — South-Central Shasta County Including Redding Metro; Northern Sacramento Valley in Tehama County; Central Glenn County I
-2026-10-10 19:28:32,357 [INFO]   not Sierra: Red Flag Warning — Southeastern Humboldt County and northern Lander County; Humboldt County - Quinn; Western Elko County, northern Eureka a
-2026-10-10 19:28:32,357 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-10-10 19:28:32,865 [INFO] CAL FIRE: 2 active Sierra incidents
-2026-10-10 19:28:33,244 [INFO] NIFC: 2 Nevada fires in the Sierra box
-2026-10-10 19:28:33,916 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-10-10 19:28:36,652 [INFO] Gauge MDSC1: no flooding 37.05
-2026-10-10 19:28:37,074 [INFO] Gauge OBBC1: no flooding 3.34
-2026-10-10 19:28:37,358 [INFO] Gauge HPIC1: no flooding 0.58
-2026-10-10 19:28:37,684 [INFO] Gauge POHC1: no flooding 0.92
-2026-10-10 19:28:37,910 [INFO] Gauge TRTC1: no flooding 2.55
-2026-10-10 19:28:38,293 [INFO] Gauge UTHC1: no flooding 5.08
-2026-10-10 19:28:38,661 [INFO] Gauge FARC1: no flooding 3.95
-2026-10-10 19:28:38,936 [INFO] Gauge TRRN2: no flooding 4.18
-2026-10-10 19:28:39,368 [INFO] Gauge WOOC1: no flooding 9.7
-2026-10-10 19:28:39,711 [INFO] Gauge CEMC1: no flooding 2.14
-2026-10-10 19:28:40,124 [INFO] Gauge GRDN2: no flooding 9.45
-2026-10-10 19:28:40,519 [INFO] Gauge CLEC1: no flooding 2.05
-2026-10-10 19:28:40,923 [INFO] Gauge EWBC1: no flooding 3.09
-2026-10-10 19:28:41,376 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-10 19:28:41,377 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=8
+2026-10-10 22:52:48,192 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-10 22:52:48,566 [INFO] NWS CA: 52 active alerts
+2026-10-10 22:52:48,672 [INFO] NWS NV: 14 active alerts
+2026-10-10 22:52:48,673 [INFO]   not Sierra: High Wind Warning — Northwest Plateau; Lake Havasu and Fort Mohave; Lake Mead - AZ side; Lake Mohave - AZ side; Hualapai Mountains; Northwes
+2026-10-10 22:52:48,673 [INFO]   not Sierra: Red Flag Warning — South-Central Shasta County Including Redding Metro; Northern Sacramento Valley in Tehama County; Central Glenn County I
+2026-10-10 22:52:48,674 [INFO]   not Sierra: High Wind Warning — Lincoln County
+2026-10-10 22:52:48,674 [INFO]   not Sierra: Red Flag Warning — Southeastern Humboldt County and northern Lander County; Humboldt County - Quinn; Western Elko County, northern Eureka a
+2026-10-10 22:52:48,674 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-10 22:52:49,143 [INFO] CAL FIRE: 2 active Sierra incidents
+2026-10-10 22:52:49,333 [INFO] NIFC: 2 Nevada fires in the Sierra box
+2026-10-10 22:52:49,768 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-10 22:52:50,774 [INFO] Gauge MDSC1: no flooding 37.09
+2026-10-10 22:52:50,976 [INFO] Gauge OBBC1: no flooding 3.35
+2026-10-10 22:52:51,160 [INFO] Gauge HPIC1: no flooding 0.58
+2026-10-10 22:52:51,299 [INFO] Gauge POHC1: no flooding 0.94
+2026-10-10 22:52:51,537 [INFO] Gauge TRTC1: no flooding 2.55
+2026-10-10 22:52:51,690 [INFO] Gauge UTHC1: no flooding 5.06
+2026-10-10 22:52:51,743 [INFO] Gauge FARC1: no flooding 3.94
+2026-10-10 22:52:52,016 [INFO] Gauge TRRN2: no flooding 4.05
+2026-10-10 22:52:52,164 [INFO] Gauge WOOC1: no flooding 9.71
+2026-10-10 22:52:52,375 [INFO] Gauge CEMC1: no flooding 2.13
+2026-10-10 22:52:52,587 [INFO] Gauge GRDN2: no flooding 9.45
+2026-10-10 22:52:52,848 [INFO] Gauge CLEC1: no flooding 2.05
+2026-10-10 22:52:53,065 [INFO] Gauge EWBC1: no flooding 3.09
+2026-10-10 22:52:53,458 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-10 22:52:53,460 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=8
