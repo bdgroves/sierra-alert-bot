@@ -1,26 +1,33 @@
-2026-10-11 01:47:00,943 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-11 01:47:01,496 [INFO] NWS CA: 53 active alerts
-2026-10-11 01:47:01,616 [INFO] NWS NV: 14 active alerts
-2026-10-11 01:47:01,617 [INFO]   not Sierra: High Wind Warning — Northwest Plateau; Lake Havasu and Fort Mohave; Lake Mead - AZ side; Lake Mohave - AZ side; Hualapai Mountains; Northwes
-2026-10-11 01:47:01,617 [INFO]   not Sierra: Red Flag Warning — South-Central Shasta County Including Redding Metro; Northern Sacramento Valley in Tehama County; Central Glenn County I
-2026-10-11 01:47:01,617 [INFO]   not Sierra: High Wind Warning — Lincoln County
-2026-10-11 01:47:01,617 [INFO]   not Sierra: Red Flag Warning — Southeastern Humboldt County and northern Lander County; Humboldt County - Quinn; Western Elko County, northern Eureka a
-2026-10-11 01:47:01,617 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-10-11 01:47:01,818 [INFO] CAL FIRE: 3 active Sierra incidents
-2026-10-11 01:47:02,085 [INFO] NIFC: 2 Nevada fires in the Sierra box
-2026-10-11 01:47:02,507 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-10-11 01:47:03,855 [INFO] Gauge MDSC1: no flooding 37.08
-2026-10-11 01:47:04,162 [INFO] Gauge OBBC1: no flooding 3.35
-2026-10-11 01:47:04,299 [INFO] Gauge HPIC1: no flooding 0.58
-2026-10-11 01:47:04,403 [INFO] Gauge POHC1: no flooding 0.94
-2026-10-11 01:47:04,428 [INFO] Gauge TRTC1: no flooding 2.54
-2026-10-11 01:47:04,642 [INFO] Gauge UTHC1: no flooding 5.05
-2026-10-11 01:47:04,805 [INFO] Gauge FARC1: no flooding 3.94
-2026-10-11 01:47:04,954 [INFO] Gauge TRRN2: no flooding 4.14
-2026-10-11 01:47:05,007 [INFO] Gauge WOOC1: no flooding 9.71
-2026-10-11 01:47:05,097 [INFO] Gauge CEMC1: no flooding 2.15
-2026-10-11 01:47:05,420 [INFO] Gauge GRDN2: no flooding 9.45
-2026-10-11 01:47:05,767 [INFO] Gauge CLEC1: no flooding 2.04
-2026-10-11 01:47:05,891 [INFO] Gauge EWBC1: no flooding 3.09
-2026-10-11 01:47:06,935 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-11 01:47:07,006 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=8
+2026-10-11 07:53:08,974 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-11 07:53:09,453 [INFO] NWS CA: 57 active alerts
+2026-10-11 07:53:09,548 [INFO] NWS NV: 8 active alerts
+2026-10-11 07:53:09,549 [INFO]   not Sierra: Flash Flood Warning — Imperial, CA
+2026-10-11 07:53:09,549 [INFO]   not Sierra: Flash Flood Warning — Imperial, CA
+2026-10-11 07:53:09,549 [INFO]   not Sierra: Flash Flood Warning — San Diego, CA
+2026-10-11 07:53:09,549 [INFO]   not Sierra: High Wind Warning — Northwest Plateau; Lake Havasu and Fort Mohave; Lake Mead - AZ side; Lake Mohave - AZ side; Hualapai Mountains; Northwes
+2026-10-11 07:53:09,549 [INFO]   not Sierra: Flash Flood Warning — Imperial, CA
+2026-10-11 07:53:09,550 [INFO]   not Sierra: Flash Flood Warning — Imperial, CA
+2026-10-11 07:53:09,550 [INFO]   not Sierra: Flash Flood Warning — La Paz, AZ; Riverside, CA
+2026-10-11 07:53:09,550 [INFO]   not Sierra: Flash Flood Warning — Imperial, CA
+2026-10-11 07:53:09,550 [INFO]   not Sierra: Flash Flood Warning — La Paz, AZ; Imperial, CA
+2026-10-11 07:53:09,550 [INFO]   not Sierra: Red Flag Warning — South-Central Shasta County Including Redding Metro; Northern Sacramento Valley in Tehama County; Central Glenn County I
+2026-10-11 07:53:09,550 [INFO]   not Sierra: High Wind Warning — Lincoln County
+2026-10-11 07:53:09,550 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-11 07:53:10,000 [INFO] CAL FIRE: 3 active Sierra incidents
+2026-10-11 07:53:10,336 [INFO] NIFC: 2 Nevada fires in the Sierra box
+2026-10-11 07:53:10,910 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-11 07:53:13,934 [INFO] Gauge MDSC1: no flooding 37.12
+2026-10-11 07:53:14,290 [INFO] Gauge OBBC1: no flooding 3.37
+2026-10-11 07:53:14,666 [INFO] Gauge HPIC1: no flooding 0.58
+2026-10-11 07:53:15,095 [INFO] Gauge POHC1: no flooding 0.95
+2026-10-11 07:53:15,443 [INFO] Gauge TRTC1: no flooding 2.54
+2026-10-11 07:53:15,676 [INFO] Gauge UTHC1: no flooding 5.04
+2026-10-11 07:53:15,980 [INFO] Gauge FARC1: no flooding 3.94
+2026-10-11 07:53:16,419 [INFO] Gauge TRRN2: no flooding 4.19
+2026-10-11 07:53:16,659 [INFO] Gauge WOOC1: no flooding 9.7
+2026-10-11 07:53:17,022 [INFO] Gauge CEMC1: no flooding 2.15
+2026-10-11 07:53:17,392 [INFO] Gauge GRDN2: no flooding 9.45
+2026-10-11 07:53:17,695 [INFO] Gauge CLEC1: no flooding 2.04
+2026-10-11 07:53:18,082 [INFO] Gauge EWBC1: no flooding 3.09
+2026-10-11 07:53:18,446 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-11 07:53:18,447 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=8
