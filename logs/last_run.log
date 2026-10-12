@@ -1,24 +1,23 @@
-2026-10-11 23:06:28,340 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-11 23:06:28,901 [INFO] NWS CA: 38 active alerts
-2026-10-11 23:06:29,095 [INFO] NWS NV: 9 active alerts
-2026-10-11 23:06:29,096 [INFO]   not Sierra: Red Flag Warning — South-Central Shasta County Including Redding Metro; Northern Sacramento Valley in Tehama County; Central Glenn County I
-2026-10-11 23:06:29,096 [INFO]   not Sierra: Flash Flood Warning — Mohave, AZ; Clark, NV; Lincoln, NV
-2026-10-11 23:06:29,096 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-10-11 23:06:29,534 [INFO] CAL FIRE: 3 active Sierra incidents
-2026-10-11 23:06:30,147 [INFO] NIFC: 2 Nevada fires in the Sierra box
-2026-10-11 23:06:30,552 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-10-11 23:06:40,895 [INFO] Gauge MDSC1: no flooding 37.05
-2026-10-11 23:06:41,341 [INFO] Gauge OBBC1: no flooding 3.35
-2026-10-11 23:06:41,727 [INFO] Gauge HPIC1: no flooding 0.58
-2026-10-11 23:06:42,112 [INFO] Gauge POHC1: no flooding 0.94
-2026-10-11 23:06:42,479 [INFO] Gauge TRTC1: no flooding 2.54
-2026-10-11 23:06:42,780 [INFO] Gauge UTHC1: no flooding 5.0
-2026-10-11 23:06:43,048 [INFO] Gauge FARC1: no flooding 3.89
-2026-10-11 23:06:43,368 [INFO] Gauge TRRN2: no flooding 4.15
-2026-10-11 23:06:43,807 [INFO] Gauge WOOC1: no flooding 9.71
-2026-10-11 23:06:43,990 [INFO] Gauge CEMC1: no flooding 2.14
-2026-10-11 23:06:44,322 [INFO] Gauge GRDN2: no flooding 9.45
-2026-10-11 23:06:44,612 [INFO] Gauge CLEC1: no flooding 2.06
-2026-10-11 23:06:45,018 [INFO] Gauge EWBC1: no flooding 3.08
-2026-10-11 23:06:45,229 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-11 23:06:45,231 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=8
+2026-10-12 02:28:12,544 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-12 02:28:13,783 [INFO] NWS CA: 37 active alerts
+2026-10-12 02:28:13,966 [INFO] NWS NV: 8 active alerts
+2026-10-12 02:28:13,967 [INFO]   not Sierra: Red Flag Warning — South-Central Shasta County Including Redding Metro; Northern Sacramento Valley in Tehama County; Central Glenn County I
+2026-10-12 02:28:13,967 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-12 02:28:14,491 [INFO] CAL FIRE: 3 active Sierra incidents
+2026-10-12 02:28:14,695 [INFO] NIFC: 2 Nevada fires in the Sierra box
+2026-10-12 02:28:15,468 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-12 02:28:19,057 [INFO] Gauge MDSC1: no flooding 37.04
+2026-10-12 02:28:19,435 [INFO] Gauge OBBC1: no flooding 3.36
+2026-10-12 02:28:19,861 [INFO] Gauge HPIC1: no flooding 0.58
+2026-10-12 02:28:20,186 [INFO] Gauge POHC1: no flooding 0.97
+2026-10-12 02:28:20,503 [INFO] Gauge TRTC1: no flooding 2.53
+2026-10-12 02:28:20,892 [INFO] Gauge UTHC1: no flooding 4.97
+2026-10-12 02:28:21,191 [INFO] Gauge FARC1: no flooding 3.88
+2026-10-12 02:28:21,608 [INFO] Gauge TRRN2: no flooding 4.19
+2026-10-12 02:28:21,844 [INFO] Gauge WOOC1: no flooding 9.71
+2026-10-12 02:28:22,147 [INFO] Gauge CEMC1: no flooding 2.16
+2026-10-12 02:28:22,474 [INFO] Gauge GRDN2: no flooding 9.45
+2026-10-12 02:28:22,818 [INFO] Gauge CLEC1: no flooding 2.05
+2026-10-12 02:28:23,068 [INFO] Gauge EWBC1: no flooding 3.08
+2026-10-12 02:28:23,515 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-12 02:28:23,577 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=8
