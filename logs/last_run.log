@@ -1,22 +1,29 @@
-2026-10-12 19:23:00,751 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-12 19:23:01,151 [INFO] NWS CA: 17 active alerts
-2026-10-12 19:23:01,292 [INFO] NWS NV: 2 active alerts
-2026-10-12 19:23:01,293 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-10-12 19:23:01,739 [INFO] CAL FIRE: 1 active Sierra incidents
-2026-10-12 19:23:01,938 [INFO] NIFC: 2 Nevada fires in the Sierra box
-2026-10-12 19:23:02,546 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-10-12 19:23:05,459 [INFO] Gauge MDSC1: no flooding 37.09
-2026-10-12 19:23:05,848 [INFO] Gauge OBBC1: no flooding 3.36
-2026-10-12 19:23:06,197 [INFO] Gauge HPIC1: no flooding 0.58
-2026-10-12 19:23:06,428 [INFO] Gauge POHC1: no flooding 0.96
-2026-10-12 19:23:06,680 [INFO] Gauge TRTC1: no flooding 2.54
-2026-10-12 19:23:07,034 [INFO] Gauge UTHC1: no flooding 4.93
-2026-10-12 19:23:07,335 [INFO] Gauge FARC1: no flooding 3.88
-2026-10-12 19:23:07,606 [INFO] Gauge TRRN2: no flooding 4.11
-2026-10-12 19:23:07,939 [INFO] Gauge WOOC1: no flooding 9.71
-2026-10-12 19:23:08,247 [INFO] Gauge CEMC1: no flooding 2.17
-2026-10-12 19:23:08,573 [INFO] Gauge GRDN2: no flooding 9.46
-2026-10-12 19:23:09,000 [INFO] Gauge CLEC1: no flooding 2.06
-2026-10-12 19:23:09,235 [INFO] Gauge EWBC1: no flooding 3.08
-2026-10-12 19:23:09,633 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-12 19:23:09,635 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=8
+2026-10-13 01:35:30,189 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-13 01:35:30,784 [INFO] NWS CA: 20 active alerts
+2026-10-13 01:35:30,944 [INFO] NWS NV: 3 active alerts
+2026-10-13 01:35:30,945 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-13 01:35:31,382 [INFO] CAL FIRE: 2 active Sierra incidents
+2026-10-13 01:35:31,701 [INFO] NIFC: 1 Nevada fires in the Sierra box
+2026-10-13 01:35:31,703 [INFO] [standby] would post fire:2c9e6d32-51e5-4a26-b862-0877054ec315
+🔥 New fire: Fine Fire Fire
+100 acres · 50% contained
+Stanislaus County, CA
+https://www.fire.ca.gov/incidents/2026/10/12/fine-fire/
+#SierraNevada #wildfire
+
+2026-10-13 01:35:32,089 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-13 01:35:35,039 [INFO] Gauge MDSC1: no flooding 37.02
+2026-10-13 01:35:35,410 [INFO] Gauge OBBC1: no flooding 3.35
+2026-10-13 01:35:35,737 [INFO] Gauge HPIC1: no flooding 0.58
+2026-10-13 01:35:36,242 [INFO] Gauge POHC1: no flooding 0.98
+2026-10-13 01:35:36,628 [INFO] Gauge TRTC1: no flooding 2.53
+2026-10-13 01:35:36,911 [INFO] Gauge UTHC1: no flooding 4.92
+2026-10-13 01:35:37,373 [INFO] Gauge FARC1: no flooding 3.88
+2026-10-13 01:35:37,702 [INFO] Gauge TRRN2: no flooding 4.11
+2026-10-13 01:35:38,163 [INFO] Gauge WOOC1: no flooding 9.71
+2026-10-13 01:35:38,500 [INFO] Gauge CEMC1: no flooding 2.18
+2026-10-13 01:35:38,968 [INFO] Gauge GRDN2: no flooding 9.46
+2026-10-13 01:35:39,248 [INFO] Gauge CLEC1: no flooding 2.08
+2026-10-13 01:35:39,665 [INFO] Gauge EWBC1: no flooding 3.05
+2026-10-13 01:35:40,005 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-13 01:35:40,006 [INFO] Done. posted=1 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=9
