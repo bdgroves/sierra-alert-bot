@@ -1,24 +1,24 @@
-2026-10-14 00:34:06,041 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-14 00:34:06,715 [INFO] NWS CA: 19 active alerts
-2026-10-14 00:34:06,846 [INFO] NWS NV: 1 active alerts
-2026-10-14 00:34:06,847 [INFO]   not Sierra: Red Flag Warning — Western Santa Monica Mountains Recreational Area; Eastern Santa Monica Mountains Recreational Area; Santa Susana Mountai
-2026-10-14 00:34:06,847 [INFO]   not Sierra: Red Flag Warning — Ventura County Beaches; Ventura County Inland Coast; Central Ventura County Valleys; Malibu Coast; Calabasas and Agoura 
-2026-10-14 00:34:06,847 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-10-14 00:34:07,767 [INFO] CAL FIRE: 2 active Sierra incidents
-2026-10-14 00:34:07,983 [INFO] NIFC: 1 Nevada fires in the Sierra box
-2026-10-14 00:34:08,402 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-10-14 00:34:09,967 [INFO] Gauge MDSC1: no flooding 37.09
-2026-10-14 00:34:10,285 [INFO] Gauge OBBC1: no flooding 2.09
-2026-10-14 00:34:10,369 [INFO] Gauge HPIC1: no flooding 0.59
-2026-10-14 00:34:10,962 [INFO] Gauge POHC1: no flooding 1.03
-2026-10-14 00:34:11,159 [INFO] Gauge TRTC1: no flooding 2.53
-2026-10-14 00:34:11,276 [INFO] Gauge UTHC1: no flooding 4.87
-2026-10-14 00:34:11,394 [INFO] Gauge FARC1: no flooding 3.9
-2026-10-14 00:34:11,583 [INFO] Gauge TRRN2: no flooding 4.11
-2026-10-14 00:34:11,813 [INFO] Gauge WOOC1: no flooding 9.7
-2026-10-14 00:34:12,108 [INFO] Gauge CEMC1: no flooding 2.19
-2026-10-14 00:34:12,279 [INFO] Gauge GRDN2: no flooding 9.47
-2026-10-14 00:34:12,511 [INFO] Gauge CLEC1: no flooding 2.09
-2026-10-14 00:34:12,694 [INFO] Gauge EWBC1: no flooding 3.08
-2026-10-14 00:34:12,891 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-14 00:34:12,893 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=9
+2026-10-14 05:29:03,534 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-14 05:29:04,101 [INFO] NWS CA: 19 active alerts
+2026-10-14 05:29:04,242 [INFO] NWS NV: 1 active alerts
+2026-10-14 05:29:04,243 [INFO]   not Sierra: Red Flag Warning — Ventura County Beaches; Ventura County Inland Coast; Central Ventura County Valleys; Malibu Coast; Calabasas and Agoura 
+2026-10-14 05:29:04,243 [INFO]   not Sierra: Red Flag Warning — Western Santa Monica Mountains Recreational Area; Eastern Santa Monica Mountains Recreational Area; Santa Susana Mountai
+2026-10-14 05:29:04,243 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-14 05:29:04,870 [INFO] CAL FIRE: 2 active Sierra incidents
+2026-10-14 05:29:05,158 [INFO] NIFC: 1 Nevada fires in the Sierra box
+2026-10-14 05:29:05,581 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-14 05:29:07,937 [INFO] Gauge MDSC1: no flooding 37.07
+2026-10-14 05:29:08,208 [INFO] Gauge OBBC1: no flooding 2.11
+2026-10-14 05:29:08,470 [INFO] Gauge HPIC1: no flooding 0.6
+2026-10-14 05:29:08,767 [INFO] Gauge POHC1: no flooding 0.98
+2026-10-14 05:29:09,192 [INFO] Gauge TRTC1: no flooding 2.54
+2026-10-14 05:29:09,638 [INFO] Gauge UTHC1: no flooding 5.2
+2026-10-14 05:29:09,926 [INFO] Gauge FARC1: no flooding 3.9
+2026-10-14 05:29:10,112 [INFO] Gauge TRRN2: no flooding 4.21
+2026-10-14 05:29:10,289 [INFO] Gauge WOOC1: no flooding 9.69
+2026-10-14 05:29:10,620 [INFO] Gauge CEMC1: no flooding 2.19
+2026-10-14 05:29:10,888 [INFO] Gauge GRDN2: no flooding 9.48
+2026-10-14 05:29:11,141 [INFO] Gauge CLEC1: no flooding 2.09
+2026-10-14 05:29:11,357 [INFO] Gauge EWBC1: no flooding 3.08
+2026-10-14 05:29:15,470 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-14 05:29:15,471 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=9
