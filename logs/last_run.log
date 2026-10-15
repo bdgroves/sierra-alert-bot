@@ -1,35 +1,37 @@
-2026-10-15 19:21:15,017 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-15 19:21:15,536 [INFO] NWS CA: 31 active alerts
-2026-10-15 19:21:15,681 [INFO] NWS NV: 3 active alerts
-2026-10-15 19:21:15,682 [INFO]   not Sierra: Red Flag Warning — North Bay Interior Mountains
-2026-10-15 19:21:15,682 [INFO]   not Sierra: Red Flag Warning — Cuyama Valley; San Luis Obispo County Mountains; Santa Barbara County Interior Mountains
-2026-10-15 19:21:15,682 [INFO]   not Sierra: Red Flag Warning — Western Santa Monica Mountains Recreational Area; Eastern Santa Monica Mountains Recreational Area; Santa Susana Mountai
-2026-10-15 19:21:15,682 [INFO]   not Sierra: Red Flag Warning — Santa Clarita Valley; Ventura County Beaches; Ventura County Inland Coast; Central Ventura County Valleys; Malibu Coast;
-2026-10-15 19:21:15,682 [INFO]   not Sierra: High Wind Warning — Western Santa Monica Mountains Recreational Area; Santa Susana Mountains; Interstate 5 Corridor; Western San Gabriel Mou
-2026-10-15 19:21:15,682 [INFO]   not Sierra: Red Flag Warning — Northern Lake Including Gravelly Valley; Eastern Lake Including Clearlake and Middletown
-2026-10-15 19:21:15,682 [INFO]   not Sierra: High Wind Warning — Riverside County Mountains
-2026-10-15 19:21:15,682 [INFO]   not Sierra: High Wind Warning — San Diego County Inland Valleys
-2026-10-15 19:21:15,682 [INFO]   not Sierra: High Wind Warning — San Bernardino and Riverside County Valleys-The Inland Empire
-2026-10-15 19:21:15,683 [INFO]   not Sierra: High Wind Warning — San Diego County Mountains
-2026-10-15 19:21:15,683 [INFO]   not Sierra: High Wind Warning — Santa Ana Mountains and Foothills
-2026-10-15 19:21:15,683 [INFO]   not Sierra: High Wind Warning — San Gorgonio Pass Near Banning
-2026-10-15 19:21:15,683 [INFO]   not Sierra: High Wind Warning — San Bernardino County Mountains
-2026-10-15 19:21:15,683 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-10-15 19:21:16,450 [INFO] CAL FIRE: 1 active Sierra incidents
-2026-10-15 19:21:16,654 [INFO] NIFC: 0 Nevada fires in the Sierra box
-2026-10-15 19:21:16,982 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-10-15 19:21:18,540 [INFO] Gauge MDSC1: no flooding 37.01
-2026-10-15 19:21:18,743 [INFO] Gauge OBBC1: no flooding 4.57
-2026-10-15 19:21:18,977 [INFO] Gauge HPIC1: no flooding 0.58
-2026-10-15 19:21:19,233 [INFO] Gauge POHC1: no flooding 0.96
-2026-10-15 19:21:19,455 [INFO] Gauge TRTC1: no flooding 2.56
-2026-10-15 19:21:19,591 [INFO] Gauge UTHC1: no flooding 5.01
-2026-10-15 19:21:19,737 [INFO] Gauge FARC1: no flooding 3.95
-2026-10-15 19:21:19,868 [INFO] Gauge TRRN2: no flooding 4.23
-2026-10-15 19:21:20,037 [INFO] Gauge WOOC1: no flooding 9.65
-2026-10-15 19:21:20,164 [INFO] Gauge CEMC1: no flooding 2.2
-2026-10-15 19:21:20,440 [INFO] Gauge GRDN2: no flooding 9.47
-2026-10-15 19:21:20,572 [INFO] Gauge CLEC1: no flooding 2.1
-2026-10-15 19:21:20,918 [INFO] Gauge EWBC1: no flooding 3.03
-2026-10-15 19:21:21,053 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-15 19:21:21,055 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=11
+2026-10-15 22:38:42,650 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-15 22:38:43,066 [INFO] NWS CA: 30 active alerts
+2026-10-15 22:38:43,160 [INFO] NWS NV: 3 active alerts
+2026-10-15 22:38:43,161 [INFO]   not Sierra: Red Flag Warning — Northern Lake Including Gravelly Valley; Eastern Lake Including Clearlake and Middletown; Southern Lake Including Cobb a
+2026-10-15 22:38:43,161 [INFO]   not Sierra: High Wind Warning — San Diego County Inland Valleys
+2026-10-15 22:38:43,161 [INFO]   not Sierra: High Wind Warning — San Bernardino County Mountains
+2026-10-15 22:38:43,161 [INFO]   not Sierra: High Wind Warning — Santa Ana Mountains and Foothills
+2026-10-15 22:38:43,161 [INFO]   not Sierra: High Wind Warning — San Bernardino and Riverside County Valleys-The Inland Empire
+2026-10-15 22:38:43,161 [INFO]   not Sierra: High Wind Warning — San Gorgonio Pass Near Banning
+2026-10-15 22:38:43,161 [INFO]   not Sierra: High Wind Warning — San Diego County Mountains
+2026-10-15 22:38:43,161 [INFO]   not Sierra: High Wind Warning — Riverside County Mountains
+2026-10-15 22:38:43,161 [INFO]   not Sierra: Red Flag Warning — Lake Casitas; Ojai Valley
+2026-10-15 22:38:43,161 [INFO]   not Sierra: Red Flag Warning — Santa Lucia Mountains
+2026-10-15 22:38:43,161 [INFO]   not Sierra: Red Flag Warning — Cuyama Valley; San Luis Obispo County Mountains; Santa Barbara County Interior Mountains
+2026-10-15 22:38:43,161 [INFO]   not Sierra: Red Flag Warning — Western Santa Monica Mountains Recreational Area; Eastern Santa Monica Mountains Recreational Area; Santa Susana Mountai
+2026-10-15 22:38:43,162 [INFO]   not Sierra: Red Flag Warning — Santa Clarita Valley; Ventura County Beaches; Ventura County Inland Coast; Central Ventura County Valleys; Malibu Coast;
+2026-10-15 22:38:43,162 [INFO]   not Sierra: Red Flag Warning — North Bay Interior Mountains
+2026-10-15 22:38:43,162 [INFO]   not Sierra: High Wind Warning — Western Santa Monica Mountains Recreational Area; Santa Susana Mountains; Interstate 5 Corridor; Western San Gabriel Mou
+2026-10-15 22:38:43,162 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-15 22:38:43,689 [INFO] CAL FIRE: 1 active Sierra incidents
+2026-10-15 22:38:43,943 [INFO] NIFC: 0 Nevada fires in the Sierra box
+2026-10-15 22:38:44,618 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-15 22:38:47,478 [INFO] Gauge MDSC1: no flooding 37.02
+2026-10-15 22:38:47,781 [INFO] Gauge OBBC1: no flooding 4.61
+2026-10-15 22:38:48,045 [INFO] Gauge HPIC1: no flooding 0.58
+2026-10-15 22:38:48,277 [INFO] Gauge POHC1: no flooding 0.96
+2026-10-15 22:38:48,611 [INFO] Gauge TRTC1: no flooding 2.56
+2026-10-15 22:38:48,951 [INFO] Gauge UTHC1: no flooding 5.0
+2026-10-15 22:38:49,269 [INFO] Gauge FARC1: no flooding 3.95
+2026-10-15 22:38:49,624 [INFO] Gauge TRRN2: no flooding 4.24
+2026-10-15 22:38:50,041 [INFO] Gauge WOOC1: no flooding 9.65
+2026-10-15 22:38:50,309 [INFO] Gauge CEMC1: no flooding 2.19
+2026-10-15 22:38:50,543 [INFO] Gauge GRDN2: no flooding 9.48
+2026-10-15 22:38:50,833 [INFO] Gauge CLEC1: no flooding 2.1
+2026-10-15 22:38:51,115 [INFO] Gauge EWBC1: no flooding 3.11
+2026-10-15 22:38:52,733 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-15 22:38:52,734 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=11
