@@ -1,35 +1,35 @@
-2026-10-14 22:41:24,018 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-14 22:41:24,533 [INFO] NWS CA: 30 active alerts
-2026-10-14 22:41:24,654 [INFO] NWS NV: 2 active alerts
-2026-10-14 22:41:24,655 [INFO]   not Sierra: Red Flag Warning — Cuyama Valley; San Luis Obispo County Mountains; Santa Barbara County Interior Mountains
-2026-10-14 22:41:24,656 [INFO]   not Sierra: Red Flag Warning — Western Santa Monica Mountains Recreational Area; Eastern Santa Monica Mountains Recreational Area; Santa Susana Mountai
-2026-10-14 22:41:24,656 [INFO]   not Sierra: Red Flag Warning — Santa Clarita Valley; Ventura County Beaches; Ventura County Inland Coast; Central Ventura County Valleys; Malibu Coast;
-2026-10-14 22:41:24,656 [INFO]   not Sierra: Red Flag Warning — Northern Lake Including Gravelly Valley; Eastern Lake Including Clearlake and Middletown
-2026-10-14 22:41:24,656 [INFO]   not Sierra: High Wind Warning — Western Santa Monica Mountains Recreational Area; Santa Susana Mountains; Interstate 5 Corridor; Western San Gabriel Mou
-2026-10-14 22:41:24,656 [INFO]   not Sierra: High Wind Warning — Santa Ana Mountains and Foothills
-2026-10-14 22:41:24,656 [INFO]   not Sierra: High Wind Warning — Riverside County Mountains
-2026-10-14 22:41:24,656 [INFO]   not Sierra: High Wind Warning — San Diego County Inland Valleys
-2026-10-14 22:41:24,656 [INFO]   not Sierra: High Wind Warning — San Bernardino and Riverside County Valleys-The Inland Empire
-2026-10-14 22:41:24,656 [INFO]   not Sierra: High Wind Warning — San Diego County Mountains
-2026-10-14 22:41:24,656 [INFO]   not Sierra: High Wind Warning — San Gorgonio Pass Near Banning
-2026-10-14 22:41:24,656 [INFO]   not Sierra: High Wind Warning — San Bernardino County Mountains
-2026-10-14 22:41:24,656 [INFO]   not Sierra: Red Flag Warning — Tehachapi Area; Fort Tejon
-2026-10-14 22:41:24,657 [INFO] NWS: 2 Sierra warning products in 1 hazards
-2026-10-14 22:41:25,346 [INFO] CAL FIRE: 2 active Sierra incidents
-2026-10-14 22:41:25,532 [INFO] NIFC: 1 Nevada fires in the Sierra box
-2026-10-14 22:41:25,976 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-10-14 22:41:28,069 [INFO] Gauge MDSC1: no flooding 37.04
-2026-10-14 22:41:28,288 [INFO] Gauge OBBC1: no flooding 3.25
-2026-10-14 22:41:28,576 [INFO] Gauge HPIC1: no flooding 0.59
-2026-10-14 22:41:28,888 [INFO] Gauge POHC1: no flooding 0.97
-2026-10-14 22:41:29,063 [INFO] Gauge TRTC1: no flooding 2.53
-2026-10-14 22:41:29,259 [INFO] Gauge UTHC1: no flooding 5.11
-2026-10-14 22:41:29,548 [INFO] Gauge FARC1: no flooding 3.9
-2026-10-14 22:41:29,754 [INFO] Gauge TRRN2: no flooding 4.16
-2026-10-14 22:41:30,139 [INFO] Gauge WOOC1: no flooding 9.67
-2026-10-14 22:41:30,352 [INFO] Gauge CEMC1: no flooding 2.19
-2026-10-14 22:41:30,633 [INFO] Gauge GRDN2: no flooding 9.48
-2026-10-14 22:41:30,827 [INFO] Gauge CLEC1: no flooding 2.1
-2026-10-14 22:41:31,026 [INFO] Gauge EWBC1: no flooding 3.04
-2026-10-14 22:41:31,240 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-14 22:41:31,242 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=11
+2026-10-15 00:57:40,264 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-15 00:57:40,793 [INFO] NWS CA: 29 active alerts
+2026-10-15 00:57:40,921 [INFO] NWS NV: 2 active alerts
+2026-10-15 00:57:40,922 [INFO]   not Sierra: Red Flag Warning — Santa Clarita Valley; Ventura County Beaches; Ventura County Inland Coast; Central Ventura County Valleys; Malibu Coast;
+2026-10-15 00:57:40,922 [INFO]   not Sierra: Red Flag Warning — Cuyama Valley; San Luis Obispo County Mountains; Santa Barbara County Interior Mountains
+2026-10-15 00:57:40,922 [INFO]   not Sierra: Red Flag Warning — Western Santa Monica Mountains Recreational Area; Eastern Santa Monica Mountains Recreational Area; Santa Susana Mountai
+2026-10-15 00:57:40,923 [INFO]   not Sierra: Red Flag Warning — Northern Lake Including Gravelly Valley; Eastern Lake Including Clearlake and Middletown
+2026-10-15 00:57:40,923 [INFO]   not Sierra: High Wind Warning — Western Santa Monica Mountains Recreational Area; Santa Susana Mountains; Interstate 5 Corridor; Western San Gabriel Mou
+2026-10-15 00:57:40,923 [INFO]   not Sierra: High Wind Warning — San Gorgonio Pass Near Banning
+2026-10-15 00:57:40,923 [INFO]   not Sierra: High Wind Warning — Riverside County Mountains
+2026-10-15 00:57:40,923 [INFO]   not Sierra: High Wind Warning — San Diego County Mountains
+2026-10-15 00:57:40,923 [INFO]   not Sierra: High Wind Warning — San Diego County Inland Valleys
+2026-10-15 00:57:40,923 [INFO]   not Sierra: High Wind Warning — San Bernardino and Riverside County Valleys-The Inland Empire
+2026-10-15 00:57:40,923 [INFO]   not Sierra: High Wind Warning — Santa Ana Mountains and Foothills
+2026-10-15 00:57:40,923 [INFO]   not Sierra: High Wind Warning — San Bernardino County Mountains
+2026-10-15 00:57:40,924 [INFO]   not Sierra: Red Flag Warning — Tehachapi Area; Fort Tejon
+2026-10-15 00:57:40,924 [INFO] NWS: 2 Sierra warning products in 1 hazards
+2026-10-15 00:57:41,145 [INFO] CAL FIRE: 2 active Sierra incidents
+2026-10-15 00:57:41,361 [INFO] NIFC: 1 Nevada fires in the Sierra box
+2026-10-15 00:57:41,982 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-15 00:57:43,417 [INFO] Gauge MDSC1: no flooding 37.03
+2026-10-15 00:57:43,649 [INFO] Gauge OBBC1: no flooding 3.26
+2026-10-15 00:57:43,764 [INFO] Gauge HPIC1: no flooding 0.59
+2026-10-15 00:57:43,917 [INFO] Gauge POHC1: no flooding 0.97
+2026-10-15 00:57:44,055 [INFO] Gauge TRTC1: no flooding 2.53
+2026-10-15 00:57:44,092 [INFO] Gauge UTHC1: no flooding 5.09
+2026-10-15 00:57:44,126 [INFO] Gauge FARC1: no flooding 3.9
+2026-10-15 00:57:44,265 [INFO] Gauge TRRN2: no flooding 4.16
+2026-10-15 00:57:44,320 [INFO] Gauge WOOC1: no flooding 9.67
+2026-10-15 00:57:44,602 [INFO] Gauge CEMC1: no flooding 2.19
+2026-10-15 00:57:44,739 [INFO] Gauge GRDN2: no flooding 9.48
+2026-10-15 00:57:44,911 [INFO] Gauge CLEC1: no flooding 2.09
+2026-10-15 00:57:45,129 [INFO] Gauge EWBC1: no flooding 3.03
+2026-10-15 00:57:45,500 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-15 00:57:45,502 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=11
