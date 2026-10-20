@@ -1,22 +1,22 @@
-2026-10-20 04:36:51,936 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-20 04:36:52,404 [INFO] NWS CA: 2 active alerts
-2026-10-20 04:36:52,505 [INFO] NWS NV: 0 active alerts
-2026-10-20 04:36:52,506 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-10-20 04:36:52,851 [INFO] CAL FIRE: 1 active Sierra incidents
-2026-10-20 04:36:53,304 [INFO] NIFC: 0 Nevada fires in the Sierra box
-2026-10-20 04:36:53,722 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-10-20 04:36:57,244 [INFO] Gauge MDSC1: no flooding 39.96
-2026-10-20 04:36:57,650 [INFO] Gauge OBBC1: no flooding 2.51
-2026-10-20 04:36:57,945 [INFO] Gauge HPIC1: no flooding 0.57
-2026-10-20 04:36:58,268 [INFO] Gauge POHC1: no flooding 0.97
-2026-10-20 04:36:58,566 [INFO] Gauge TRTC1: no flooding 2.56
-2026-10-20 04:36:58,905 [INFO] Gauge UTHC1: no flooding 5.09
-2026-10-20 04:36:59,245 [INFO] Gauge FARC1: no flooding 3.95
-2026-10-20 04:36:59,694 [INFO] Gauge TRRN2: no flooding 4.3
-2026-10-20 04:37:00,018 [INFO] Gauge WOOC1: no flooding 9.58
-2026-10-20 04:37:00,366 [INFO] Gauge CEMC1: no flooding 2.17
-2026-10-20 04:37:00,746 [INFO] Gauge GRDN2: no flooding 9.47
-2026-10-20 04:37:01,130 [INFO] Gauge CLEC1: no flooding 2.05
-2026-10-20 04:37:01,429 [INFO] Gauge EWBC1: no flooding 3.11
-2026-10-20 04:37:11,958 [ERROR] USGS fetch failed: 502 Server Error: Bad Gateway for url: https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude=3.5&orderby=time&starttime=2026-10-19T04%3A37%3A01&minlatitude=36.0&maxlatitude=41.5&minlongitude=-121.0&maxlongitude=-117.5
-2026-10-20 04:37:11,960 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=11
+2026-10-20 09:40:12,177 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-20 09:40:12,680 [INFO] NWS CA: 2 active alerts
+2026-10-20 09:40:12,815 [INFO] NWS NV: 0 active alerts
+2026-10-20 09:40:12,816 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-20 09:40:13,053 [INFO] CAL FIRE: 0 active Sierra incidents
+2026-10-20 09:40:13,257 [INFO] NIFC: 0 Nevada fires in the Sierra box
+2026-10-20 09:40:13,545 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-20 09:40:15,546 [INFO] Gauge MDSC1: no flooding 39.53
+2026-10-20 09:40:15,702 [INFO] Gauge OBBC1: no flooding 2.5
+2026-10-20 09:40:15,845 [INFO] Gauge HPIC1: no flooding 0.56
+2026-10-20 09:40:16,075 [INFO] Gauge POHC1: no flooding 0.97
+2026-10-20 09:40:16,308 [INFO] Gauge TRTC1: no flooding 2.56
+2026-10-20 09:40:16,416 [INFO] Gauge UTHC1: no flooding 5.06
+2026-10-20 09:40:16,557 [INFO] Gauge FARC1: no flooding 4.04
+2026-10-20 09:40:16,760 [INFO] Gauge TRRN2: no flooding 4.31
+2026-10-20 09:40:16,901 [INFO] Gauge WOOC1: no flooding 9.58
+2026-10-20 09:40:17,019 [INFO] Gauge CEMC1: no flooding 2.17
+2026-10-20 09:40:17,320 [INFO] Gauge GRDN2: no flooding 9.47
+2026-10-20 09:40:17,540 [INFO] Gauge CLEC1: no flooding 2.05
+2026-10-20 09:40:17,674 [INFO] Gauge EWBC1: no flooding 3.11
+2026-10-20 09:40:23,750 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-20 09:40:23,752 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=11
