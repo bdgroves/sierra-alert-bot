@@ -1,28 +1,23 @@
-2026-10-22 11:38:55,486 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-22 11:38:55,934 [INFO] NWS CA: 11 active alerts
-2026-10-22 11:38:56,020 [INFO] NWS NV: 0 active alerts
-2026-10-22 11:38:56,022 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-10-22 11:38:56,456 [INFO] CAL FIRE: 0 active Sierra incidents
-2026-10-22 11:38:56,727 [INFO] NIFC: 0 Nevada fires in the Sierra box
-2026-10-22 11:38:57,002 [INFO] [standby] would post lsr:HNX:2026-10-22T06:09:00Z:DEBRIS FLOW:6 WNW Squaw Valley
-🌊 Spotter report: Debris Flow
-6 WNW Squaw Valley, Fresno Co. CA · Wed 11:09 PM PDT
-BIG ROCKS IN THE MIDDLE OF THE ROAD WAY ALONG WITH MEDIUM SIZED ROCKS AND OTHER SMALL ONES IN THE LANES. INCIDENT OCCURRED AT INTERSECTION O
-#SierraNevada
-
-2026-10-22 11:38:57,002 [INFO] LSR: 1 significant Sierra reports in 12 h
-2026-10-22 11:38:58,486 [INFO] Gauge MDSC1: no flooding 37.59
-2026-10-22 11:38:58,630 [INFO] Gauge OBBC1: no flooding 3.29
-2026-10-22 11:38:58,736 [INFO] Gauge HPIC1: no flooding 0.62
-2026-10-22 11:38:58,993 [INFO] Gauge POHC1: no flooding 0.99
-2026-10-22 11:38:59,222 [INFO] Gauge TRTC1: no flooding 2.57
-2026-10-22 11:38:59,312 [INFO] Gauge UTHC1: no flooding 4.98
-2026-10-22 11:38:59,543 [INFO] Gauge FARC1: no flooding 4.01
-2026-10-22 11:38:59,685 [INFO] Gauge TRRN2: no flooding 4.36
-2026-10-22 11:38:59,901 [INFO] Gauge WOOC1: no flooding 9.68
-2026-10-22 11:38:59,988 [INFO] Gauge CEMC1: no flooding 2.28
-2026-10-22 11:39:00,264 [INFO] Gauge GRDN2: no flooding 9.51
-2026-10-22 11:39:00,525 [INFO] Gauge CLEC1: no flooding 2.27
-2026-10-22 11:39:00,707 [INFO] Gauge EWBC1: no flooding 3.02
-2026-10-22 11:39:01,104 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-22 11:39:01,106 [INFO] Done. posted=1 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=12
+2026-10-22 16:04:27,641 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-22 16:04:28,228 [INFO] NWS CA: 21 active alerts
+2026-10-22 16:04:28,425 [INFO] NWS NV: 0 active alerts
+2026-10-22 16:04:28,426 [INFO]   not Sierra: Flash Flood Warning — Santa Barbara, CA
+2026-10-22 16:04:28,426 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-22 16:04:28,772 [INFO] CAL FIRE: 0 active Sierra incidents
+2026-10-22 16:04:29,001 [INFO] NIFC: 0 Nevada fires in the Sierra box
+2026-10-22 16:04:29,449 [INFO] LSR: 1 significant Sierra reports in 12 h
+2026-10-22 16:04:30,988 [INFO] Gauge MDSC1: no flooding 37.94
+2026-10-22 16:04:31,209 [INFO] Gauge OBBC1: no flooding 4.1
+2026-10-22 16:04:31,432 [INFO] Gauge HPIC1: no flooding 0.63
+2026-10-22 16:04:31,940 [INFO] Gauge POHC1: no flooding 1.0
+2026-10-22 16:04:32,335 [INFO] Gauge TRTC1: no flooding 2.56
+2026-10-22 16:04:33,208 [INFO] Gauge UTHC1: no flooding 5.0
+2026-10-22 16:04:34,026 [INFO] Gauge FARC1: no flooding 4.0
+2026-10-22 16:04:34,558 [INFO] Gauge TRRN2: no flooding 4.36
+2026-10-22 16:04:34,915 [INFO] Gauge WOOC1: no flooding 9.66
+2026-10-22 16:04:35,150 [INFO] Gauge CEMC1: no flooding 2.3
+2026-10-22 16:04:35,414 [INFO] Gauge GRDN2: no flooding 9.53
+2026-10-22 16:04:35,647 [INFO] Gauge CLEC1: no flooding 2.25
+2026-10-22 16:04:36,035 [INFO] Gauge EWBC1: no flooding 3.02
+2026-10-22 16:04:36,438 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-22 16:04:36,454 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=12
