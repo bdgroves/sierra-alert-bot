@@ -1,23 +1,23 @@
-2026-10-22 16:04:27,641 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-22 16:04:28,228 [INFO] NWS CA: 21 active alerts
-2026-10-22 16:04:28,425 [INFO] NWS NV: 0 active alerts
-2026-10-22 16:04:28,426 [INFO]   not Sierra: Flash Flood Warning — Santa Barbara, CA
-2026-10-22 16:04:28,426 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-10-22 16:04:28,772 [INFO] CAL FIRE: 0 active Sierra incidents
-2026-10-22 16:04:29,001 [INFO] NIFC: 0 Nevada fires in the Sierra box
-2026-10-22 16:04:29,449 [INFO] LSR: 1 significant Sierra reports in 12 h
-2026-10-22 16:04:30,988 [INFO] Gauge MDSC1: no flooding 37.94
-2026-10-22 16:04:31,209 [INFO] Gauge OBBC1: no flooding 4.1
-2026-10-22 16:04:31,432 [INFO] Gauge HPIC1: no flooding 0.63
-2026-10-22 16:04:31,940 [INFO] Gauge POHC1: no flooding 1.0
-2026-10-22 16:04:32,335 [INFO] Gauge TRTC1: no flooding 2.56
-2026-10-22 16:04:33,208 [INFO] Gauge UTHC1: no flooding 5.0
-2026-10-22 16:04:34,026 [INFO] Gauge FARC1: no flooding 4.0
-2026-10-22 16:04:34,558 [INFO] Gauge TRRN2: no flooding 4.36
-2026-10-22 16:04:34,915 [INFO] Gauge WOOC1: no flooding 9.66
-2026-10-22 16:04:35,150 [INFO] Gauge CEMC1: no flooding 2.3
-2026-10-22 16:04:35,414 [INFO] Gauge GRDN2: no flooding 9.53
-2026-10-22 16:04:35,647 [INFO] Gauge CLEC1: no flooding 2.25
-2026-10-22 16:04:36,035 [INFO] Gauge EWBC1: no flooding 3.02
-2026-10-22 16:04:36,438 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-22 16:04:36,454 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=12
+2026-10-22 20:11:27,714 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-22 20:11:28,491 [INFO] NWS CA: 16 active alerts
+2026-10-22 20:11:28,702 [INFO] NWS NV: 2 active alerts
+2026-10-22 20:11:28,703 [INFO]   not Sierra: Severe Thunderstorm Warning — Clark, NV; Lincoln, NV
+2026-10-22 20:11:28,703 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-22 20:11:29,381 [INFO] CAL FIRE: 0 active Sierra incidents
+2026-10-22 20:11:29,760 [INFO] NIFC: 0 Nevada fires in the Sierra box
+2026-10-22 20:11:30,301 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-22 20:11:31,806 [INFO] Gauge MDSC1: no flooding 38.07
+2026-10-22 20:11:31,990 [INFO] Gauge OBBC1: no flooding 4.61
+2026-10-22 20:11:32,148 [INFO] Gauge HPIC1: no flooding 0.66
+2026-10-22 20:11:32,412 [INFO] Gauge POHC1: no flooding 1.0
+2026-10-22 20:11:32,612 [INFO] Gauge TRTC1: no flooding 2.56
+2026-10-22 20:11:32,661 [INFO] Gauge UTHC1: no flooding 4.98
+2026-10-22 20:11:32,873 [INFO] Gauge FARC1: no flooding 3.97
+2026-10-22 20:11:32,956 [INFO] Gauge TRRN2: no flooding 4.37
+2026-10-22 20:11:33,209 [INFO] Gauge WOOC1: no flooding 9.64
+2026-10-22 20:11:33,357 [INFO] Gauge CEMC1: no flooding 2.31
+2026-10-22 20:11:33,405 [INFO] Gauge GRDN2: no flooding 9.55
+2026-10-22 20:11:33,686 [INFO] Gauge CLEC1: no flooding 2.22
+2026-10-22 20:11:33,982 [INFO] Gauge EWBC1: no flooding 3.02
+2026-10-22 20:11:34,218 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-22 20:11:34,219 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=12
