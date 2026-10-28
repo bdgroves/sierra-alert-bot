@@ -1,22 +1,22 @@
-2026-10-28 08:16:50,883 [INFO] === Sierra Nevada Alert Bot ===
-2026-10-28 08:16:51,389 [INFO] NWS CA: 8 active alerts
-2026-10-28 08:16:51,509 [INFO] NWS NV: 0 active alerts
-2026-10-28 08:16:51,510 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-10-28 08:16:52,189 [INFO] CAL FIRE: 0 active Sierra incidents
-2026-10-28 08:16:52,341 [INFO] NIFC: 0 Nevada fires in the Sierra box
-2026-10-28 08:16:52,698 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-10-28 08:16:53,899 [INFO] Gauge MDSC1: no flooding 37.2
-2026-10-28 08:16:54,112 [INFO] Gauge OBBC1: no flooding 2.1
-2026-10-28 08:16:54,278 [INFO] Gauge HPIC1: no flooding 0.73
-2026-10-28 08:16:54,482 [INFO] Gauge POHC1: no flooding 1.04
-2026-10-28 08:16:54,757 [INFO] Gauge TRTC1: no flooding 2.54
-2026-10-28 08:16:54,948 [INFO] Gauge UTHC1: no flooding 4.83
-2026-10-28 08:16:55,226 [INFO] Gauge FARC1: no flooding 3.96
-2026-10-28 08:16:55,374 [INFO] Gauge TRRN2: no flooding 4.32
-2026-10-28 08:16:55,431 [INFO] Gauge WOOC1: no flooding 9.59
-2026-10-28 08:16:55,673 [INFO] Gauge CEMC1: no flooding 2.19
-2026-10-28 08:16:55,979 [INFO] Gauge GRDN2: no flooding 9.48
-2026-10-28 08:16:56,297 [INFO] Gauge CLEC1: no flooding 2.05
-2026-10-28 08:16:56,347 [INFO] Gauge EWBC1: no flooding 3.01
-2026-10-28 08:16:56,698 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-10-28 08:16:56,699 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=12
+2026-10-28 15:13:40,435 [INFO] === Sierra Nevada Alert Bot ===
+2026-10-28 15:13:41,596 [INFO] NWS CA: 8 active alerts
+2026-10-28 15:13:41,871 [INFO] NWS NV: 0 active alerts
+2026-10-28 15:13:41,872 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-10-28 15:13:43,947 [INFO] CAL FIRE: 0 active Sierra incidents
+2026-10-28 15:13:44,368 [INFO] NIFC: 0 Nevada fires in the Sierra box
+2026-10-28 15:13:45,401 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-10-28 15:13:50,734 [INFO] Gauge MDSC1: no flooding 37.23
+2026-10-28 15:13:51,538 [INFO] Gauge OBBC1: no flooding 2.25
+2026-10-28 15:13:51,981 [INFO] Gauge HPIC1: no flooding 0.73
+2026-10-28 15:13:52,665 [INFO] Gauge POHC1: no flooding 1.03
+2026-10-28 15:13:53,035 [INFO] Gauge TRTC1: no flooding 2.55
+2026-10-28 15:13:53,528 [INFO] Gauge UTHC1: no flooding 4.94
+2026-10-28 15:13:54,102 [INFO] Gauge FARC1: no flooding 3.95
+2026-10-28 15:13:54,672 [INFO] Gauge TRRN2: no flooding 4.32
+2026-10-28 15:13:55,302 [INFO] Gauge WOOC1: no flooding 9.59
+2026-10-28 15:13:55,792 [INFO] Gauge CEMC1: no flooding 2.2
+2026-10-28 15:13:56,399 [INFO] Gauge GRDN2: no flooding 9.48
+2026-10-28 15:13:56,967 [INFO] Gauge CLEC1: no flooding 2.04
+2026-10-28 15:13:57,450 [INFO] Gauge EWBC1: no flooding 3.01
+2026-10-28 15:13:58,184 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-10-28 15:13:58,186 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=12
