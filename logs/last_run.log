@@ -1,29 +1,29 @@
-2026-11-01 13:51:40,239 [INFO] === Sierra Nevada Alert Bot ===
-2026-11-01 13:51:40,753 [INFO] NWS CA: 10 active alerts
-2026-11-01 13:51:40,885 [INFO] NWS NV: 3 active alerts
-2026-11-01 13:51:40,886 [INFO]   not Sierra: Winter Storm Warning — Ruby Mountains and East Humboldt Range
-2026-11-01 13:51:40,886 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-11-01 13:51:41,507 [INFO] CAL FIRE: 0 active Sierra incidents
-2026-11-01 13:51:41,885 [INFO] NIFC: 0 Nevada fires in the Sierra box
-2026-11-01 13:51:42,394 [INFO] [standby] would post lsr:HNX:2026-11-01T12:17:00Z:DEBRIS FLOW:7 N Orange Cove
+2026-11-01 18:51:40,013 [INFO] === Sierra Nevada Alert Bot ===
+2026-11-01 18:51:40,623 [INFO] NWS CA: 8 active alerts
+2026-11-01 18:51:40,723 [INFO] NWS NV: 2 active alerts
+2026-11-01 18:51:40,725 [INFO]   not Sierra: Winter Storm Warning — Ruby Mountains and East Humboldt Range
+2026-11-01 18:51:40,725 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-11-01 18:51:42,133 [INFO] CAL FIRE: 0 active Sierra incidents
+2026-11-01 18:51:42,354 [INFO] NIFC: 0 Nevada fires in the Sierra box
+2026-11-01 18:51:43,202 [INFO] [standby] would post lsr:HNX:2026-11-01T14:27:00Z:DEBRIS FLOW:4 E Lemon Cove
 🌊 Spotter report: Debris Flow
-7 N Orange Cove, Fresno Co. CA · Sun 4:17 AM PST
-California Highway Patrol reports "MUD 2-3 INCHES THICK" along westbound SR 180 one mile east of Cove Rd.
+4 E Lemon Cove, Tulare Co. CA · Sun 6:27 AM PST
+California Highway Patrol reports three large boulders in eastbound lane of CA State Route 198 at Horse Creek Campground.
 #SierraNevada
 
-2026-11-01 13:51:42,394 [INFO] LSR: 1 significant Sierra reports in 12 h
-2026-11-01 13:51:45,056 [INFO] Gauge MDSC1: no flooding 36.96
-2026-11-01 13:51:45,433 [INFO] Gauge OBBC1: no flooding 3.63
-2026-11-01 13:51:45,782 [INFO] Gauge HPIC1: no flooding 1.09
-2026-11-01 13:51:46,173 [INFO] Gauge POHC1: no flooding 1.28
-2026-11-01 13:51:46,427 [INFO] Gauge TRTC1: no flooding 2.56
-2026-11-01 13:51:46,664 [INFO] Gauge UTHC1: no flooding 5.3
-2026-11-01 13:51:47,102 [INFO] Gauge FARC1: no flooding 4.01
-2026-11-01 13:51:47,506 [INFO] Gauge TRRN2: no flooding 4.51
-2026-11-01 13:51:47,765 [INFO] Gauge WOOC1: no flooding 9.76
-2026-11-01 13:51:48,044 [INFO] Gauge CEMC1: no flooding 2.46
-2026-11-01 13:51:48,349 [INFO] Gauge GRDN2: no flooding 9.66
-2026-11-01 13:51:48,693 [INFO] Gauge CLEC1: no flooding 2.2
-2026-11-01 13:51:49,055 [INFO] Gauge EWBC1: no flooding 2.38
-2026-11-01 13:51:49,172 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-11-01 13:51:49,174 [INFO] Done. posted=1 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=13
+2026-11-01 18:51:43,202 [INFO] LSR: 2 significant Sierra reports in 12 h
+2026-11-01 18:51:44,584 [INFO] Gauge MDSC1: no flooding 36.97
+2026-11-01 18:51:44,724 [INFO] Gauge OBBC1: no flooding 3.39
+2026-11-01 18:51:44,980 [INFO] Gauge HPIC1: no flooding 1.11
+2026-11-01 18:51:45,262 [INFO] Gauge POHC1: no flooding 1.23
+2026-11-01 18:51:45,532 [INFO] Gauge TRTC1: no flooding 2.57
+2026-11-01 18:51:45,580 [INFO] Gauge UTHC1: no flooding 5.25
+2026-11-01 18:51:45,823 [INFO] Gauge FARC1: no flooding 4.0
+2026-11-01 18:51:46,096 [INFO] Gauge TRRN2: no flooding 4.48
+2026-11-01 18:51:46,333 [INFO] Gauge WOOC1: no flooding 9.74
+2026-11-01 18:51:46,477 [INFO] Gauge CEMC1: no flooding 2.4
+2026-11-01 18:51:46,757 [INFO] Gauge GRDN2: no flooding 9.67
+2026-11-01 18:51:46,806 [INFO] Gauge CLEC1: no flooding 2.23
+2026-11-01 18:51:46,998 [INFO] Gauge EWBC1: no flooding 2.37
+2026-11-01 18:51:47,212 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-11-01 18:51:47,213 [INFO] Done. posted=1 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=14
