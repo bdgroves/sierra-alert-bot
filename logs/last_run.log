@@ -1,31 +1,23 @@
-2026-11-12 10:11:05,904 [INFO] === Sierra Nevada Alert Bot ===
-2026-11-12 10:11:06,312 [INFO] NWS CA: 35 active alerts
-2026-11-12 10:11:06,470 [INFO] NWS NV: 7 active alerts
-2026-11-12 10:11:06,471 [INFO]   not Sierra: High Wind Warning — Central Siskiyou County
-2026-11-12 10:11:06,471 [INFO] NWS: 4 Sierra warning products in 1 hazards
-2026-11-12 10:11:06,471 [INFO] [standby] would post sierra:KREV.WS.W.0004.2026
-❄️ Winter Storm Warning
-Mono; Greater Lake Tahoe Area; Lassen Volcanic National Park +more
-Until Sat 4 PM PST
-Heavy wet snow. Snow accumulations of 1 to 2 feet above 7000 feet, up to 6 inches between 6000 and 7000 feet, and little to no…
-https://www.weather.gov/rev/
-#SierraNevada
-
-2026-11-12 10:11:06,875 [INFO] CAL FIRE: 0 active Sierra incidents
-2026-11-12 10:11:07,162 [INFO] NIFC: 0 Nevada fires in the Sierra box
-2026-11-12 10:11:07,460 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-11-12 10:11:09,087 [INFO] Gauge MDSC1: no flooding 36.64
-2026-11-12 10:11:09,346 [INFO] Gauge OBBC1: no flooding 2.36
-2026-11-12 10:11:09,505 [INFO] Gauge HPIC1: no flooding 1.02
-2026-11-12 10:11:09,684 [INFO] Gauge POHC1: no flooding 1.2
-2026-11-12 10:11:09,907 [INFO] Gauge TRTC1: no flooding 2.55
-2026-11-12 10:11:10,033 [INFO] Gauge UTHC1: no flooding 5.12
-2026-11-12 10:11:10,290 [INFO] Gauge FARC1: no flooding 4.02
-2026-11-12 10:11:10,516 [INFO] Gauge TRRN2: no flooding 4.5
-2026-11-12 10:11:10,807 [INFO] Gauge WOOC1: no flooding 9.63
-2026-11-12 10:11:10,939 [INFO] Gauge CEMC1: no flooding 2.23
-2026-11-12 10:11:11,172 [INFO] Gauge GRDN2: no flooding 9.53
-2026-11-12 10:11:11,388 [INFO] Gauge CLEC1: no flooding 2.09
-2026-11-12 10:11:11,491 [INFO] Gauge EWBC1: no flooding 2.43
-2026-11-12 10:11:11,919 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-11-12 10:11:11,920 [INFO] Done. posted=1 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=18
+2026-11-12 18:22:55,261 [INFO] === Sierra Nevada Alert Bot ===
+2026-11-12 18:22:55,915 [INFO] NWS CA: 41 active alerts
+2026-11-12 18:22:56,148 [INFO] NWS NV: 7 active alerts
+2026-11-12 18:22:56,149 [INFO]   not Sierra: High Wind Warning — Central Siskiyou County
+2026-11-12 18:22:56,149 [INFO] NWS: 4 Sierra warning products in 1 hazards
+2026-11-12 18:22:57,284 [INFO] CAL FIRE: 0 active Sierra incidents
+2026-11-12 18:22:57,509 [INFO] NIFC: 0 Nevada fires in the Sierra box
+2026-11-12 18:22:57,713 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-11-12 18:22:59,414 [INFO] Gauge MDSC1: no flooding 36.65
+2026-11-12 18:22:59,557 [INFO] Gauge OBBC1: no flooding 2.35
+2026-11-12 18:22:59,605 [INFO] Gauge HPIC1: no flooding 1.02
+2026-11-12 18:22:59,795 [INFO] Gauge POHC1: no flooding 1.2
+2026-11-12 18:22:59,911 [INFO] Gauge TRTC1: no flooding 2.54
+2026-11-12 18:23:00,114 [INFO] Gauge UTHC1: no flooding 5.12
+2026-11-12 18:23:00,284 [INFO] Gauge FARC1: no flooding 4.01
+2026-11-12 18:23:00,496 [INFO] Gauge TRRN2: no flooding 4.52
+2026-11-12 18:23:00,623 [INFO] Gauge WOOC1: no flooding 9.63
+2026-11-12 18:23:00,742 [INFO] Gauge CEMC1: no flooding 2.26
+2026-11-12 18:23:00,865 [INFO] Gauge GRDN2: no flooding 9.5
+2026-11-12 18:23:00,971 [INFO] Gauge CLEC1: no flooding 2.12
+2026-11-12 18:23:01,082 [INFO] Gauge EWBC1: no flooding 2.43
+2026-11-12 18:23:01,423 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-11-12 18:23:01,424 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=18
