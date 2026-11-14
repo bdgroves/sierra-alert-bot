@@ -1,22 +1,34 @@
-2026-11-14 01:41:07,380 [INFO] === Sierra Nevada Alert Bot ===
-2026-11-14 01:41:07,854 [INFO] NWS CA: 41 active alerts
-2026-11-14 01:41:08,094 [INFO] NWS NV: 6 active alerts
-2026-11-14 01:41:08,095 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-11-14 01:41:08,889 [INFO] CAL FIRE: 0 active Sierra incidents
-2026-11-14 01:41:09,037 [INFO] NIFC: 0 Nevada fires in the Sierra box
-2026-11-14 01:41:09,352 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-11-14 01:41:11,702 [INFO] Gauge MDSC1: no flooding 36.79
-2026-11-14 01:41:11,873 [INFO] Gauge OBBC1: no flooding 2.43
-2026-11-14 01:41:12,097 [INFO] Gauge HPIC1: no flooding 1.07
-2026-11-14 01:41:12,177 [INFO] Gauge POHC1: no flooding 1.27
-2026-11-14 01:41:12,430 [INFO] Gauge TRTC1: no flooding 2.55
-2026-11-14 01:41:12,610 [INFO] Gauge UTHC1: no flooding 5.25
-2026-11-14 01:41:12,904 [INFO] Gauge FARC1: no flooding 4.07
-2026-11-14 01:41:12,953 [INFO] Gauge TRRN2: no flooding 4.55
-2026-11-14 01:41:13,180 [INFO] Gauge WOOC1: no flooding 9.7
-2026-11-14 01:41:13,469 [INFO] Gauge CEMC1: no flooding 2.28
-2026-11-14 01:41:13,514 [INFO] Gauge GRDN2: no flooding 9.53
-2026-11-14 01:41:13,566 [INFO] Gauge CLEC1: no flooding 2.11
-2026-11-14 01:41:13,733 [INFO] Gauge EWBC1: no flooding 2.43
-2026-11-14 01:41:13,898 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-11-14 01:41:13,903 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=18
+2026-11-14 08:05:29,798 [INFO] === Sierra Nevada Alert Bot ===
+2026-11-14 08:05:30,304 [INFO] NWS CA: 27 active alerts
+2026-11-14 08:05:30,476 [INFO] NWS NV: 3 active alerts
+2026-11-14 08:05:30,477 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-11-14 08:05:30,767 [INFO] CAL FIRE: 0 active Sierra incidents
+2026-11-14 08:05:30,945 [INFO] NIFC: 0 Nevada fires in the Sierra box
+2026-11-14 08:05:31,380 [INFO] [standby] would post lsr:REV:2026-11-13T21:05:00Z:NON-TSTM WND GST:1 NE Mammoth Mountain S
+💨 Spotter report: 94 mph gust
+1 NE Mammoth Mountain S, Mono Co. CA · Fri 1:05 PM PST
+
+#SierraNevada
+
+2026-11-14 08:05:31,380 [INFO] [standby] would post lsr:REV:2026-11-13T21:20:00Z:NON-TSTM WND GST:4 S Conway Summit
+💨 Spotter report: 89 mph gust
+4 S Conway Summit, Mono Co. CA · Fri 1:20 PM PST
+
+#SierraNevada
+
+2026-11-14 08:05:31,380 [INFO] LSR: 2 significant Sierra reports in 12 h
+2026-11-14 08:05:33,621 [INFO] Gauge MDSC1: no flooding 36.83
+2026-11-14 08:05:33,664 [INFO] Gauge OBBC1: no flooding 2.44
+2026-11-14 08:05:33,898 [INFO] Gauge HPIC1: no flooding 1.2
+2026-11-14 08:05:34,156 [INFO] Gauge POHC1: no flooding 1.31
+2026-11-14 08:05:34,295 [INFO] Gauge TRTC1: no flooding 2.55
+2026-11-14 08:05:34,454 [INFO] Gauge UTHC1: no flooding 5.32
+2026-11-14 08:05:34,655 [INFO] Gauge FARC1: no flooding 4.07
+2026-11-14 08:05:34,819 [INFO] Gauge TRRN2: no flooding 4.73
+2026-11-14 08:05:36,733 [INFO] Gauge WOOC1: no flooding 9.69
+2026-11-14 08:05:36,935 [INFO] Gauge CEMC1: no flooding 2.41
+2026-11-14 08:05:37,090 [INFO] Gauge GRDN2: no flooding 9.56
+2026-11-14 08:05:38,597 [INFO] Gauge CLEC1: no flooding 2.2
+2026-11-14 08:05:39,184 [INFO] Gauge EWBC1: no flooding 2.43
+2026-11-14 08:05:39,493 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-11-14 08:05:39,494 [INFO] Done. posted=2 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=20
