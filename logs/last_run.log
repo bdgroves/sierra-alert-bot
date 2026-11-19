@@ -1,28 +1,69 @@
-2026-11-19 10:42:25,581 [INFO] === Sierra Nevada Alert Bot ===
-2026-11-19 10:42:26,055 [INFO] NWS CA: 53 active alerts
-2026-11-19 10:42:26,266 [INFO] NWS NV: 12 active alerts
-2026-11-19 10:42:26,267 [INFO]   not Sierra: Flash Flood Warning — Santa Barbara, CA
-2026-11-19 10:42:26,267 [INFO]   not Sierra: Flash Flood Warning — San Luis Obispo, CA; Santa Barbara, CA
-2026-11-19 10:42:26,267 [INFO]   not Sierra: Winter Storm Warning — Western Shasta County Mountains Above 3000 ft; Eastern Shasta County Mountains and Southern Cascades Above 3000 ft; Teha
-2026-11-19 10:42:26,267 [INFO]   not Sierra: Winter Storm Warning — Spring Mountains-Red Rock Canyon
-2026-11-19 10:42:26,267 [INFO]   not Sierra: Winter Storm Warning — Esmeralda and Central Nye County
-2026-11-19 10:42:26,267 [INFO]   not Sierra: Winter Storm Warning — Ruby Mountains and East Humboldt Range
-2026-11-19 10:42:26,267 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-11-19 10:42:26,816 [INFO] CAL FIRE: 0 active Sierra incidents
-2026-11-19 10:42:27,043 [INFO] NIFC: 0 Nevada fires in the Sierra box
-2026-11-19 10:42:27,561 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-11-19 10:42:30,555 [INFO] Gauge MDSC1: no flooding 37.28
-2026-11-19 10:42:31,017 [INFO] Gauge OBBC1: no flooding 2.4
-2026-11-19 10:42:31,272 [INFO] Gauge HPIC1: no flooding 1.43
-2026-11-19 10:42:31,628 [INFO] Gauge POHC1: no flooding 1.52
-2026-11-19 10:42:31,915 [INFO] Gauge TRTC1: no flooding 2.54
-2026-11-19 10:42:32,221 [INFO] Gauge UTHC1: no flooding 5.42
-2026-11-19 10:42:32,571 [INFO] Gauge FARC1: no flooding 3.73
-2026-11-19 10:42:32,852 [INFO] Gauge TRRN2: no flooding 4.16
-2026-11-19 10:42:33,198 [INFO] Gauge WOOC1: no flooding 9.61
-2026-11-19 10:42:33,677 [INFO] Gauge CEMC1: no flooding 2.3
-2026-11-19 10:42:34,040 [INFO] Gauge GRDN2: no flooding 9.54
-2026-11-19 10:42:34,402 [INFO] Gauge CLEC1: no flooding 2.19
-2026-11-19 10:42:34,728 [INFO] Gauge EWBC1: no flooding 2.42
-2026-11-19 10:42:35,127 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-11-19 10:42:35,128 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=17
+2026-11-19 19:11:29,373 [INFO] === Sierra Nevada Alert Bot ===
+2026-11-19 19:11:29,772 [INFO] NWS CA: 49 active alerts
+2026-11-19 19:11:29,879 [INFO] NWS NV: 10 active alerts
+2026-11-19 19:11:29,880 [INFO]   not Sierra: Winter Storm Warning — Ruby Mountains and East Humboldt Range
+2026-11-19 19:11:29,880 [INFO]   not Sierra: Winter Storm Warning — Spring Mountains-Red Rock Canyon
+2026-11-19 19:11:29,880 [INFO]   not Sierra: Winter Storm Warning — Esmeralda and Central Nye County
+2026-11-19 19:11:29,880 [INFO] NWS: 2 Sierra warning products in 2 hazards
+2026-11-19 19:11:29,881 [INFO] [standby] would post sierra:KHNX.FF.W.0002.2026
+🌊 Flash Flood Warning
+Mariposa, CA
+Until Thu 12:30 PM PST
+https://www.weather.gov/hnx/
+#SierraNevada
+
+2026-11-19 19:11:29,881 [INFO] [standby] would post sierra:AvalancheWarning.20261119
+🏔️ Avalanche Warning
+Greater Lake Tahoe Area
+Until Fri 4 AM PST
+HIGH avalanche danger exists in the backcountry. Large avalanches are expected across backcountry terrain.
+https://alerts.weather.gov/
+#SierraNevada
+
+2026-11-19 19:11:30,347 [INFO] CAL FIRE: 0 active Sierra incidents
+2026-11-19 19:11:30,548 [INFO] NIFC: 0 Nevada fires in the Sierra box
+2026-11-19 19:11:30,913 [INFO] [standby] would post lsr:STO:2026-11-19T15:00:00Z:SNOW:2 N Bear Valley
+❄️ Spotter report: 35" of snow
+2 N Bear Valley, Alpine Co. CA · Thu 7 AM PST
+At Bear Valley Ski Resort. 24 hour total.
+#SierraNevada
+
+2026-11-19 19:11:30,913 [INFO] [standby] would post lsr:STO:2026-11-19T16:00:00Z:SNOW:Soda Springs
+❄️ Spotter report: 24" of snow
+Soda Springs, Nevada Co. CA · Thu 8 AM PST
+24 hour total.
+#SierraNevada
+
+2026-11-19 19:11:30,914 [INFO] [standby] would post lsr:REV:2026-11-19T16:22:00Z:SNOW:1 NW Incline Village
+❄️ Spotter report: 24" of snow
+1 NW Incline Village, Washoe Co. NV · Thu 8:22 AM PST
+Spotter WA-17 measured 24 inches of snow in the last 24 hours.
+#SierraNevada
+
+2026-11-19 19:11:30,914 [INFO] [standby] would post lsr:REV:2026-11-19T16:02:00Z:SNOW:1 N Incline Village
+❄️ Spotter report: 25.5" of snow
+1 N Incline Village, Washoe Co. NV · Thu 8:02 AM PST
+Spotter WA-12 in Incline Village measured 25.5 inches with a liquid content of 2.61 inches in the last 24 hours.
+#SierraNevada
+
+2026-11-19 19:11:30,914 [INFO] [cap] holding lsr:REV:2026-11-19T16:00:00Z:SNOW:1 E Soda Springs for next run
+2026-11-19 19:11:30,914 [INFO] [cap] holding lsr:REV:2026-11-19T16:07:00Z:SNOW:1 SE Mt. Rose Ski Base for next run
+2026-11-19 19:11:30,914 [INFO] [cap] holding lsr:STO:2026-11-19T16:00:00Z:SNOW:Kingvale for next run
+2026-11-19 19:11:30,914 [INFO] [cap] holding lsr:STO:2026-11-19T15:00:00Z:SNOW:3 S Soda Springs for next run
+2026-11-19 19:11:30,914 [INFO] LSR: 8 significant Sierra reports in 12 h
+2026-11-19 19:11:33,508 [INFO] Gauge MDSC1: no flooding 37.36
+2026-11-19 19:11:33,831 [INFO] Gauge OBBC1: no flooding 2.16
+2026-11-19 19:11:34,099 [INFO] Gauge HPIC1: no flooding 1.43
+2026-11-19 19:11:34,411 [INFO] Gauge POHC1: no flooding 1.63
+2026-11-19 19:11:34,794 [INFO] Gauge TRTC1: no flooding 2.54
+2026-11-19 19:11:35,178 [INFO] Gauge UTHC1: no flooding 5.43
+2026-11-19 19:11:35,626 [INFO] Gauge FARC1: no flooding 3.75
+2026-11-19 19:11:35,984 [INFO] Gauge TRRN2: no flooding 4.26
+2026-11-19 19:11:36,292 [INFO] Gauge WOOC1: no flooding 9.66
+2026-11-19 19:11:36,614 [INFO] Gauge CEMC1: no flooding 2.3
+2026-11-19 19:11:36,882 [INFO] Gauge GRDN2: no flooding 9.59
+2026-11-19 19:11:37,359 [INFO] Gauge CLEC1: no flooding 2.08
+2026-11-19 19:11:37,564 [INFO] Gauge EWBC1: no flooding 2.42
+2026-11-19 19:11:37,932 [INFO] USGS: 1 quakes M3.5+ in 24 h
+2026-11-19 19:11:37,932 [INFO] [cap] holding eq:ci41363599 for next run
+2026-11-19 19:11:37,933 [INFO] Done. posted=6 failed=0 held=5 bootstrap=False dry_run=False standby=True cache=23
