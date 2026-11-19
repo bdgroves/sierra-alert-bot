@@ -1,31 +1,28 @@
-2026-11-19 02:28:42,544 [INFO] === Sierra Nevada Alert Bot ===
-2026-11-19 02:28:42,967 [INFO] NWS CA: 58 active alerts
-2026-11-19 02:28:43,083 [INFO] NWS NV: 9 active alerts
-2026-11-19 02:28:43,084 [INFO]   not Sierra: Flash Flood Warning — Monterey, CA
-2026-11-19 02:28:43,084 [INFO]   not Sierra: Flash Flood Warning — Monterey, CA
-2026-11-19 02:28:43,084 [INFO]   not Sierra: Flood Warning — Alameda, CA; Contra Costa, CA
-2026-11-19 02:28:43,084 [INFO]   not Sierra: Winter Storm Warning — Western Siskiyou County
-2026-11-19 02:28:43,084 [INFO]   not Sierra: Winter Storm Warning — South Central Siskiyou County
-2026-11-19 02:28:43,084 [INFO]   not Sierra: Winter Storm Warning — North Central and Southeast Siskiyou County
-2026-11-19 02:28:43,084 [INFO]   not Sierra: Winter Storm Warning — Southern Trinity; Northeastern Trinity
-2026-11-19 02:28:43,085 [INFO]   not Sierra: Winter Storm Warning — Western Shasta County Mountains Above 3000 ft; Eastern Shasta County Mountains and Southern Cascades Above 3000 ft; Teha
-2026-11-19 02:28:43,085 [INFO]   not Sierra: Winter Storm Warning — Ruby Mountains and East Humboldt Range
-2026-11-19 02:28:43,085 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-11-19 02:28:43,856 [INFO] CAL FIRE: 0 active Sierra incidents
-2026-11-19 02:28:43,991 [INFO] NIFC: 0 Nevada fires in the Sierra box
-2026-11-19 02:28:44,384 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-11-19 02:28:44,891 [INFO] Gauge MDSC1: no flooding 36.99
-2026-11-19 02:28:44,915 [INFO] Gauge OBBC1: no flooding 2.39
-2026-11-19 02:28:44,986 [INFO] Gauge HPIC1: no flooding 1.38
-2026-11-19 02:28:45,009 [INFO] Gauge POHC1: no flooding 1.46
-2026-11-19 02:28:45,029 [INFO] Gauge TRTC1: no flooding 2.54
-2026-11-19 02:28:45,164 [INFO] Gauge UTHC1: no flooding 5.32
-2026-11-19 02:28:45,293 [INFO] Gauge FARC1: no flooding 3.7
-2026-11-19 02:28:45,318 [INFO] Gauge TRRN2: no flooding 4.23
-2026-11-19 02:28:45,506 [INFO] Gauge WOOC1: no flooding 9.69
-2026-11-19 02:28:45,530 [INFO] Gauge CEMC1: no flooding 2.22
-2026-11-19 02:28:45,636 [INFO] Gauge GRDN2: no flooding 9.52
-2026-11-19 02:28:45,660 [INFO] Gauge CLEC1: no flooding 1.84
-2026-11-19 02:28:45,841 [INFO] Gauge EWBC1: no flooding 2.42
-2026-11-19 02:28:46,135 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-11-19 02:28:46,136 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=24
+2026-11-19 10:42:25,581 [INFO] === Sierra Nevada Alert Bot ===
+2026-11-19 10:42:26,055 [INFO] NWS CA: 53 active alerts
+2026-11-19 10:42:26,266 [INFO] NWS NV: 12 active alerts
+2026-11-19 10:42:26,267 [INFO]   not Sierra: Flash Flood Warning — Santa Barbara, CA
+2026-11-19 10:42:26,267 [INFO]   not Sierra: Flash Flood Warning — San Luis Obispo, CA; Santa Barbara, CA
+2026-11-19 10:42:26,267 [INFO]   not Sierra: Winter Storm Warning — Western Shasta County Mountains Above 3000 ft; Eastern Shasta County Mountains and Southern Cascades Above 3000 ft; Teha
+2026-11-19 10:42:26,267 [INFO]   not Sierra: Winter Storm Warning — Spring Mountains-Red Rock Canyon
+2026-11-19 10:42:26,267 [INFO]   not Sierra: Winter Storm Warning — Esmeralda and Central Nye County
+2026-11-19 10:42:26,267 [INFO]   not Sierra: Winter Storm Warning — Ruby Mountains and East Humboldt Range
+2026-11-19 10:42:26,267 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-11-19 10:42:26,816 [INFO] CAL FIRE: 0 active Sierra incidents
+2026-11-19 10:42:27,043 [INFO] NIFC: 0 Nevada fires in the Sierra box
+2026-11-19 10:42:27,561 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-11-19 10:42:30,555 [INFO] Gauge MDSC1: no flooding 37.28
+2026-11-19 10:42:31,017 [INFO] Gauge OBBC1: no flooding 2.4
+2026-11-19 10:42:31,272 [INFO] Gauge HPIC1: no flooding 1.43
+2026-11-19 10:42:31,628 [INFO] Gauge POHC1: no flooding 1.52
+2026-11-19 10:42:31,915 [INFO] Gauge TRTC1: no flooding 2.54
+2026-11-19 10:42:32,221 [INFO] Gauge UTHC1: no flooding 5.42
+2026-11-19 10:42:32,571 [INFO] Gauge FARC1: no flooding 3.73
+2026-11-19 10:42:32,852 [INFO] Gauge TRRN2: no flooding 4.16
+2026-11-19 10:42:33,198 [INFO] Gauge WOOC1: no flooding 9.61
+2026-11-19 10:42:33,677 [INFO] Gauge CEMC1: no flooding 2.3
+2026-11-19 10:42:34,040 [INFO] Gauge GRDN2: no flooding 9.54
+2026-11-19 10:42:34,402 [INFO] Gauge CLEC1: no flooding 2.19
+2026-11-19 10:42:34,728 [INFO] Gauge EWBC1: no flooding 2.42
+2026-11-19 10:42:35,127 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-11-19 10:42:35,128 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=17
