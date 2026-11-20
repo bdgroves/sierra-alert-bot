@@ -1,62 +1,25 @@
-2026-11-20 01:19:08,349 [INFO] === Sierra Nevada Alert Bot ===
-2026-11-20 01:19:08,704 [INFO] NWS CA: 23 active alerts
-2026-11-20 01:19:08,841 [INFO] NWS NV: 10 active alerts
-2026-11-20 01:19:08,842 [INFO]   not Sierra: Winter Storm Warning — Esmeralda and Central Nye County
-2026-11-20 01:19:08,842 [INFO]   not Sierra: Winter Storm Warning — Spring Mountains-Red Rock Canyon
-2026-11-20 01:19:08,842 [INFO]   not Sierra: Winter Storm Warning — Ruby Mountains and East Humboldt Range
-2026-11-20 01:19:08,842 [INFO] NWS: 1 Sierra warning products in 1 hazards
-2026-11-20 01:19:09,380 [INFO] CAL FIRE: 0 active Sierra incidents
-2026-11-20 01:19:09,519 [INFO] NIFC: 0 Nevada fires in the Sierra box
-2026-11-20 01:19:09,771 [INFO] [standby] would post lsr:REV:2026-11-19T16:00:00Z:SNOW:1 E Soda Springs
-❄️ Spotter report: 30.3" of snow
-1 E Soda Springs, Nevada Co. CA · Thu 8 AM PST
-The Central Sierra Snow Laboratory measured 30.3 inches of snow with a liquid total of 3.30 inches in the last 24 hours.
-#SierraNevada
-
-2026-11-20 01:19:09,772 [INFO] [standby] would post lsr:REV:2026-11-19T16:07:00Z:SNOW:1 SE Mt. Rose Ski Base
-❄️ Spotter report: 32" of snow
-1 SE Mt. Rose Ski Base, Washoe Co. NV · Thu 8:07 AM PST
-Mt Rose Ski Base measured 32 inches of new snow in the last 24 hours.
-#SierraNevada
-
-2026-11-20 01:19:09,774 [INFO] [standby] would post lsr:HNX:2026-11-19T21:03:00Z:HAIL:5 NW Clovis
-🧊 Spotter report: 1" hail
-5 NW Clovis, Fresno Co. CA · Thu 1:03 PM PST
-&&
-#SierraNevada
-
-2026-11-20 01:19:09,775 [INFO] [standby] would post lsr:STO:2026-11-19T16:00:00Z:SNOW:Kingvale
-❄️ Spotter report: 26" of snow
-Kingvale, Nevada Co. CA · Thu 8 AM PST
-24 hour total.
-#SierraNevada
-
-2026-11-20 01:19:09,775 [INFO] [standby] would post lsr:HNX:2026-11-19T19:45:00Z:FLASH FLOOD:5 NW Midpines
-🌊 Spotter report: Flash Flood
-5 NW Midpines, Mariposa Co. CA · Thu 11:45 AM PST
-CA-140 was closed at Briceburg due to flooding per CalTrans District 10.
-#SierraNevada
-
-2026-11-20 01:19:09,777 [INFO] [standby] would post lsr:STO:2026-11-19T15:00:00Z:SNOW:3 S Soda Springs
-❄️ Spotter report: 30.5" of snow
-3 S Soda Springs, Placer Co. CA · Thu 7 AM PST
-At Sierra Snow Lab. 48 hour storm total with 30.3 in the last 24 hours.
-#SierraNevada
-
-2026-11-20 01:19:09,777 [INFO] LSR: 10 significant Sierra reports in 12 h
-2026-11-20 01:19:10,393 [INFO] Gauge MDSC1: no flooding 37.05
-2026-11-20 01:19:10,505 [INFO] Gauge OBBC1: no flooding 1.97
-2026-11-20 01:19:10,619 [INFO] Gauge HPIC1: no flooding 1.48
-2026-11-20 01:19:10,751 [INFO] Gauge POHC1: no flooding 1.72
-2026-11-20 01:19:10,772 [INFO] Gauge TRTC1: no flooding 2.54
-2026-11-20 01:19:10,798 [INFO] Gauge UTHC1: no flooding 5.5
-2026-11-20 01:19:10,826 [INFO] Gauge FARC1: no flooding 3.68
-2026-11-20 01:19:10,915 [INFO] Gauge TRRN2: no flooding 4.29
-2026-11-20 01:19:11,047 [INFO] Gauge WOOC1: no flooding 9.61
-2026-11-20 01:19:11,070 [INFO] Gauge CEMC1: no flooding 2.26
-2026-11-20 01:19:11,296 [INFO] Gauge GRDN2: no flooding 9.58
-2026-11-20 01:19:11,323 [INFO] Gauge CLEC1: no flooding 2.17
-2026-11-20 01:19:11,413 [INFO] Gauge EWBC1: no flooding 2.42
-2026-11-20 01:19:11,692 [INFO] USGS: 1 quakes M3.5+ in 24 h
-2026-11-20 01:19:11,692 [INFO] [cap] holding eq:ci41363599 for next run
-2026-11-20 01:19:11,694 [INFO] Done. posted=6 failed=0 held=1 bootstrap=False dry_run=False standby=True cache=29
+2026-11-20 09:05:42,462 [INFO] === Sierra Nevada Alert Bot ===
+2026-11-20 09:05:42,826 [INFO] NWS CA: 20 active alerts
+2026-11-20 09:05:42,929 [INFO] NWS NV: 6 active alerts
+2026-11-20 09:05:42,930 [INFO]   not Sierra: Winter Storm Warning — Ruby Mountains and East Humboldt Range
+2026-11-20 09:05:42,930 [INFO]   not Sierra: Winter Storm Warning — Esmeralda and Central Nye County
+2026-11-20 09:05:42,930 [INFO]   not Sierra: Winter Storm Warning — Spring Mountains-Red Rock Canyon
+2026-11-20 09:05:42,930 [INFO] NWS: 1 Sierra warning products in 1 hazards
+2026-11-20 09:05:43,222 [INFO] CAL FIRE: 0 active Sierra incidents
+2026-11-20 09:05:43,505 [INFO] NIFC: 0 Nevada fires in the Sierra box
+2026-11-20 09:05:43,721 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-11-20 09:05:45,028 [INFO] Gauge MDSC1: no flooding 36.91
+2026-11-20 09:05:45,228 [INFO] Gauge OBBC1: no flooding 1.97
+2026-11-20 09:05:45,423 [INFO] Gauge HPIC1: no flooding 1.46
+2026-11-20 09:05:45,514 [INFO] Gauge POHC1: no flooding 1.68
+2026-11-20 09:05:45,719 [INFO] Gauge TRTC1: no flooding 2.55
+2026-11-20 09:05:45,815 [INFO] Gauge UTHC1: no flooding 5.5
+2026-11-20 09:05:45,992 [INFO] Gauge FARC1: no flooding 3.65
+2026-11-20 09:05:46,081 [INFO] Gauge TRRN2: no flooding 4.12
+2026-11-20 09:05:46,326 [INFO] Gauge WOOC1: no flooding 9.62
+2026-11-20 09:05:46,418 [INFO] Gauge CEMC1: no flooding 2.21
+2026-11-20 09:05:46,617 [INFO] Gauge GRDN2: no flooding 9.54
+2026-11-20 09:05:46,818 [INFO] Gauge CLEC1: no flooding 1.95
+2026-11-20 09:05:46,912 [INFO] Gauge EWBC1: no flooding 2.42
+2026-11-20 09:05:47,039 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-11-20 09:05:47,041 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=29
