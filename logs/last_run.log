@@ -1,40 +1,22 @@
-2026-11-20 23:55:39,451 [INFO] === Sierra Nevada Alert Bot ===
-2026-11-20 23:55:39,909 [INFO] NWS CA: 21 active alerts
-2026-11-20 23:55:40,058 [INFO] NWS NV: 0 active alerts
-2026-11-20 23:55:40,058 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-11-20 23:55:40,528 [INFO] CAL FIRE: 0 active Sierra incidents
-2026-11-20 23:55:40,752 [INFO] NIFC: 0 Nevada fires in the Sierra box
-2026-11-20 23:55:41,268 [INFO] [standby] would post lsr:STO:2026-11-20T16:22:00Z:SNOW:3 S Soda Springs
-❄️ Spotter report: 39.8" of snow
-3 S Soda Springs, Placer Co. CA · Fri 8:22 AM PST
-Storm total at Sierra Snow Lab. 9.3 inches in last 24 hours.
-#SierraNevada
-
-2026-11-20 23:55:41,268 [INFO] [standby] would post lsr:STO:2026-11-20T14:15:00Z:SNOW:2 N Bear Valley
-❄️ Spotter report: 40" of snow
-2 N Bear Valley, Alpine Co. CA · Fri 6:15 AM PST
-Storm total at Bear Valley ski resort. 5 inches in the last 24 hours.
-#SierraNevada
-
-2026-11-20 23:55:41,269 [INFO] [standby] would post lsr:STO:2026-11-20T14:00:00Z:SNOW:2 E Pinecrest
-❄️ Spotter report: 44" of snow
-2 E Pinecrest, Tuolumne Co. CA · Fri 6 AM PST
-Storm total at Dodge Ridge Base. 5 inches in the last 24 hours.
-#SierraNevada
-
-2026-11-20 23:55:41,269 [INFO] LSR: 3 significant Sierra reports in 12 h
-2026-11-20 23:55:43,761 [INFO] Gauge MDSC1: no flooding 36.85
-2026-11-20 23:55:44,128 [INFO] Gauge OBBC1: no flooding 2.03
-2026-11-20 23:55:44,319 [INFO] Gauge HPIC1: no flooding 1.58
-2026-11-20 23:55:44,734 [INFO] Gauge POHC1: no flooding 1.58
-2026-11-20 23:55:45,093 [INFO] Gauge TRTC1: no flooding 2.55
-2026-11-20 23:55:45,348 [INFO] Gauge UTHC1: no flooding 5.49
-2026-11-20 23:55:45,824 [INFO] Gauge FARC1: no flooding 3.64
-2026-11-20 23:55:46,167 [INFO] Gauge TRRN2: no flooding 4.06
-2026-11-20 23:55:46,552 [INFO] Gauge WOOC1: no flooding 9.67
-2026-11-20 23:55:46,871 [INFO] Gauge CEMC1: no flooding 2.17
-2026-11-20 23:55:47,115 [INFO] Gauge GRDN2: no flooding 9.47
-2026-11-20 23:55:47,542 [INFO] Gauge CLEC1: no flooding 2.0
-2026-11-20 23:55:47,934 [INFO] Gauge EWBC1: no flooding 2.46
-2026-11-20 23:55:48,061 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-11-20 23:55:48,061 [INFO] Done. posted=3 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=32
+2026-11-21 06:54:03,363 [INFO] === Sierra Nevada Alert Bot ===
+2026-11-21 06:54:03,862 [INFO] NWS CA: 17 active alerts
+2026-11-21 06:54:04,016 [INFO] NWS NV: 0 active alerts
+2026-11-21 06:54:04,018 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-11-21 06:54:04,962 [INFO] CAL FIRE: 0 active Sierra incidents
+2026-11-21 06:54:05,146 [INFO] NIFC: 0 Nevada fires in the Sierra box
+2026-11-21 06:54:05,605 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-11-21 06:54:06,891 [INFO] Gauge MDSC1: no flooding 36.8
+2026-11-21 06:54:07,007 [INFO] Gauge OBBC1: no flooding 1.96
+2026-11-21 06:54:07,122 [INFO] Gauge HPIC1: no flooding 1.44
+2026-11-21 06:54:07,304 [INFO] Gauge POHC1: no flooding 1.53
+2026-11-21 06:54:07,498 [INFO] Gauge TRTC1: no flooding 2.55
+2026-11-21 06:54:07,660 [INFO] Gauge UTHC1: no flooding 5.49
+2026-11-21 06:54:07,859 [INFO] Gauge FARC1: no flooding 3.63
+2026-11-21 06:54:07,935 [INFO] Gauge TRRN2: no flooding 4.06
+2026-11-21 06:54:08,128 [INFO] Gauge WOOC1: no flooding 9.67
+2026-11-21 06:54:08,185 [INFO] Gauge CEMC1: no flooding 2.16
+2026-11-21 06:54:08,219 [INFO] Gauge GRDN2: no flooding 9.5
+2026-11-21 06:54:08,380 [INFO] Gauge CLEC1: no flooding 2.14
+2026-11-21 06:54:08,517 [INFO] Gauge EWBC1: no flooding 2.46
+2026-11-21 06:54:08,893 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-11-21 06:54:08,894 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=32
