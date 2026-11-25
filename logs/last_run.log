@@ -1,25 +1,24 @@
-2026-11-25 02:34:06,160 [INFO] === Sierra Nevada Alert Bot ===
-2026-11-25 02:34:06,600 [INFO] NWS CA: 34 active alerts
-2026-11-25 02:34:06,721 [INFO] NWS NV: 0 active alerts
-2026-11-25 02:34:06,722 [INFO]   not Sierra: Flood Warning — Solano, CA
-2026-11-25 02:34:06,722 [INFO]   not Sierra: Flood Warning — Sacramento, CA; San Joaquin, CA; Solano, CA; Yolo, CA
-2026-11-25 02:34:06,722 [INFO]   not Sierra: High Wind Warning — Central Siskiyou County
-2026-11-25 02:34:06,722 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-11-25 02:34:06,949 [INFO] CAL FIRE: 0 active Sierra incidents
-2026-11-25 02:34:07,081 [INFO] NIFC: 0 Nevada fires in the Sierra box
-2026-11-25 02:34:07,480 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-11-25 02:34:09,378 [INFO] Gauge MDSC1: no flooding 36.71
-2026-11-25 02:34:09,586 [INFO] Gauge OBBC1: no flooding 1.96
-2026-11-25 02:34:09,689 [INFO] Gauge HPIC1: no flooding 1.56
-2026-11-25 02:34:09,871 [INFO] Gauge POHC1: no flooding 1.74
-2026-11-25 02:34:10,075 [INFO] Gauge TRTC1: no flooding 2.55
-2026-11-25 02:34:10,261 [INFO] Gauge UTHC1: no flooding 5.39
-2026-11-25 02:34:10,295 [INFO] Gauge FARC1: no flooding 3.65
-2026-11-25 02:34:10,367 [INFO] Gauge TRRN2: no flooding 4.01
-2026-11-25 02:34:10,521 [INFO] Gauge WOOC1: no flooding 9.69
-2026-11-25 02:34:10,848 [INFO] Gauge CEMC1: no flooding 2.38
-2026-11-25 02:34:11,179 [INFO] Gauge GRDN2: no flooding 9.61
-2026-11-25 02:34:11,478 [INFO] Gauge CLEC1: no flooding 2.35
-2026-11-25 02:34:11,618 [INFO] Gauge EWBC1: no flooding 2.46
-2026-11-25 02:34:11,983 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-11-25 02:34:11,984 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=31
+2026-11-25 11:46:28,021 [INFO] === Sierra Nevada Alert Bot ===
+2026-11-25 11:46:28,515 [INFO] NWS CA: 34 active alerts
+2026-11-25 11:46:28,647 [INFO] NWS NV: 0 active alerts
+2026-11-25 11:46:28,648 [INFO]   not Sierra: Flood Warning — Solano, CA
+2026-11-25 11:46:28,648 [INFO]   not Sierra: Flood Warning — Sacramento, CA; San Joaquin, CA; Solano, CA; Yolo, CA
+2026-11-25 11:46:28,648 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-11-25 11:46:29,166 [INFO] CAL FIRE: 0 active Sierra incidents
+2026-11-25 11:46:29,370 [INFO] NIFC: 0 Nevada fires in the Sierra box
+2026-11-25 11:46:29,628 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-11-25 11:46:31,424 [INFO] Gauge MDSC1: no flooding 36.7
+2026-11-25 11:46:31,718 [INFO] Gauge OBBC1: no flooding 1.95
+2026-11-25 11:46:31,975 [INFO] Gauge HPIC1: no flooding 1.58
+2026-11-25 11:46:32,005 [INFO] Gauge POHC1: no flooding 1.75
+2026-11-25 11:46:32,246 [INFO] Gauge TRTC1: no flooding 2.55
+2026-11-25 11:46:32,604 [INFO] Gauge UTHC1: no flooding 5.38
+2026-11-25 11:46:32,931 [INFO] Gauge FARC1: no flooding 3.65
+2026-11-25 11:46:33,094 [INFO] Gauge TRRN2: no flooding 4.03
+2026-11-25 11:46:33,213 [INFO] Gauge WOOC1: no flooding 9.68
+2026-11-25 11:46:33,357 [INFO] Gauge CEMC1: no flooding 2.35
+2026-11-25 11:46:33,829 [INFO] Gauge GRDN2: no flooding 9.61
+2026-11-25 11:46:34,240 [INFO] Gauge CLEC1: no flooding 2.23
+2026-11-25 11:46:34,386 [INFO] Gauge EWBC1: no flooding 2.46
+2026-11-25 11:46:34,515 [INFO] USGS: 0 quakes M3.5+ in 24 h
+2026-11-25 11:46:34,517 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=31
