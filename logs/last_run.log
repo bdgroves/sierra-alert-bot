@@ -1,22 +1,28 @@
-2026-11-27 13:57:25,616 [INFO] === Sierra Nevada Alert Bot ===
-2026-11-27 13:57:25,950 [INFO] NWS CA: 24 active alerts
-2026-11-27 13:57:26,049 [INFO] NWS NV: 0 active alerts
-2026-11-27 13:57:26,050 [INFO] NWS: 0 Sierra warning products in 0 hazards
-2026-11-27 13:57:26,558 [INFO] CAL FIRE: 0 active Sierra incidents
-2026-11-27 13:57:26,683 [INFO] NIFC: 0 Nevada fires in the Sierra box
-2026-11-27 13:57:26,952 [INFO] LSR: 0 significant Sierra reports in 12 h
-2026-11-27 13:57:27,592 [INFO] Gauge MDSC1: no flooding 36.65
-2026-11-27 13:57:27,702 [INFO] Gauge OBBC1: no flooding 1.94
-2026-11-27 13:57:27,727 [INFO] Gauge HPIC1: no flooding 1.63
-2026-11-27 13:57:27,799 [INFO] Gauge POHC1: no flooding 1.82
-2026-11-27 13:57:27,911 [INFO] Gauge TRTC1: no flooding 2.55
-2026-11-27 13:57:28,007 [INFO] Gauge UTHC1: no flooding 5.37
-2026-11-27 13:57:28,120 [INFO] Gauge FARC1: no flooding 3.65
-2026-11-27 13:57:28,144 [INFO] Gauge TRRN2: no flooding 4.06
-2026-11-27 13:57:28,168 [INFO] Gauge WOOC1: no flooding 9.69
-2026-11-27 13:57:28,308 [INFO] Gauge CEMC1: no flooding 2.37
-2026-11-27 13:57:28,398 [INFO] Gauge GRDN2: no flooding 9.62
-2026-11-27 13:57:28,479 [INFO] Gauge CLEC1: no flooding 2.19
-2026-11-27 13:57:28,500 [INFO] Gauge EWBC1: no flooding 2.46
-2026-11-27 13:57:28,785 [INFO] USGS: 0 quakes M3.5+ in 24 h
-2026-11-27 13:57:28,786 [INFO] Done. posted=0 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=30
+2026-11-27 22:37:42,197 [INFO] === Sierra Nevada Alert Bot ===
+2026-11-27 22:37:42,659 [INFO] NWS CA: 23 active alerts
+2026-11-27 22:37:42,814 [INFO] NWS NV: 2 active alerts
+2026-11-27 22:37:42,815 [INFO] NWS: 0 Sierra warning products in 0 hazards
+2026-11-27 22:37:43,481 [INFO] CAL FIRE: 0 active Sierra incidents
+2026-11-27 22:37:43,719 [INFO] NIFC: 0 Nevada fires in the Sierra box
+2026-11-27 22:37:44,188 [INFO] LSR: 0 significant Sierra reports in 12 h
+2026-11-27 22:37:47,913 [INFO] Gauge MDSC1: no flooding 36.66
+2026-11-27 22:37:48,187 [INFO] Gauge OBBC1: no flooding 1.95
+2026-11-27 22:37:48,535 [INFO] Gauge HPIC1: no flooding 1.63
+2026-11-27 22:37:48,920 [INFO] Gauge POHC1: no flooding 1.88
+2026-11-27 22:37:49,267 [INFO] Gauge TRTC1: no flooding 2.55
+2026-11-27 22:37:49,582 [INFO] Gauge UTHC1: no flooding 5.36
+2026-11-27 22:37:49,924 [INFO] Gauge FARC1: no flooding 3.66
+2026-11-27 22:37:50,275 [INFO] Gauge TRRN2: no flooding 4.06
+2026-11-27 22:37:50,551 [INFO] Gauge WOOC1: no flooding 9.66
+2026-11-27 22:37:51,030 [INFO] Gauge CEMC1: no flooding 2.35
+2026-11-27 22:37:51,483 [INFO] Gauge GRDN2: no flooding 9.61
+2026-11-27 22:37:51,930 [INFO] Gauge CLEC1: no flooding 2.06
+2026-11-27 22:37:52,357 [INFO] Gauge EWBC1: no flooding 2.46
+2026-11-27 22:37:52,499 [INFO] USGS: 1 quakes M3.5+ in 24 h
+2026-11-27 22:37:52,499 [INFO] [standby] would post eq:nn00927525
+📳 M3.6 earthquake — 21 km SSW of Silver Peak, Nevada
+Fri 2:27 PM PST · 10 km deep
+https://earthquake.usgs.gov/earthquakes/eventpage/nn00927525
+#SierraNevada #earthquake
+
+2026-11-27 22:37:52,500 [INFO] Done. posted=1 failed=0 held=0 bootstrap=False dry_run=False standby=True cache=31
